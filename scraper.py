@@ -65,6 +65,37 @@ def _identity(url: str) -> str:
     return url
 
 
+# Bleep lumps music and merch into the same /release/ URL space, so we
+# explicitly drop anything whose slug looks like wearable/physical goods.
+# A new BoC album is *never* going to have any of these substrings in
+# its URL, and the false-positive risk of missing a real release is
+# therefore effectively zero.
+MERCH_SLUG_SUBSTRINGS = (
+    "t-shirt",
+    "tshirt",
+    "sweatshirt",
+    "hoodie",
+    "longsleeve",
+    "long-sleeve",
+    "beanie",
+    "cap-",
+    "-cap",
+    "tote",
+    "poster",
+    "sticker",
+    "patch",
+    "pin-",
+    "-pin",
+    "mug",
+    "keychain",
+    "tote-bag",
+    "mask",
+    "slipmat",
+    "gift-card",
+    "bundle",
+)
+
+
 @dataclass
 class Source:
     name: str
@@ -76,6 +107,10 @@ class Source:
     # Used to scope Bleep results to BoC only (its /release/ URLs embed the
     # artist slug: /release/<id>-<artist-slug>-<album-slug>).
     required_slug: str | None = None
+    # If True, drop URLs whose slug looks like merchandise (t-shirts etc).
+    # Needed for Bleep because it lumps merch into the same /release/ URL
+    # space as music. Warp keeps merch under /products/ so doesn't need it.
+    drop_merch: bool = False
     # Applied to every matching release URL before diffing / storing, so
     # different sub-pages of the same release collapse together.
     canonicalize: Callable[[str], str] = _identity
@@ -123,6 +158,8 @@ class Source:
             if path.rstrip("/") == self.release_path_marker.rstrip("/"):
                 continue
             if self.required_slug and self.required_slug not in path:
+                continue
+            if self.drop_merch and any(s in path for s in MERCH_SLUG_SUBSTRINGS):
                 continue
             abs_url = self.canonicalize(abs_url)
             title = anchor.get_text(" ", strip=True) or abs_url
@@ -190,6 +227,7 @@ SOURCES: list[Source] = [
         url="https://bleep.com/artist/78-boards-of-canada",
         release_path_marker="/release/",
         required_slug="boards-of-canada",
+        drop_merch=True,
     ),
 ]
 
