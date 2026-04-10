@@ -1,6 +1,6 @@
 {
   "Bleep": {
-    "last_checked": 1775857956,
+    "last_checked": 1775858110,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway",
@@ -9,28 +9,12 @@
       "https://bleep.com/release/388652-boards-of-canada-hi-scores": "https://bleep.com/release/388652-boards-of-canada-hi-scores",
       "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest": "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest",
       "https://bleep.com/release/4625-boards-of-canada-geogaddi": "https://bleep.com/release/4625-boards-of-canada-geogaddi",
-      "https://bleep.com/release/502760-boards-of-canada-boards-of-canada-t-shirt-green": "https://bleep.com/release/502760-boards-of-canada-boards-of-canada-t-shirt-green",
-      "https://bleep.com/release/505112-boards-of-canada-nuclear-family-logo-t-shirt-spectra-yellow": "https://bleep.com/release/505112-boards-of-canada-nuclear-family-logo-t-shirt-spectra-yellow",
-      "https://bleep.com/release/505113-boards-of-canada-leaf-logo-t-shirt-black": "https://bleep.com/release/505113-boards-of-canada-leaf-logo-t-shirt-black",
-      "https://bleep.com/release/505114-boards-of-canada-leaf-logo-t-shirt-spectra-yellow": "https://bleep.com/release/505114-boards-of-canada-leaf-logo-t-shirt-spectra-yellow",
-      "https://bleep.com/release/505115-boards-of-canada-nuclear-family-logo-t-shirt-black": "https://bleep.com/release/505115-boards-of-canada-nuclear-family-logo-t-shirt-black",
-      "https://bleep.com/release/505116-boards-of-canada-nuclear-family-logo-hoodie-black": "https://bleep.com/release/505116-boards-of-canada-nuclear-family-logo-hoodie-black",
-      "https://bleep.com/release/505117-boards-of-canada-leaf-logo-sweatshirt-black": "https://bleep.com/release/505117-boards-of-canada-leaf-logo-sweatshirt-black",
-      "https://bleep.com/release/505118-boards-of-canada-compound-logo-sweatshirt-black": "https://bleep.com/release/505118-boards-of-canada-compound-logo-sweatshirt-black",
-      "https://bleep.com/release/505119-boards-of-canada-nuclear-family-logo-sweatshirt-natural-raw": "https://bleep.com/release/505119-boards-of-canada-nuclear-family-logo-sweatshirt-natural-raw",
-      "https://bleep.com/release/505120-boards-of-canada-leaf-logo-sweatshirt-natural-raw": "https://bleep.com/release/505120-boards-of-canada-leaf-logo-sweatshirt-natural-raw",
-      "https://bleep.com/release/505121-boards-of-canada-compound-logo-t-shirt-black": "https://bleep.com/release/505121-boards-of-canada-compound-logo-t-shirt-black",
-      "https://bleep.com/release/505122-boards-of-canada-boc-logo-t-shirt-black": "https://bleep.com/release/505122-boards-of-canada-boc-logo-t-shirt-black",
-      "https://bleep.com/release/505123-boards-of-canada-music-has-the-right-to-children-t-shirt-white": "https://bleep.com/release/505123-boards-of-canada-music-has-the-right-to-children-t-shirt-white",
-      "https://bleep.com/release/505124-boards-of-canada-music-has-the-right-to-children-t-shirt-black": "https://bleep.com/release/505124-boards-of-canada-music-has-the-right-to-children-t-shirt-black",
-      "https://bleep.com/release/505125-boards-of-canada-two-boys-t-shirt-black": "https://bleep.com/release/505125-boards-of-canada-two-boys-t-shirt-black",
-      "https://bleep.com/release/505129-boards-of-canada-compound-logo-sweatshirt-natural-raw": "https://bleep.com/release/505129-boards-of-canada-compound-logo-sweatshirt-natural-raw",
       "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country": "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country",
       "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children"
     }
   },
   "Warp Records": {
-    "last_checked": 1775857954,
+    "last_checked": 1775858109,
     "releases": {
       "https://warp.net/releases/11672-the-campfire-headphase": "The Campfire Headphase , album , 2005",
       "https://warp.net/releases/12790-trans-canada-highway": "Trans Canada Highway , EP , 2006",
@@ -44,7 +28,7 @@
     }
   },
   "_diagnostics": {
-    "last_run": 1775857956,
+    "last_run": 1775858110,
     "sources": {
       "Bleep": {
         "boards_hits": [
@@ -67,9 +51,9 @@
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
         "has_cloudflare_challenge": false,
-        "html_length": 114161,
+        "html_length": 114579,
         "http_status": 200,
-        "matched_count": 25,
+        "matched_count": 9,
         "matched_sample": [
           "https://bleep.com/release/141387-boards-of-canada-peel-session",
           "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest",
@@ -79,8 +63,7 @@
           "https://bleep.com/release/12985-boards-of-canada-twoism",
           "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country",
           "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children",
-          "https://bleep.com/release/388652-boards-of-canada-hi-scores",
-          "https://bleep.com/release/505129-boards-of-canada-compound-logo-sweatshirt-natural-raw"
+          "https://bleep.com/release/388652-boards-of-canada-hi-scores"
         ],
         "pattern_counts": {
           "/music/": 2,
