@@ -1,20 +1,20 @@
 {
   "Bleep": {
-    "last_checked": 1775858110,
+    "last_checked": 1775858319,
     "releases": {
-      "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase",
-      "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway",
-      "https://bleep.com/release/12985-boards-of-canada-twoism": "https://bleep.com/release/12985-boards-of-canada-twoism",
-      "https://bleep.com/release/141387-boards-of-canada-peel-session": "https://bleep.com/release/141387-boards-of-canada-peel-session",
-      "https://bleep.com/release/388652-boards-of-canada-hi-scores": "https://bleep.com/release/388652-boards-of-canada-hi-scores",
-      "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest": "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest",
-      "https://bleep.com/release/4625-boards-of-canada-geogaddi": "https://bleep.com/release/4625-boards-of-canada-geogaddi",
-      "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country": "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country",
-      "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children"
+      "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
+      "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
+      "https://bleep.com/release/12985-boards-of-canada-twoism": "LP Download",
+      "https://bleep.com/release/141387-boards-of-canada-peel-session": "Peel Session",
+      "https://bleep.com/release/388652-boards-of-canada-hi-scores": "Hi Scores",
+      "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest": "Tomorrow's Harvest",
+      "https://bleep.com/release/4625-boards-of-canada-geogaddi": "LP CD Download",
+      "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country": "In A Beautiful Place Out In The Country",
+      "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "Music Has The Right To Children"
     }
   },
   "Warp Records": {
-    "last_checked": 1775858109,
+    "last_checked": 1775858317,
     "releases": {
       "https://warp.net/releases/11672-the-campfire-headphase": "The Campfire Headphase , album , 2005",
       "https://warp.net/releases/12790-trans-canada-highway": "Trans Canada Highway , EP , 2006",
@@ -27,113 +27,26 @@
       "https://warp.net/releases/7819-music-has-the-right-to-children": "Music Has The Right To Children , album , 1998"
     }
   },
-  "_diagnostics": {
-    "last_run": 1775858110,
+  "_telemetry": {
+    "last_run": 1775858319,
     "sources": {
       "Bleep": {
-        "boards_hits": [
-          "https://music.apple.com/us/artist/boards-of-canada/2989314",
-          "https://www.facebook.com/boardsofcanada",
-          "https://www.instagram.com/boardsofcanada/",
-          "https://x.com/boardsofcanada",
-          "http://www.youtube.com/user/boardsofcanada",
-          "https://bleep.com/music/artist/78-boards-of-canada",
-          "https://bleep.com/release/141387-boards-of-canada-peel-session",
-          "https://bleep.com/artist/78-boards-of-canada",
-          "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest",
-          "https://bleep.com/release/4625-boards-of-canada-geogaddi",
-          "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway",
-          "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase",
-          "https://bleep.com/release/12985-boards-of-canada-twoism",
-          "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country",
-          "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children"
-        ],
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
-        "has_cloudflare_challenge": false,
-        "html_length": 114579,
+        "html_length": 114161,
         "http_status": 200,
+        "looks_like_cloudflare_challenge": false,
         "matched_count": 9,
-        "matched_sample": [
-          "https://bleep.com/release/141387-boards-of-canada-peel-session",
-          "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest",
-          "https://bleep.com/release/4625-boards-of-canada-geogaddi",
-          "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway",
-          "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase",
-          "https://bleep.com/release/12985-boards-of-canada-twoism",
-          "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country",
-          "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children",
-          "https://bleep.com/release/388652-boards-of-canada-hi-scores"
-        ],
-        "pattern_counts": {
-          "/music/": 2,
-          "/release/": 102
-        },
-        "pattern_samples": {
-          "/music/": [
-            "https://bleep.com/music/artist/78-boards-of-canada"
-          ],
-          "/release/": [
-            "https://bleep.com/release/141387-boards-of-canada-peel-session",
-            "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest",
-            "https://bleep.com/release/4625-boards-of-canada-geogaddi",
-            "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway",
-            "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase",
-            "https://bleep.com/release/12985-boards-of-canada-twoism",
-            "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country",
-            "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children"
-          ]
-        },
-        "total_anchors": 308
+        "total_anchors_on_page": 308
       },
       "Warp Records": {
-        "boards_hits": [
-          "https://warp.net/artists/boards-of-canada",
-          "https://warp.net/artists/boards-of-canada/releases",
-          "https://warp.net/artists/boards-of-canada/links",
-          "https://warp.net/products/502760-boards-of-canada-t-shirt-green",
-          "https://bleep.com/artist/78-boards-of-canada",
-          "https://www.instagram.com/boardsofcanada/",
-          "https://www.youtube.com/user/boardsofcanada",
-          "https://x.com/boardsofcanada",
-          "https://www.facebook.com/boardsofcanada",
-          "https://music.apple.com/us/artist/boards-of-canada/2989314",
-          "https://music.amazon.com/artists/B000T37SOY/boards-of-canada",
-          "https://boardsofcanada.bandcamp.com/"
-        ],
         "fetch": "ok",
         "final_url": "https://warp.net/artists/boards-of-canada",
-        "has_cloudflare_challenge": false,
         "html_length": 161438,
         "http_status": 200,
+        "looks_like_cloudflare_challenge": false,
         "matched_count": 9,
-        "matched_sample": [
-          "https://warp.net/releases/141387-peel-session",
-          "https://warp.net/releases/43515-tomorrows-harvest",
-          "https://warp.net/releases/4625-geogaddi",
-          "https://warp.net/releases/12790-trans-canada-highway",
-          "https://warp.net/releases/11672-the-campfire-headphase",
-          "https://warp.net/releases/12985-twoism",
-          "https://warp.net/releases/5729-in-a-beautiful-place-out-in-the-country",
-          "https://warp.net/releases/7819-music-has-the-right-to-children",
-          "https://warp.net/releases/388652-hi-scores"
-        ],
-        "pattern_counts": {
-          "/releases/": 9
-        },
-        "pattern_samples": {
-          "/releases/": [
-            "https://warp.net/releases/141387-peel-session/tracklist",
-            "https://warp.net/releases/43515-tomorrows-harvest/tracklist",
-            "https://warp.net/releases/4625-geogaddi/tracklist",
-            "https://warp.net/releases/12790-trans-canada-highway/tracklist",
-            "https://warp.net/releases/11672-the-campfire-headphase/tracklist",
-            "https://warp.net/releases/12985-twoism/tracklist",
-            "https://warp.net/releases/5729-in-a-beautiful-place-out-in-the-country/tracklist",
-            "https://warp.net/releases/7819-music-has-the-right-to-children/tracklist"
-          ]
-        },
-        "total_anchors": 68
+        "total_anchors_on_page": 68
       }
     }
   }
