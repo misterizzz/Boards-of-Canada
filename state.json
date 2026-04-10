@@ -1,1 +1,66 @@
-{}
+{
+  "_diagnostics": {
+    "last_run": 1775857759,
+    "sources": {
+      "Bleep": {
+        "boards_hits": [],
+        "fetch": "ok",
+        "final_url": "https://bleep.com/artist/48-a-guy-called-gerald",
+        "has_cloudflare_challenge": false,
+        "html_length": 51158,
+        "http_status": 200,
+        "matched_count": 0,
+        "matched_sample": [],
+        "pattern_counts": {
+          "/release/": 6
+        },
+        "pattern_samples": {
+          "/release/": [
+            "https://bleep.com/release/311216-a-guy-called-gerald-trip-city",
+            "https://bleep.com/release/41279-a-guy-called-gerald-how-long-is-now"
+          ]
+        },
+        "total_anchors": 103
+      },
+      "Warp Records": {
+        "boards_hits": [
+          "https://warp.net/artists/boards-of-canada",
+          "https://warp.net/artists/boards-of-canada/releases",
+          "https://warp.net/artists/boards-of-canada/links",
+          "https://warp.net/products/502760-boards-of-canada-t-shirt-green",
+          "https://bleep.com/artist/78-boards-of-canada",
+          "https://www.instagram.com/boardsofcanada/",
+          "https://www.youtube.com/user/boardsofcanada",
+          "https://x.com/boardsofcanada",
+          "https://www.facebook.com/boardsofcanada",
+          "https://music.apple.com/us/artist/boards-of-canada/2989314",
+          "https://music.amazon.com/artists/B000T37SOY/boards-of-canada",
+          "https://boardsofcanada.bandcamp.com/"
+        ],
+        "fetch": "ok",
+        "final_url": "https://warp.net/artists/boards-of-canada",
+        "has_cloudflare_challenge": false,
+        "html_length": 161438,
+        "http_status": 200,
+        "matched_count": 0,
+        "matched_sample": [],
+        "pattern_counts": {
+          "/releases/": 9
+        },
+        "pattern_samples": {
+          "/releases/": [
+            "https://warp.net/releases/141387-peel-session/tracklist",
+            "https://warp.net/releases/43515-tomorrows-harvest/tracklist",
+            "https://warp.net/releases/4625-geogaddi/tracklist",
+            "https://warp.net/releases/12790-trans-canada-highway/tracklist",
+            "https://warp.net/releases/11672-the-campfire-headphase/tracklist",
+            "https://warp.net/releases/12985-twoism/tracklist",
+            "https://warp.net/releases/5729-in-a-beautiful-place-out-in-the-country/tracklist",
+            "https://warp.net/releases/7819-music-has-the-right-to-children/tracklist"
+          ]
+        },
+        "total_anchors": 68
+      }
+    }
+  }
+}
