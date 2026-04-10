@@ -10,6 +10,14 @@ on:
         description: "Send a test ntfy push regardless of state diff"
         required: false
         default: "false"
+  push:
+    branches:
+      - main
+      - claude/ios-album-notifications-akAwd
+    paths:
+      - "scraper.py"
+      - "requirements.txt"
+      - ".github/workflows/check.yml"
 
 permissions:
   contents: write
