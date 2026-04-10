@@ -1,20 +1,20 @@
 {
   "Bleep": {
-    "last_checked": 1775858319,
+    "last_checked": 1775858440,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
-      "https://bleep.com/release/12985-boards-of-canada-twoism": "LP Download",
+      "https://bleep.com/release/12985-boards-of-canada-twoism": "Twoism",
       "https://bleep.com/release/141387-boards-of-canada-peel-session": "Peel Session",
       "https://bleep.com/release/388652-boards-of-canada-hi-scores": "Hi Scores",
-      "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest": "Tomorrow's Harvest",
-      "https://bleep.com/release/4625-boards-of-canada-geogaddi": "LP CD Download",
+      "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest": "Tomorrows Harvest",
+      "https://bleep.com/release/4625-boards-of-canada-geogaddi": "Geogaddi",
       "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country": "In A Beautiful Place Out In The Country",
       "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "Music Has The Right To Children"
     }
   },
   "Warp Records": {
-    "last_checked": 1775858317,
+    "last_checked": 1775858439,
     "releases": {
       "https://warp.net/releases/11672-the-campfire-headphase": "The Campfire Headphase , album , 2005",
       "https://warp.net/releases/12790-trans-canada-highway": "Trans Canada Highway , EP , 2006",
@@ -28,12 +28,12 @@
     }
   },
   "_telemetry": {
-    "last_run": 1775858319,
+    "last_run": 1775858440,
     "sources": {
       "Bleep": {
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
-        "html_length": 114161,
+        "html_length": 114579,
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 9,
