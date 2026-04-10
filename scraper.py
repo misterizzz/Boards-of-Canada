@@ -13,10 +13,12 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -48,6 +50,21 @@ CANDIDATE_PATH_MARKERS = (
 )
 
 
+# Warp exposes each release at /releases/<id>-<slug> with optional sub-pages
+# /tracklist, /reviews, /credits. Collapse them to the canonical base URL so
+# we get a single stable identifier per release.
+_WARP_RELEASE_RE = re.compile(r"^(https?://warp\.net/releases/[^/?#]+)(?:/.*)?$")
+
+
+def _warp_canonical(url: str) -> str:
+    m = _WARP_RELEASE_RE.match(url)
+    return m.group(1) if m else url
+
+
+def _identity(url: str) -> str:
+    return url
+
+
 @dataclass
 class Source:
     name: str
@@ -59,6 +76,9 @@ class Source:
     # Used to scope Bleep results to BoC only (its /release/ URLs embed the
     # artist slug: /release/<id>-<artist-slug>-<album-slug>).
     required_slug: str | None = None
+    # Applied to every matching release URL before diffing / storing, so
+    # different sub-pages of the same release collapse together.
+    canonicalize: Callable[[str], str] = _identity
 
     def fetch(self) -> tuple[str, int, str]:
         """Return (html, http_status, final_url) after retry/backoff."""
@@ -104,6 +124,7 @@ class Source:
                 continue
             if self.required_slug and self.required_slug not in path:
                 continue
+            abs_url = self.canonicalize(abs_url)
             title = anchor.get_text(" ", strip=True) or abs_url
             # Prefer the longest text node seen for the same URL, which is
             # usually the one containing the actual release title rather
@@ -159,11 +180,14 @@ SOURCES: list[Source] = [
     Source(
         name="Warp Records",
         url="https://warp.net/artists/boards-of-canada/",
-        release_path_marker="/records/",
+        release_path_marker="/releases/",
+        canonicalize=_warp_canonical,
     ),
     Source(
+        # Bleep artist ID 48 is A Guy Called Gerald — the correct BoC ID is
+        # 78 (confirmed via cross-link from warp.net).
         name="Bleep",
-        url="https://bleep.com/artist/48-boards-of-canada",
+        url="https://bleep.com/artist/78-boards-of-canada",
         release_path_marker="/release/",
         required_slug="boards-of-canada",
     ),
