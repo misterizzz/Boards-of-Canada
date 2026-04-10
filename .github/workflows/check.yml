@@ -1,0 +1,57 @@
+name: BoC album watcher
+
+on:
+  schedule:
+    # GitHub Actions minimum interval is 5 minutes.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      force_notify:
+        description: "Send a test ntfy push regardless of state diff"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: boc-watcher
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check for new releases
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          extra_args=""
+          if [ "${{ github.event.inputs.force_notify }}" = "true" ]; then
+            extra_args="--force-notify"
+          fi
+          python scraper.py $extra_args
+
+      - name: Commit updated state
+        run: |
+          if [[ -n "$(git status --porcelain state.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state.json
+            git commit -m "chore: update release state"
+            git push
+          else
+            echo "No state changes to commit."
+          fi
