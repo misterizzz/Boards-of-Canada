@@ -34,20 +34,7 @@ STATE_FILE = Path(__file__).with_name("state.json")
 NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
 
 # Keys in state.json that are NOT sources.
-RESERVED_KEYS = {"_diagnostics"}
-
-# Candidate path substrings used when diagnosing which URL pattern a site uses
-# for its release pages. Purely for debug output.
-CANDIDATE_PATH_MARKERS = (
-    "/records/",
-    "/release/",
-    "/releases/",
-    "/album/",
-    "/albums/",
-    "/music/",
-    "/shop/",
-    "/product/",
-)
+RESERVED_KEYS = {"_telemetry"}
 
 
 # Warp exposes each release at /releases/<id>-<slug> with optional sub-pages
@@ -63,6 +50,27 @@ def _warp_canonical(url: str) -> str:
 
 def _identity(url: str) -> str:
     return url
+
+
+def _title_from_slug(url: str, artist_slug: str | None) -> str:
+    """Build a human title from the last URL path segment.
+
+    For Bleep, anchors wrap only an <img>, so anchor.get_text() returns
+    nothing and we'd end up showing the raw URL in push notifications.
+    The URL slug already contains everything we need: drop the leading
+    numeric ID, drop the embedded artist slug if there is one, titlecase
+    the rest. /release/141387-boards-of-canada-peel-session becomes
+    "Peel Session".
+    """
+    last = urlparse(url).path.rstrip("/").split("/")[-1]
+    parts = [p for p in last.split("-") if p]
+    if parts and parts[0].isdigit():
+        parts = parts[1:]
+    if artist_slug:
+        slug_words = artist_slug.split("-")
+        if parts[: len(slug_words)] == slug_words:
+            parts = parts[len(slug_words):]
+    return " ".join(p.capitalize() for p in parts) or last
 
 
 # Bleep lumps music and merch into the same /release/ URL space, so we
@@ -162,7 +170,9 @@ class Source:
             if self.drop_merch and any(s in path for s in MERCH_SLUG_SUBSTRINGS):
                 continue
             abs_url = self.canonicalize(abs_url)
-            title = anchor.get_text(" ", strip=True) or abs_url
+            title = anchor.get_text(" ", strip=True)
+            if not title:
+                title = _title_from_slug(abs_url, self.required_slug)
             # Prefer the longest text node seen for the same URL, which is
             # usually the one containing the actual release title rather
             # than a thumbnail-only link.
@@ -170,46 +180,15 @@ class Source:
                 releases[abs_url] = title
         return releases
 
-    def diagnose(self, html: str) -> dict:
-        """Return debug info about what kinds of links the page contains."""
-        soup = BeautifulSoup(html, "html.parser")
-        anchors = [a.get("href", "") for a in soup.find_all("a", href=True)]
-        parsed = urlparse(self.url)
-        base = f"{parsed.scheme}://{parsed.netloc}"
-
-        # Count matches per candidate marker, and collect a small sample.
-        pattern_counts: dict[str, int] = {}
-        pattern_samples: dict[str, list[str]] = {}
-        for href in anchors:
-            abs_url = urljoin(base, href).split("?")[0].split("#")[0]
-            path = urlparse(abs_url).path
-            for marker in CANDIDATE_PATH_MARKERS:
-                if marker in path:
-                    pattern_counts[marker] = pattern_counts.get(marker, 0) + 1
-                    pattern_samples.setdefault(marker, [])
-                    if len(pattern_samples[marker]) < 8:
-                        if abs_url not in pattern_samples[marker]:
-                            pattern_samples[marker].append(abs_url)
-                    break
-
-        # Also sample anchors that contain the artist slug "boards", in case
-        # the URL structure doesn't use any of the candidate path markers.
-        boards_hits: list[str] = []
-        for href in anchors:
-            abs_url = urljoin(base, href).split("?")[0].split("#")[0]
-            if "boards" in abs_url.lower() and abs_url not in boards_hits:
-                boards_hits.append(abs_url)
-            if len(boards_hits) >= 15:
-                break
-
+    def telemetry(self, html: str) -> dict:
+        """Lightweight per-run telemetry written back to state.json."""
         return {
-            "total_anchors": len(anchors),
-            "pattern_counts": pattern_counts,
-            "pattern_samples": pattern_samples,
-            "boards_hits": boards_hits,
+            "total_anchors_on_page": len(BeautifulSoup(html, "html.parser").find_all("a", href=True)),
             "html_length": len(html),
-            "has_cloudflare_challenge": "cf-challenge" in html.lower()
-            or "just a moment" in html.lower()[:2000],
+            "looks_like_cloudflare_challenge": (
+                "cf-challenge" in html.lower()
+                or "just a moment" in html.lower()[:2000]
+            ),
         }
 
 
@@ -279,35 +258,31 @@ def main() -> int:
         return 2
 
     state = load_state()
-    diagnostics: dict[str, dict] = {}
+    telemetry: dict[str, dict] = {}
     new_items: list[tuple[Source, str, str]] = []
 
     for source in SOURCES:
         is_first_run = source.name not in state
         previous = set(state.get(source.name, {}).get("releases", {}).keys())
-        diag: dict = {"fetch": "unknown"}
+        tele: dict = {"fetch": "unknown"}
 
         try:
             html, status, final_url = source.fetch()
-            diag["fetch"] = "ok"
-            diag["http_status"] = status
-            diag["final_url"] = final_url
+            tele["fetch"] = "ok"
+            tele["http_status"] = status
+            tele["final_url"] = final_url
         except requests.RequestException as exc:
-            diag["fetch"] = f"failed: {exc}"
+            tele["fetch"] = f"failed: {exc}"
             print(f"[{source.name}] fetch failed: {exc}", file=sys.stderr)
-            diagnostics[source.name] = diag
+            telemetry[source.name] = tele
             continue
 
-        diag.update(source.diagnose(html))
+        tele.update(source.telemetry(html))
         releases = source.extract_releases(html)
-        diag["matched_count"] = len(releases)
-        diag["matched_sample"] = list(releases.keys())[:10]
-        diagnostics[source.name] = diag
+        tele["matched_count"] = len(releases)
+        telemetry[source.name] = tele
 
-        print(
-            f"[{source.name}] parsed {len(releases)} release link(s) "
-            f"(total anchors: {diag['total_anchors']})"
-        )
+        print(f"[{source.name}] parsed {len(releases)} release link(s)")
 
         if not releases:
             print(
@@ -329,10 +304,12 @@ def main() -> int:
             "last_checked": int(time.time()),
         }
 
-    state["_diagnostics"] = {
+    state["_telemetry"] = {
         "last_run": int(time.time()),
-        "sources": diagnostics,
+        "sources": telemetry,
     }
+    # Drop old diagnostics key from previous scraper versions.
+    state.pop("_diagnostics", None)
 
     if args.force_notify and not args.dry_run and topic:
         notify(
