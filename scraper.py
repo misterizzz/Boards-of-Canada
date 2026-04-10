@@ -15,7 +15,7 @@ import json
 import os
 import sys
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -31,6 +31,22 @@ USER_AGENT = (
 STATE_FILE = Path(__file__).with_name("state.json")
 NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
 
+# Keys in state.json that are NOT sources.
+RESERVED_KEYS = {"_diagnostics"}
+
+# Candidate path substrings used when diagnosing which URL pattern a site uses
+# for its release pages. Purely for debug output.
+CANDIDATE_PATH_MARKERS = (
+    "/records/",
+    "/release/",
+    "/releases/",
+    "/album/",
+    "/albums/",
+    "/music/",
+    "/shop/",
+    "/product/",
+)
+
 
 @dataclass
 class Source:
@@ -39,8 +55,13 @@ class Source:
     # Substring that must appear in an anchor's href for it to count as a
     # release link. Keeps navigation / social links out of the diff.
     release_path_marker: str
+    # Optional extra filter: the URL path must contain this string too.
+    # Used to scope Bleep results to BoC only (its /release/ URLs embed the
+    # artist slug: /release/<id>-<artist-slug>-<album-slug>).
+    required_slug: str | None = None
 
-    def fetch(self) -> str:
+    def fetch(self) -> tuple[str, int, str]:
+        """Return (html, http_status, final_url) after retry/backoff."""
         headers = {
             "User-Agent": USER_AGENT,
             "Accept": (
@@ -54,7 +75,7 @@ class Source:
             try:
                 resp = requests.get(self.url, headers=headers, timeout=30)
                 resp.raise_for_status()
-                return resp.text
+                return resp.text, resp.status_code, resp.url
             except requests.RequestException as exc:
                 last_error = exc
                 if attempt < 3:
@@ -75,10 +96,13 @@ class Source:
             if self.release_path_marker not in href:
                 continue
             abs_url = urljoin(base, href).split("?")[0].split("#")[0]
+            path = urlparse(abs_url).path
             # Skip the artist page itself and obvious index pages.
-            if urlparse(abs_url).path.rstrip("/") == artist_path:
+            if path.rstrip("/") == artist_path:
                 continue
-            if urlparse(abs_url).path.rstrip("/") == self.release_path_marker.rstrip("/"):
+            if path.rstrip("/") == self.release_path_marker.rstrip("/"):
+                continue
+            if self.required_slug and self.required_slug not in path:
                 continue
             title = anchor.get_text(" ", strip=True) or abs_url
             # Prefer the longest text node seen for the same URL, which is
@@ -87,6 +111,48 @@ class Source:
             if abs_url not in releases or len(title) > len(releases[abs_url]):
                 releases[abs_url] = title
         return releases
+
+    def diagnose(self, html: str) -> dict:
+        """Return debug info about what kinds of links the page contains."""
+        soup = BeautifulSoup(html, "html.parser")
+        anchors = [a.get("href", "") for a in soup.find_all("a", href=True)]
+        parsed = urlparse(self.url)
+        base = f"{parsed.scheme}://{parsed.netloc}"
+
+        # Count matches per candidate marker, and collect a small sample.
+        pattern_counts: dict[str, int] = {}
+        pattern_samples: dict[str, list[str]] = {}
+        for href in anchors:
+            abs_url = urljoin(base, href).split("?")[0].split("#")[0]
+            path = urlparse(abs_url).path
+            for marker in CANDIDATE_PATH_MARKERS:
+                if marker in path:
+                    pattern_counts[marker] = pattern_counts.get(marker, 0) + 1
+                    pattern_samples.setdefault(marker, [])
+                    if len(pattern_samples[marker]) < 8:
+                        if abs_url not in pattern_samples[marker]:
+                            pattern_samples[marker].append(abs_url)
+                    break
+
+        # Also sample anchors that contain the artist slug "boards", in case
+        # the URL structure doesn't use any of the candidate path markers.
+        boards_hits: list[str] = []
+        for href in anchors:
+            abs_url = urljoin(base, href).split("?")[0].split("#")[0]
+            if "boards" in abs_url.lower() and abs_url not in boards_hits:
+                boards_hits.append(abs_url)
+            if len(boards_hits) >= 15:
+                break
+
+        return {
+            "total_anchors": len(anchors),
+            "pattern_counts": pattern_counts,
+            "pattern_samples": pattern_samples,
+            "boards_hits": boards_hits,
+            "html_length": len(html),
+            "has_cloudflare_challenge": "cf-challenge" in html.lower()
+            or "just a moment" in html.lower()[:2000],
+        }
 
 
 SOURCES: list[Source] = [
@@ -99,6 +165,7 @@ SOURCES: list[Source] = [
         name="Bleep",
         url="https://bleep.com/artist/48-boards-of-canada",
         release_path_marker="/release/",
+        required_slug="boards-of-canada",
     ),
 ]
 
@@ -115,7 +182,6 @@ def save_state(state: dict) -> None:
 
 def notify(topic: str, title: str, message: str, click_url: str | None = None) -> None:
     headers = {
-        # ntfy reads these as ISO-8859-1; RFC 8187 encoding handles unicode.
         "Title": title.encode("utf-8"),
         "Priority": "high",
         "Tags": "loud_sound,musical_note",
@@ -151,23 +217,40 @@ def main() -> int:
         return 2
 
     state = load_state()
+    diagnostics: dict[str, dict] = {}
     new_items: list[tuple[Source, str, str]] = []
 
     for source in SOURCES:
         is_first_run = source.name not in state
         previous = set(state.get(source.name, {}).get("releases", {}).keys())
+        diag: dict = {"fetch": "unknown"}
+
         try:
-            html = source.fetch()
+            html, status, final_url = source.fetch()
+            diag["fetch"] = "ok"
+            diag["http_status"] = status
+            diag["final_url"] = final_url
         except requests.RequestException as exc:
-            print(f"[{source.name}] fetch failed after retries: {exc}", file=sys.stderr)
+            diag["fetch"] = f"failed: {exc}"
+            print(f"[{source.name}] fetch failed: {exc}", file=sys.stderr)
+            diagnostics[source.name] = diag
             continue
 
+        diag.update(source.diagnose(html))
         releases = source.extract_releases(html)
-        print(f"[{source.name}] parsed {len(releases)} release link(s)")
+        diag["matched_count"] = len(releases)
+        diag["matched_sample"] = list(releases.keys())[:10]
+        diagnostics[source.name] = diag
+
+        print(
+            f"[{source.name}] parsed {len(releases)} release link(s) "
+            f"(total anchors: {diag['total_anchors']})"
+        )
+
         if not releases:
-            # Don't wipe known state if the selector broke.
             print(
-                f"[{source.name}] no releases parsed — leaving previous state untouched",
+                f"[{source.name}] no releases parsed — leaving previous "
+                "release state untouched so we do not spam on a transient blip",
                 file=sys.stderr,
             )
             continue
@@ -183,6 +266,11 @@ def main() -> int:
             "releases": releases,
             "last_checked": int(time.time()),
         }
+
+    state["_diagnostics"] = {
+        "last_run": int(time.time()),
+        "sources": diagnostics,
+    }
 
     if args.force_notify and not args.dry_run and topic:
         notify(
