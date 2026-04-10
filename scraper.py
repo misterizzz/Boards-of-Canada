@@ -119,6 +119,11 @@ class Source:
     # Needed for Bleep because it lumps merch into the same /release/ URL
     # space as music. Warp keeps merch under /products/ so doesn't need it.
     drop_merch: bool = False
+    # If True, derive the release title from the URL slug instead of any
+    # anchor text. Needed for Bleep where the text is either empty
+    # (image-only anchor) or is a format selector label like "LP Download"
+    # or "LP CD Download", neither of which is useful in a push.
+    title_from_slug: bool = False
     # Applied to every matching release URL before diffing / storing, so
     # different sub-pages of the same release collapse together.
     canonicalize: Callable[[str], str] = _identity
@@ -170,9 +175,12 @@ class Source:
             if self.drop_merch and any(s in path for s in MERCH_SLUG_SUBSTRINGS):
                 continue
             abs_url = self.canonicalize(abs_url)
-            title = anchor.get_text(" ", strip=True)
-            if not title:
+            if self.title_from_slug:
                 title = _title_from_slug(abs_url, self.required_slug)
+            else:
+                title = anchor.get_text(" ", strip=True)
+                if not title:
+                    title = _title_from_slug(abs_url, self.required_slug)
             # Prefer the longest text node seen for the same URL, which is
             # usually the one containing the actual release title rather
             # than a thumbnail-only link.
@@ -207,6 +215,7 @@ SOURCES: list[Source] = [
         release_path_marker="/release/",
         required_slug="boards-of-canada",
         drop_merch=True,
+        title_from_slug=True,
     ),
 ]
 
