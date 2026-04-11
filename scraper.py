@@ -152,6 +152,10 @@ class Source:
     # Used to scope Bleep results to BoC only (its /release/ URLs embed the
     # artist slug: /release/<id>-<artist-slug>-<album-slug>).
     required_slug: str | None = None
+    # Optional extra filter: the anchor's visible text must contain this
+    # substring (case-insensitive). Used for editorial/news pages where
+    # the URL doesn't embed the artist name but the article title does.
+    required_text: str | None = None
     # If True, derive the title from the URL slug instead of any anchor
     # text. Needed for Bleep where the text is either empty (image-only
     # anchor) or a format selector label like "LP Download".
@@ -204,11 +208,14 @@ class Source:
                 continue
             if self.required_slug and self.required_slug not in path:
                 continue
+            anchor_text = anchor.get_text(" ", strip=True)
+            if self.required_text and self.required_text.lower() not in anchor_text.lower():
+                continue
             abs_url = self.canonicalize(abs_url)
             if self.title_from_slug:
                 title = _title_from_slug(abs_url, self.required_slug)
             else:
-                title = anchor.get_text(" ", strip=True)
+                title = anchor_text
                 if not title:
                     title = _title_from_slug(abs_url, self.required_slug)
             # Prefer the longest text node seen for the same URL, which is
@@ -268,12 +275,10 @@ SOURCES: list[Source] = [
         url="https://warp.net/artists/boards-of-canada/",
         # The BoC artist page on warp.net only shows BoC-related content in
         # these URL spaces, so we can trust any anchor under them without a
-        # slug check. /news/ is a guess — the first run's telemetry will
-        # confirm whether it exists on the artist page.
+        # slug check. News doesn't live here — see Warp Editorial below.
         path_markers=(
             "/releases/",
             "/products/",
-            "/news/",
             "/videos/",
             "/video/",
             "/tour/",
@@ -285,20 +290,24 @@ SOURCES: list[Source] = [
         # 78 (confirmed via cross-link from warp.net).
         name="Bleep",
         url="https://bleep.com/artist/78-boards-of-canada",
-        # Bleep lumps music and merch under /release/. News/editorial
-        # might live under /news/, /features/, or /articles/ — first run's
-        # telemetry will tell us which (if any).
-        path_markers=(
-            "/release/",
-            "/news/",
-            "/features/",
-            "/feature/",
-            "/articles/",
-            "/article/",
-            "/journal/",
-        ),
+        # Bleep only surfaces /release/ URLs from the artist page (music +
+        # merch lumped together). Its editorial/news content is elsewhere
+        # on the site and is not linked from the artist page, so news
+        # tracking on Bleep would need a separate source with a different
+        # URL — skipped for now, no obvious endpoint.
+        path_markers=("/release/",),
         required_slug="boards-of-canada",
         title_from_slug=True,
+    ),
+    Source(
+        # Warp posts label news at warp.net/editorial. We fetch that index
+        # page and keep any article whose visible anchor text mentions
+        # "Boards of Canada" — the URL slugs of editorial posts don't
+        # embed artist names so text filtering is the only reliable hook.
+        name="Warp Editorial",
+        url="https://warp.net/editorial",
+        path_markers=("/editorial/",),
+        required_text="boards of canada",
     ),
 ]
 
