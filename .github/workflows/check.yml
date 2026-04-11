@@ -57,7 +57,7 @@ jobs:
             echo "Icon already sourced from Deezer, skipping bootstrap."
             exit 0
           fi
-          echo "Fetching BoC artist photo…"
+          echo "Fetching BoC artist photo..."
           if ! curl -fsSL \
               -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
               -H "Accept: image/avif,image/webp,image/png,*/*" \
@@ -68,14 +68,13 @@ jobs:
             exit 0
           fi
           pip install --quiet Pillow
-          python3 - <<'PY'
-from PIL import Image
-src = Image.open('/tmp/boc.jpg').convert('RGB')
-for size in (192, 512):
-    img = src.resize((size, size), Image.LANCZOS)
-    img.save(f'docs/icons/icon-{size}.png', 'PNG', optimize=True)
-    print(f'wrote docs/icons/icon-{size}.png')
-PY
+          python3 -c "
+          from PIL import Image
+          src = Image.open('/tmp/boc.jpg').convert('RGB')
+          src.resize((192, 192), Image.LANCZOS).save('docs/icons/icon-192.png', 'PNG', optimize=True)
+          src.resize((512, 512), Image.LANCZOS).save('docs/icons/icon-512.png', 'PNG', optimize=True)
+          print('icons updated from Deezer')
+          " || exit 0
           echo deezer-500 > docs/icons/.source
 
       - name: Check for new releases
