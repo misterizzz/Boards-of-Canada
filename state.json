@@ -1,6 +1,6 @@
 {
   "Bleep": {
-    "last_checked": 1775888187,
+    "last_checked": 1775888323,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
@@ -30,7 +30,7 @@
     }
   },
   "Warp": {
-    "last_checked": 1775888184,
+    "last_checked": 1775888322,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -61,13 +61,17 @@
       "https://warp.net/video/10268265-dayvan-cowboy": "Dayvan Cowboy , 2006"
     }
   },
+  "Warp Editorial": {
+    "last_checked": 1775888324,
+    "releases": {}
+  },
   "_telemetry": {
-    "last_run": 1775888187,
+    "last_run": 1775888324,
     "sources": {
       "Bleep": {
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
-        "html_length": 114161,
+        "html_length": 114579,
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 25,
