@@ -59,24 +59,50 @@ self.addEventListener("fetch", (event) => {
 });
 
 // --- Web Push ---------------------------------------------------------
+//
+// The scraper sends a zero-byte "tickle" push — no payload, just a
+// VAPID-signed POST that wakes us up. We then fetch the event log
+// ourselves and show the newest entry as a notification. This avoids
+// RFC 8291 payload encryption on the sender side.
 
 self.addEventListener("push", (event) => {
-  let data = {};
-  try {
-    data = event.data ? event.data.json() : {};
-  } catch {
-    data = { title: "BoC watcher", body: event.data ? event.data.text() : "" };
-  }
-  const title = data.title || "Boards of Canada";
-  const options = {
-    body: data.body || "",
-    icon: "icons/icon-192.png",
-    badge: "icons/icon-192.png",
-    data: { url: data.url || "./" },
-    tag: data.url || undefined,
-    renotify: false,
-  };
-  event.waitUntil(self.registration.showNotification(title, options));
+  event.waitUntil(
+    fetch("events.json", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : []))
+      .then((events) => {
+        if (!events.length) {
+          return self.registration.showNotification("Boards of Canada", {
+            body: "Tap to open the watcher.",
+            icon: "icons/icon-192.png",
+            badge: "icons/icon-192.png",
+            data: { url: "./" },
+            tag: "boc-empty",
+          });
+        }
+        const latest = events[0];
+        const more = events.length > 1 ? ` (+${events.length - 1} more in the app)` : "";
+        return self.registration.showNotification(
+          `BoC ${latest.category} — new on ${latest.source}`,
+          {
+            body: `${latest.title}${more}`,
+            icon: "icons/icon-192.png",
+            badge: "icons/icon-192.png",
+            data: { url: latest.url },
+            tag: "boc-latest",
+            renotify: true,
+          }
+        );
+      })
+      .catch((err) => {
+        console.error("push handler failed", err);
+        return self.registration.showNotification("Boards of Canada", {
+          body: "Something new has arrived. Tap to open.",
+          icon: "icons/icon-192.png",
+          data: { url: "./" },
+          tag: "boc-fallback",
+        });
+      })
+  );
 });
 
 self.addEventListener("notificationclick", (event) => {

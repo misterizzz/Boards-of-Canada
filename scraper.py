@@ -14,6 +14,7 @@ The first run per source only records a baseline and does not notify.
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
 import re
@@ -357,55 +358,112 @@ def save_subscriptions(subs: list) -> None:
     SUBSCRIPTIONS_FILE.write_text(json.dumps(subs, indent=2) + "\n")
 
 
+def _b64url_encode(data: bytes) -> str:
+    return base64.urlsafe_b64encode(data).decode("ascii").rstrip("=")
+
+
+def _build_vapid_auth_header(
+    vapid_private_key_b64url: str, endpoint: str, sub: str
+) -> str:
+    """Build an RFC 8292 VAPID Authorization header.
+
+    `vapid_private_key_b64url` is the raw 32-byte ECDSA P-256 private
+    scalar, base64url-encoded, exactly the format my keygen script emits
+    and what we ask the user to store in the VAPID_PRIVATE_KEY secret.
+    """
+    import base64 as _base64  # local alias to keep global imports tidy
+
+    from cryptography.hazmat.primitives import hashes, serialization
+    from cryptography.hazmat.primitives.asymmetric import ec
+    from cryptography.hazmat.primitives.asymmetric.utils import decode_dss_signature
+
+    padded = vapid_private_key_b64url + "=" * ((4 - len(vapid_private_key_b64url) % 4) % 4)
+    raw_private = _base64.urlsafe_b64decode(padded)
+    private_value = int.from_bytes(raw_private, "big")
+    priv = ec.derive_private_key(private_value, ec.SECP256R1())
+    pub_bytes = priv.public_key().public_bytes(
+        encoding=serialization.Encoding.X962,
+        format=serialization.PublicFormat.UncompressedPoint,
+    )
+    pub_b64 = _b64url_encode(pub_bytes)
+
+    parsed = urlparse(endpoint)
+    audience = f"{parsed.scheme}://{parsed.netloc}"
+    header_segment = _b64url_encode(b'{"typ":"JWT","alg":"ES256"}')
+    claims = {
+        "aud": audience,
+        "exp": int(time.time()) + 12 * 3600,
+        "sub": sub,
+    }
+    claims_segment = _b64url_encode(
+        json.dumps(claims, separators=(",", ":")).encode("utf-8")
+    )
+    signing_input = f"{header_segment}.{claims_segment}".encode("ascii")
+    der_sig = priv.sign(signing_input, ec.ECDSA(hashes.SHA256()))
+    r, s = decode_dss_signature(der_sig)
+    raw_sig = r.to_bytes(32, "big") + s.to_bytes(32, "big")
+    sig_segment = _b64url_encode(raw_sig)
+    jwt = f"{header_segment}.{claims_segment}.{sig_segment}"
+    return f"vapid t={jwt}, k={pub_b64}"
+
+
 def send_web_push(
     subscriptions: list,
     vapid_private_key: str,
-    title: str,
-    body: str,
-    url: str,
-    category: str,
 ) -> list:
-    """Send a Web Push to every subscription in the list.
+    """Fire a zero-byte "tickle" push to every subscription.
 
-    Returns the list of subscriptions that are still alive — endpoints
-    that responded with 404/410 are pruned because the device has
-    unsubscribed or expired the token.
+    No payload encryption, just a VAPID-signed POST with empty body. The
+    service worker's `push` handler fetches events.json and shows the
+    newest entry as a notification. This avoids having to implement RFC
+    8291 payload encryption (aes128gcm with HKDF over p256dh+auth) which
+    pywebpush normally handles, at the cost of one extra HTTP round trip
+    in the service worker before the banner shows up.
+
+    Returns the list of subscriptions that are still alive. 404/410 from
+    the push service means the subscription is dead — we prune it so
+    `docs/subscriptions.json` self-cleans over time.
     """
-    try:
-        from pywebpush import WebPushException, webpush  # type: ignore
-    except ImportError:
-        print("[webpush] pywebpush not installed, skipping", file=sys.stderr)
-        return subscriptions
-
-    payload = json.dumps(
-        {"title": title, "body": body, "url": url, "category": category}
-    )
-    claims = {"sub": VAPID_CLAIMS_SUB}
     survivors: list = []
     for sub in subscriptions:
+        endpoint = sub.get("endpoint")
+        if not endpoint:
+            continue
         try:
-            webpush(
-                subscription_info=sub,
-                data=payload,
-                vapid_private_key=vapid_private_key,
-                vapid_claims=dict(claims),  # pywebpush mutates claims
-                ttl=3600,
+            auth = _build_vapid_auth_header(
+                vapid_private_key, endpoint, VAPID_CLAIMS_SUB
+            )
+            resp = requests.post(
+                endpoint,
+                headers={
+                    "Authorization": auth,
+                    "TTL": "3600",
+                    "Content-Length": "0",
+                    "Urgency": "normal",
+                },
+                data=b"",
+                timeout=30,
+            )
+        except requests.RequestException as exc:
+            print(f"[webpush] network error, keeping sub: {exc}", file=sys.stderr)
+            survivors.append(sub)
+            continue
+
+        if resp.status_code in (200, 201, 202):
+            survivors.append(sub)
+        elif resp.status_code in (404, 410):
+            print(
+                f"[webpush] pruning dead subscription ({resp.status_code})",
+                file=sys.stderr,
+            )
+        else:
+            # Transient error, keep it and retry next run.
+            print(
+                f"[webpush] push returned {resp.status_code}, keeping sub: "
+                f"{resp.text[:120]}",
+                file=sys.stderr,
             )
             survivors.append(sub)
-        except WebPushException as exc:
-            resp = getattr(exc, "response", None)
-            status = getattr(resp, "status_code", None)
-            if status in (404, 410):
-                print(
-                    f"[webpush] pruning dead subscription ({status})",
-                    file=sys.stderr,
-                )
-            else:
-                print(
-                    f"[webpush] push failed ({status}), keeping sub: {exc}",
-                    file=sys.stderr,
-                )
-                survivors.append(sub)
     return survivors
 
 
@@ -583,18 +641,14 @@ def main() -> int:
                     print(f"[ntfy] push failed: {exc}", file=sys.stderr)
 
         # 3. Web Push fan-out to every subscription in docs/subscriptions.json.
+        # One tickle push per run — the SW will fetch events.json itself
+        # and show the newest entry as a banner. Multiple new items in
+        # one run collapse to a single notification that says "tap to see
+        # the rest" (user opens the PWA).
         vapid_private = os.environ.get("VAPID_PRIVATE_KEY")
         subs = load_subscriptions()
         if vapid_private and subs:
-            for ev in enriched:
-                subs = send_web_push(
-                    subs,
-                    vapid_private,
-                    title=f"BoC {ev['category']} — {ev['source']}",
-                    body=ev["title"],
-                    url=ev["url"],
-                    category=ev["category"],
-                )
+            subs = send_web_push(subs, vapid_private)
             save_subscriptions(subs)
         elif subs and not vapid_private:
             print(
