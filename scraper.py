@@ -230,7 +230,7 @@ def save_state(state: dict) -> None:
     STATE_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
 
-def notify(topic: str, title: str, message: str, click_url: str | None = None) -> None:
+def notify(topic: str, title: str, message: str, click_url: str | None = None) -> requests.Response:
     headers = {
         "Title": title.encode("utf-8"),
         "Priority": "high",
@@ -245,6 +245,7 @@ def notify(topic: str, title: str, message: str, click_url: str | None = None) -
         timeout=30,
     )
     resp.raise_for_status()
+    return resp
 
 
 def main() -> int:
@@ -269,6 +270,16 @@ def main() -> int:
     state = load_state()
     telemetry: dict[str, dict] = {}
     new_items: list[tuple[Source, str, str]] = []
+
+    # Consume a one-shot test-push marker. Any agent with repo write access
+    # can set state["_request_test_push"] = true and push; the next run will
+    # fire a test push to ntfy, capture the response status, write it to
+    # _telemetry.last_test_push, and remove the marker. This is the only
+    # way to verify the ntfy pipeline end-to-end without access to the
+    # Actions log or workflow_dispatch triggering.
+    marker_requests_push = bool(state.pop("_request_test_push", False))
+    if marker_requests_push:
+        print("[test-push] marker found in state.json, will send test push")
 
     for source in SOURCES:
         is_first_run = source.name not in state
@@ -320,12 +331,27 @@ def main() -> int:
     # Drop old diagnostics key from previous scraper versions.
     state.pop("_diagnostics", None)
 
-    if args.force_notify and not args.dry_run and topic:
-        notify(
-            topic,
-            "BoC watcher test",
-            "Test notification — scraper is alive.",
-        )
+    if (args.force_notify or marker_requests_push) and not args.dry_run and topic:
+        try:
+            resp = notify(
+                topic,
+                "BoC watcher test",
+                f"Test notification — scraper pipeline verified at {int(time.time())}",
+            )
+            state["_telemetry"]["last_test_push"] = {
+                "sent_at": int(time.time()),
+                "ntfy_http_status": resp.status_code,
+                "ntfy_body_snippet": resp.text[:120] if resp.text else "",
+                "ok": True,
+            }
+            print(f"[test-push] ntfy responded {resp.status_code}")
+        except requests.RequestException as exc:
+            state["_telemetry"]["last_test_push"] = {
+                "sent_at": int(time.time()),
+                "error": str(exc),
+                "ok": False,
+            }
+            print(f"[test-push] failed: {exc}", file=sys.stderr)
 
     for source, url, title in new_items:
         print(f"NEW [{source.name}] {title} -> {url}")
