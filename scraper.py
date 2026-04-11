@@ -394,22 +394,30 @@ def main() -> int:
         tele["matched_count"] = len(releases)
         telemetry[source.name] = tele
 
-        print(f"[{source.name}] parsed {len(releases)} release link(s)")
+        print(f"[{source.name}] parsed {len(releases)} link(s)")
 
-        if not releases:
+        # Transient-blip protection: if an ESTABLISHED source suddenly
+        # returns 0 items, don't clobber its baseline — most likely a
+        # temporary fetch anomaly or selector drift. But for a FIRST
+        # run, an empty result set IS a legitimate baseline (e.g. Warp
+        # Editorial currently has no BoC article). Writing that empty
+        # baseline is important: otherwise the source stays stuck in
+        # "first run" mode forever and the eventual first real match
+        # would be treated as baseline instead of triggering a push.
+        if not releases and not is_first_run:
             print(
-                f"[{source.name}] no releases parsed — leaving previous "
-                "release state untouched so we do not spam on a transient blip",
+                f"[{source.name}] 0 items on a non-first run — keeping "
+                "stored state to avoid losing the baseline on a blip",
                 file=sys.stderr,
             )
             continue
 
         added = set(releases.keys()) - previous
-        if added and not is_first_run:
+        if is_first_run:
+            print(f"[{source.name}] baseline captured ({len(releases)} items)")
+        elif added:
             for url in sorted(added):
                 new_items.append((source, url, releases[url]))
-        elif added and is_first_run:
-            print(f"[{source.name}] baseline captured ({len(added)} releases)")
 
         state[source.name] = {
             "releases": releases,
