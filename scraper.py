@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Watch Warp Records and Bleep.com for new Boards of Canada releases.
+"""Watch Warp and Bleep for anything new about Boards of Canada.
 
-On every run we fetch the artist pages, extract links that look like
-release pages, diff them against a persisted state file and push any
-new entries to an ntfy.sh topic so the user gets an iOS notification.
+On every run we fetch the BoC artist pages on both sites and extract
+every anchor whose path sits under a "BoC-related" space (releases,
+products, news, videos, ...). We diff that set against a persisted
+state file and push any new entries via ntfy.sh. Each new URL is
+classified at push time as music / merch / news / update so the
+notification title tells you what kind of thing it is.
 
 The first run per source only records a baseline and does not notify.
 """
@@ -73,11 +76,8 @@ def _title_from_slug(url: str, artist_slug: str | None) -> str:
     return " ".join(p.capitalize() for p in parts) or last
 
 
-# Bleep lumps music and merch into the same /release/ URL space, so we
-# explicitly drop anything whose slug looks like wearable/physical goods.
-# A new BoC album is *never* going to have any of these substrings in
-# its URL, and the false-positive risk of missing a real release is
-# therefore effectively zero.
+# Substrings that identify an item as merchandise (wearables, physical
+# goods) rather than music. Used at classification time to label pushes.
 MERCH_SLUG_SUBSTRINGS = (
     "t-shirt",
     "tshirt",
@@ -104,28 +104,60 @@ MERCH_SLUG_SUBSTRINGS = (
 )
 
 
+# Path prefix → category. Checked in order; first match wins.
+CATEGORY_PATH_PREFIXES: tuple[tuple[str, str], ...] = (
+    ("/news/", "news"),
+    ("/article/", "news"),
+    ("/articles/", "news"),
+    ("/features/", "news"),
+    ("/feature/", "news"),
+    ("/journal/", "news"),
+    ("/editorial/", "news"),
+    ("/video/", "video"),
+    ("/videos/", "video"),
+    ("/products/", "merch"),
+    ("/tour/", "tour"),
+    ("/releases/", "music"),
+)
+
+
+def classify_url(url: str) -> str:
+    """Return a short category label for a matching URL.
+
+    We check the URL path against a set of known prefixes first. If the
+    path is still ambiguous (e.g. Bleep's /release/ URL space that
+    contains both music and merch), fall back to the merch keyword scan.
+    """
+    path = urlparse(url).path.lower()
+    for prefix, label in CATEGORY_PATH_PREFIXES:
+        if prefix in path:
+            if label == "music" and any(s in path for s in MERCH_SLUG_SUBSTRINGS):
+                return "merch"
+            return label
+    if "/release/" in path:
+        if any(s in path for s in MERCH_SLUG_SUBSTRINGS):
+            return "merch"
+        return "music"
+    return "update"
+
+
 @dataclass
 class Source:
     name: str
     url: str
-    # Substring that must appear in an anchor's href for it to count as a
-    # release link. Keeps navigation / social links out of the diff.
-    release_path_marker: str
+    # Tuple of path substrings — an anchor matches if its URL path contains
+    # ANY of these. Widen this to add new content types (news, tour, ...).
+    path_markers: tuple[str, ...]
     # Optional extra filter: the URL path must contain this string too.
     # Used to scope Bleep results to BoC only (its /release/ URLs embed the
     # artist slug: /release/<id>-<artist-slug>-<album-slug>).
     required_slug: str | None = None
-    # If True, drop URLs whose slug looks like merchandise (t-shirts etc).
-    # Needed for Bleep because it lumps merch into the same /release/ URL
-    # space as music. Warp keeps merch under /products/ so doesn't need it.
-    drop_merch: bool = False
-    # If True, derive the release title from the URL slug instead of any
-    # anchor text. Needed for Bleep where the text is either empty
-    # (image-only anchor) or is a format selector label like "LP Download"
-    # or "LP CD Download", neither of which is useful in a push.
+    # If True, derive the title from the URL slug instead of any anchor
+    # text. Needed for Bleep where the text is either empty (image-only
+    # anchor) or a format selector label like "LP Download".
     title_from_slug: bool = False
-    # Applied to every matching release URL before diffing / storing, so
-    # different sub-pages of the same release collapse together.
+    # Applied to every matching URL before diffing / storing, so different
+    # sub-pages of the same release collapse together.
     canonicalize: Callable[[str], str] = _identity
 
     def fetch(self) -> tuple[str, int, str]:
@@ -152,7 +184,7 @@ class Source:
         raise last_error
 
     def extract_releases(self, html: str) -> dict[str, str]:
-        """Return {absolute_url: title} for release-like anchors."""
+        """Return {absolute_url: title} for anchors matching any path marker."""
         soup = BeautifulSoup(html, "html.parser")
         parsed = urlparse(self.url)
         base = f"{parsed.scheme}://{parsed.netloc}"
@@ -161,18 +193,16 @@ class Source:
         releases: dict[str, str] = {}
         for anchor in soup.find_all("a", href=True):
             href = anchor["href"]
-            if self.release_path_marker not in href:
+            if not any(marker in href for marker in self.path_markers):
                 continue
             abs_url = urljoin(base, href).split("?")[0].split("#")[0]
             path = urlparse(abs_url).path
             # Skip the artist page itself and obvious index pages.
             if path.rstrip("/") == artist_path:
                 continue
-            if path.rstrip("/") == self.release_path_marker.rstrip("/"):
+            if any(path.rstrip("/") == m.rstrip("/") for m in self.path_markers):
                 continue
             if self.required_slug and self.required_slug not in path:
-                continue
-            if self.drop_merch and any(s in path for s in MERCH_SLUG_SUBSTRINGS):
                 continue
             abs_url = self.canonicalize(abs_url)
             if self.title_from_slug:
@@ -182,29 +212,72 @@ class Source:
                 if not title:
                     title = _title_from_slug(abs_url, self.required_slug)
             # Prefer the longest text node seen for the same URL, which is
-            # usually the one containing the actual release title rather
-            # than a thumbnail-only link.
+            # usually the one containing the actual title rather than a
+            # thumbnail-only link.
             if abs_url not in releases or len(title) > len(releases[abs_url]):
                 releases[abs_url] = title
         return releases
 
     def telemetry(self, html: str) -> dict:
-        """Lightweight per-run telemetry written back to state.json."""
+        """Per-run telemetry written back to state.json.
+
+        Also dumps a compact inventory of anchor path prefixes on the page
+        so we can see — without access to Action logs — what URL spaces
+        exist and decide whether our path_markers cover them.
+        """
+        soup = BeautifulSoup(html, "html.parser")
+        anchors = [a.get("href", "") for a in soup.find_all("a", href=True)]
+        base_netloc = urlparse(self.url).netloc
+
+        # Bucket anchors by their first two path segments. That's enough
+        # granularity to tell "/news/..." from "/releases/..." from
+        # "/artists/..." while staying compact.
+        prefix_counts: dict[str, int] = {}
+        prefix_samples: dict[str, str] = {}
+        for href in anchors:
+            abs_url = urljoin(f"https://{base_netloc}", href).split("?")[0].split("#")[0]
+            p = urlparse(abs_url)
+            if p.netloc != base_netloc:
+                continue
+            segments = [s for s in p.path.split("/") if s][:2]
+            prefix = "/" + "/".join(segments) + "/" if segments else "/"
+            prefix_counts[prefix] = prefix_counts.get(prefix, 0) + 1
+            prefix_samples.setdefault(prefix, abs_url)
+
+        # Only keep the top ~12 prefixes by count for compactness.
+        top = sorted(prefix_counts.items(), key=lambda kv: -kv[1])[:12]
+        prefix_inventory = {
+            pref: {"count": count, "example": prefix_samples[pref]}
+            for pref, count in top
+        }
+
         return {
-            "total_anchors_on_page": len(BeautifulSoup(html, "html.parser").find_all("a", href=True)),
+            "total_anchors_on_page": len(anchors),
             "html_length": len(html),
             "looks_like_cloudflare_challenge": (
                 "cf-challenge" in html.lower()
                 or "just a moment" in html.lower()[:2000]
             ),
+            "path_prefix_inventory": prefix_inventory,
         }
 
 
 SOURCES: list[Source] = [
     Source(
-        name="Warp Records",
+        name="Warp",
         url="https://warp.net/artists/boards-of-canada/",
-        release_path_marker="/releases/",
+        # The BoC artist page on warp.net only shows BoC-related content in
+        # these URL spaces, so we can trust any anchor under them without a
+        # slug check. /news/ is a guess — the first run's telemetry will
+        # confirm whether it exists on the artist page.
+        path_markers=(
+            "/releases/",
+            "/products/",
+            "/news/",
+            "/videos/",
+            "/video/",
+            "/tour/",
+        ),
         canonicalize=_warp_canonical,
     ),
     Source(
@@ -212,9 +285,19 @@ SOURCES: list[Source] = [
         # 78 (confirmed via cross-link from warp.net).
         name="Bleep",
         url="https://bleep.com/artist/78-boards-of-canada",
-        release_path_marker="/release/",
+        # Bleep lumps music and merch under /release/. News/editorial
+        # might live under /news/, /features/, or /articles/ — first run's
+        # telemetry will tell us which (if any).
+        path_markers=(
+            "/release/",
+            "/news/",
+            "/features/",
+            "/feature/",
+            "/articles/",
+            "/article/",
+            "/journal/",
+        ),
         required_slug="boards-of-canada",
-        drop_merch=True,
         title_from_slug=True,
     ),
 ]
@@ -359,11 +442,12 @@ def main() -> int:
             print(f"[test-push] failed (redacted): {err}", file=sys.stderr)
 
     for source, url, title in new_items:
-        print(f"NEW [{source.name}] {title} -> {url}")
+        category = classify_url(url)
+        print(f"NEW [{source.name}/{category}] {title} -> {url}")
         if not args.dry_run and topic:
             notify(
                 topic,
-                f"BoC — new on {source.name}",
+                f"BoC {category} — new on {source.name}",
                 f"{title}\n{url}",
                 click_url=url,
             )
