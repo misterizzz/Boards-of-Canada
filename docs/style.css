@@ -1,0 +1,313 @@
+/* Boards of Canada watcher — styled to feel faded and analog. */
+
+:root {
+  --cream: #f4e8d0;
+  --cream-deep: #ead9b8;
+  --coffee: #2a2018;
+  --coffee-soft: #5c4a38;
+  --orange: #d97843;
+  --orange-deep: #b4582a;
+  --moss: #5b7c3b;
+  --moss-deep: #3f5527;
+  --aubergine: #6b4368;
+  --grain: rgba(42, 32, 24, 0.06);
+  --card-bg: #f7edd6;
+  --card-edge: rgba(42, 32, 24, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background: var(--cream);
+}
+
+body {
+  margin: 0;
+  color: var(--coffee);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.48;
+  min-height: 100vh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  /* Subtle paper grain via a layered radial gradient. */
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(var(--grain) 1px, transparent 1px),
+    radial-gradient(var(--grain) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+}
+
+/* Site header ------------------------------------------------------------ */
+
+header.site {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2.2rem 1.2rem 1.6rem;
+  text-align: center;
+}
+
+.mark {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background-image: url("icons/icon-512.png");
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    0 0 0 2px var(--cream),
+    0 0 0 3px var(--coffee-soft),
+    0 6px 22px rgba(42, 32, 24, 0.18);
+  filter: saturate(0.78) contrast(0.92);
+}
+
+header.site h1 {
+  font-size: 1.6rem;
+  margin: 0.2rem 0 0.1rem;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  font-variant: small-caps;
+  color: var(--coffee);
+}
+
+header.site h1 .sub {
+  color: var(--orange-deep);
+  font-weight: 400;
+  margin-left: 0.35rem;
+}
+
+header.site .lede {
+  margin: 0.3rem 0 0;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--coffee-soft);
+}
+
+/* Push subscription panel ------------------------------------------------ */
+
+section.push {
+  max-width: 560px;
+  margin: 0.6rem auto 0;
+  padding: 0 1.2rem;
+}
+
+section.push button {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--coffee);
+  background: var(--orange);
+  color: var(--cream);
+  font: inherit;
+  font-size: 1rem;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  border-radius: 3px;
+  box-shadow: 0 3px 0 var(--orange-deep), 0 5px 12px rgba(42, 32, 24, 0.15);
+  cursor: pointer;
+}
+
+section.push button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 var(--orange-deep), 0 3px 8px rgba(42, 32, 24, 0.15);
+}
+
+#push-status {
+  margin: 0.6rem 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--coffee-soft);
+  font-style: italic;
+  min-height: 1.2em;
+}
+
+#push-share {
+  margin-top: 0.8rem;
+  padding: 0.8rem;
+  background: var(--cream-deep);
+  border: 1px dashed var(--coffee-soft);
+  border-radius: 4px;
+}
+
+#push-share summary {
+  cursor: pointer;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--coffee);
+}
+
+#push-share p {
+  margin: 0.6rem 0;
+  font-size: 0.85rem;
+  color: var(--coffee-soft);
+}
+
+#push-share textarea {
+  width: 100%;
+  min-height: 140px;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 0.75rem;
+  color: var(--coffee);
+  background: var(--cream);
+  border: 1px solid var(--card-edge);
+  border-radius: 3px;
+  padding: 0.5rem;
+  resize: vertical;
+}
+
+#push-copy {
+  margin-top: 0.6rem;
+  background: var(--moss);
+  box-shadow: 0 3px 0 var(--moss-deep), 0 5px 12px rgba(42, 32, 24, 0.15);
+}
+
+/* Feed ------------------------------------------------------------------- */
+
+main {
+  max-width: 560px;
+  margin: 1.2rem auto 2rem;
+  padding: 0 1.2rem;
+}
+
+.feed-head {
+  margin: 1.5rem 0 0.2rem;
+  font-size: 0.85rem;
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: var(--coffee-soft);
+  font-weight: 500;
+}
+
+.feed-meta {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  color: var(--coffee-soft);
+  font-style: italic;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+article.event {
+  background: var(--card-bg);
+  border: 1px solid var(--card-edge);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  box-shadow:
+    inset 0 0 60px rgba(42, 32, 24, 0.05),
+    0 2px 6px rgba(42, 32, 24, 0.08);
+  position: relative;
+}
+
+article.event::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--orange);
+  border-radius: 4px 0 0 4px;
+}
+
+article.event.cat-music::before  { background: var(--orange); }
+article.event.cat-merch::before   { background: var(--moss); }
+article.event.cat-news::before    { background: var(--coffee-soft); }
+article.event.cat-video::before   { background: var(--aubergine); }
+article.event.cat-tour::before    { background: var(--orange-deep); }
+article.event.cat-update::before  { background: var(--coffee); }
+
+article.event header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15em 0.55em;
+  font-size: 0.65rem;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  background: var(--orange);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 var(--orange-deep);
+}
+
+.cat-music  .badge { background: var(--orange);      box-shadow: 0 1px 0 var(--orange-deep); }
+.cat-merch  .badge { background: var(--moss);        box-shadow: 0 1px 0 var(--moss-deep); }
+.cat-news   .badge { background: var(--coffee-soft); box-shadow: 0 1px 0 var(--coffee); }
+.cat-video  .badge { background: var(--aubergine);   box-shadow: 0 1px 0 #4a2d48; }
+.cat-tour   .badge { background: var(--orange-deep); box-shadow: 0 1px 0 #7a3a15; }
+.cat-update .badge { background: var(--coffee);      box-shadow: 0 1px 0 #000; }
+
+article.event time {
+  font-size: 0.72rem;
+  color: var(--coffee-soft);
+  font-style: italic;
+}
+
+article.event h2 {
+  margin: 0.15rem 0 0.35rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+article.event h2 a {
+  color: var(--coffee);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--orange);
+}
+
+article.event h2 a:hover {
+  color: var(--orange-deep);
+}
+
+article.event footer {
+  font-size: 0.75rem;
+  color: var(--coffee-soft);
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+}
+
+.empty {
+  text-align: center;
+  font-style: italic;
+  color: var(--coffee-soft);
+  padding: 2rem 0;
+}
+
+/* Site footer ------------------------------------------------------------ */
+
+footer {
+  max-width: 560px;
+  margin: 1rem auto 2rem;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--coffee-soft);
+  font-style: italic;
+  border-top: 1px solid var(--card-edge);
+}
+
+footer a {
+  color: var(--orange-deep);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--orange);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Keep BoC palette even in dark mode — this is a deliberate choice, the
+     whole look depends on the warm cream tones. Just nudge the contrast. */
+  html { background-color: var(--cream); }
+}

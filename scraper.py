@@ -34,7 +34,14 @@ USER_AGENT = (
 )
 
 STATE_FILE = Path(__file__).with_name("state.json")
+DOCS_DIR = Path(__file__).with_name("docs")
+EVENTS_FILE = DOCS_DIR / "events.json"
+SUBSCRIPTIONS_FILE = DOCS_DIR / "subscriptions.json"
 NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
+VAPID_CLAIMS_SUB = os.environ.get(
+    "VAPID_CLAIMS_SUB", "mailto:boc-watcher@users.noreply.github.com"
+)
+MAX_EVENTS = 500
 
 # Keys in state.json that are NOT sources.
 RESERVED_KEYS = {"_telemetry"}
@@ -322,6 +329,86 @@ def save_state(state: dict) -> None:
     STATE_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
 
+def load_events() -> list:
+    if EVENTS_FILE.exists():
+        try:
+            return json.loads(EVENTS_FILE.read_text())
+        except json.JSONDecodeError:
+            return []
+    return []
+
+
+def save_events(events: list) -> None:
+    EVENTS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    EVENTS_FILE.write_text(json.dumps(events, indent=2) + "\n")
+
+
+def load_subscriptions() -> list:
+    if SUBSCRIPTIONS_FILE.exists():
+        try:
+            return json.loads(SUBSCRIPTIONS_FILE.read_text())
+        except json.JSONDecodeError:
+            return []
+    return []
+
+
+def save_subscriptions(subs: list) -> None:
+    SUBSCRIPTIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    SUBSCRIPTIONS_FILE.write_text(json.dumps(subs, indent=2) + "\n")
+
+
+def send_web_push(
+    subscriptions: list,
+    vapid_private_key: str,
+    title: str,
+    body: str,
+    url: str,
+    category: str,
+) -> list:
+    """Send a Web Push to every subscription in the list.
+
+    Returns the list of subscriptions that are still alive — endpoints
+    that responded with 404/410 are pruned because the device has
+    unsubscribed or expired the token.
+    """
+    try:
+        from pywebpush import WebPushException, webpush  # type: ignore
+    except ImportError:
+        print("[webpush] pywebpush not installed, skipping", file=sys.stderr)
+        return subscriptions
+
+    payload = json.dumps(
+        {"title": title, "body": body, "url": url, "category": category}
+    )
+    claims = {"sub": VAPID_CLAIMS_SUB}
+    survivors: list = []
+    for sub in subscriptions:
+        try:
+            webpush(
+                subscription_info=sub,
+                data=payload,
+                vapid_private_key=vapid_private_key,
+                vapid_claims=dict(claims),  # pywebpush mutates claims
+                ttl=3600,
+            )
+            survivors.append(sub)
+        except WebPushException as exc:
+            resp = getattr(exc, "response", None)
+            status = getattr(resp, "status_code", None)
+            if status in (404, 410):
+                print(
+                    f"[webpush] pruning dead subscription ({status})",
+                    file=sys.stderr,
+                )
+            else:
+                print(
+                    f"[webpush] push failed ({status}), keeping sub: {exc}",
+                    file=sys.stderr,
+                )
+                survivors.append(sub)
+    return survivors
+
+
 def notify(topic: str, title: str, message: str, click_url: str | None = None) -> requests.Response:
     headers = {
         "Title": title.encode("utf-8"),
@@ -458,21 +545,68 @@ def main() -> int:
             }
             print(f"[test-push] failed (redacted): {err}", file=sys.stderr)
 
+    # Event log + push fan-out. Collect enriched events first so we can
+    # do the event append, ntfy push, and web push in one pass.
+    enriched: list[dict] = []
     for source, url, title in new_items:
         category = classify_url(url)
+        enriched.append(
+            {
+                "ts": int(time.time()),
+                "source": source.name,
+                "category": category,
+                "title": title,
+                "url": url,
+            }
+        )
         print(f"NEW [{source.name}/{category}] {title} -> {url}")
-        if not args.dry_run and topic:
-            notify(
-                topic,
-                f"BoC {category} — new on {source.name}",
-                f"{title}\n{url}",
-                click_url=url,
+
+    if enriched and not args.dry_run:
+        # 1. Append to docs/events.json, newest-first, FIFO cap.
+        events = load_events()
+        for ev in enriched:
+            events.insert(0, ev)
+        events = events[:MAX_EVENTS]
+        save_events(events)
+
+        # 2. ntfy.sh fan-out (still running in parallel for the transition).
+        if topic:
+            for ev in enriched:
+                try:
+                    notify(
+                        topic,
+                        f"BoC {ev['category']} — new on {ev['source']}",
+                        f"{ev['title']}\n{ev['url']}",
+                        click_url=ev["url"],
+                    )
+                except requests.RequestException as exc:
+                    print(f"[ntfy] push failed: {exc}", file=sys.stderr)
+
+        # 3. Web Push fan-out to every subscription in docs/subscriptions.json.
+        vapid_private = os.environ.get("VAPID_PRIVATE_KEY")
+        subs = load_subscriptions()
+        if vapid_private and subs:
+            for ev in enriched:
+                subs = send_web_push(
+                    subs,
+                    vapid_private,
+                    title=f"BoC {ev['category']} — {ev['source']}",
+                    body=ev["title"],
+                    url=ev["url"],
+                    category=ev["category"],
+                )
+            save_subscriptions(subs)
+        elif subs and not vapid_private:
+            print(
+                "[webpush] VAPID_PRIVATE_KEY not set — skipping web push "
+                "even though subscriptions exist",
+                file=sys.stderr,
             )
 
     if not args.dry_run:
         save_state(state)
 
-    print(f"Done. {len(new_items)} new release(s) reported.")
+    print(f"Done. {len(enriched)} new release(s) reported.")
     return 0
 
 

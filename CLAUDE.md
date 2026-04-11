@@ -4,14 +4,51 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A GitHub-Actions-hosted watcher that pushes iOS notifications via ntfy.sh whenever anything new appears about Boards of Canada on warp.net or bleep.com — new music releases, new merch, new videos, new editorial articles. Everything is driven by one Python script (`scraper.py`) and one workflow (`.github/workflows/check.yml`). There is no server, no deploy, no app.
+A GitHub-Actions-hosted watcher that pushes iOS notifications whenever anything new appears about Boards of Canada on warp.net or bleep.com — music releases, merch, videos, editorial articles. Two push channels run in parallel:
+
+1. **ntfy.sh** (legacy) — uses the ntfy iOS app
+2. **Native Web Push** to a Progressive Web App installed from GitHub Pages (`docs/`), which also serves as a BoC-styled overview feed of every event ever captured.
+
+Everything is driven by one Python script (`scraper.py`), one workflow (`.github/workflows/check.yml`), and a static PWA (`docs/`). No server, no deploy, no app store.
 
 ## Runtime model
 
-- **Schedule**: `*/5 * * * *` cron in the workflow, plus a `push` trigger scoped to `scraper.py`, `requirements.txt`, and the workflow file itself. Pushing a code change therefore fires the Action within ~20 seconds — useful for fast iteration. `state.json` is deliberately NOT in the push paths so the bot's own state commits cannot recursively retrigger.
-- **State**: `state.json` in the repo root. The workflow's final step commits it back to the branch with a `github-actions[bot]` author whenever it changed.
-- **Default branch**: `claude/ios-album-notifications-akAwd` — that's where cron fires and where bot state commits land. `main` exists but has diverged; don't fast-forward it without an explicit user OK (would need a force-push).
-- **Secret**: `NTFY_TOPIC` in repo Actions secrets. It is the ntfy.sh topic name (no URL, no prefix).
+- **Schedule**: `*/5 * * * *` cron in the workflow, plus a `push` trigger scoped to `scraper.py`, `requirements.txt`, and the workflow file itself. Pushing a code change therefore fires the Action within ~20 seconds — useful for fast iteration. `state.json`, `docs/events.json`, `docs/subscriptions.json` and `docs/icons/**` are deliberately NOT in the push paths so the bot's own commits cannot recursively retrigger.
+- **State**: `state.json` in the repo root (current snapshot per source). The workflow's final step commits it back to the branch with a `github-actions[bot]` author whenever it changed.
+- **Default branch**: `claude/ios-album-notifications-akAwd` — that's where cron fires and where bot commits land. `main` exists but has diverged; don't fast-forward it without an explicit user OK (would need a force-push).
+- **Secrets**: `NTFY_TOPIC` (ntfy.sh topic name, optional), `VAPID_PRIVATE_KEY` (base64url-encoded raw 32-byte ECDSA P-256 scalar, used by `pywebpush` to sign push requests to Apple).
+
+## PWA + GitHub Pages
+
+`docs/` is a static PWA served via GitHub Pages from the default branch, `/docs` folder. It does two things:
+
+1. **Overview feed** — reads `docs/events.json` (append-only log of every detection, newest first, FIFO capped at 500) and renders a BoC-styled list. Poll interval: 5 minutes.
+2. **Web Push client** — on tap of "Enable notifications", service worker subscribes to the browser's push service using the VAPID public key in `docs/vapid_public.json`. The resulting subscription JSON is shown in-app for the user to copy; a human then commits it to `docs/subscriptions.json` (this is the only manual step per device).
+
+The PWA is pure vanilla JS/CSS/HTML — no build step, no framework. `docs/icons/icon-512.png` is bootstrapped by the workflow on first run (a placeholder 1×1 PNG gets replaced by the Deezer artist photo via `curl` + Pillow).
+
+## Event log (`docs/events.json`) vs state snapshot (`state.json`)
+
+`state.json` is a snapshot of the currently-visible URLs per source, overwritten every run. `docs/events.json` is an append-only list of every new URL ever detected, with `{ts, source, category, title, url}` per event. They're written in the same `main()` pass in `scraper.py`:
+
+1. Source extraction builds the `new_items` list (only on non-first runs where something actually changed).
+2. For every new item we `classify_url()` it into music/merch/news/video/tour/update and append to events.
+3. We fan out to both ntfy (if `NTFY_TOPIC` is set) and Web Push (if `VAPID_PRIVATE_KEY` is set AND `docs/subscriptions.json` has entries).
+
+Dead Web Push subscriptions (404/410 from Apple) are pruned automatically by `send_web_push()` and written back to `docs/subscriptions.json` on the same commit.
+
+## Feedback-loop debugging pattern
+
+The sandbox this project was built in has no outbound HTTP (WebFetch 403s everything, including example.com). All knowledge of what Warp and Bleep actually serve has to come from the Action runs themselves. The standard iteration loop is:
+
+1. Edit `scraper.py`, push.
+2. Push trigger fires the Action within ~20s.
+3. Action scrapes, writes `state.json` with a `_telemetry` block, commits back.
+4. Read `state.json` via `mcp__github__get_file_contents` (the file in git is truth; local working copy lags behind bot commits).
+5. The `_telemetry.sources[*].path_prefix_inventory` is the key diagnostic: it buckets every anchor on the fetched page by its first two path segments with counts and one example per bucket, so you can see what URL spaces actually exist without needing to read the raw HTML.
+6. Adjust `path_markers` / `required_slug` / `required_text`, push again.
+
+When local `git push` is rejected for non-fast-forward, the cause is almost always that the bot committed an updated `state.json` or `docs/events.json` in between — `git pull --rebase` resolves it (drop any conflict in favor of the incoming bot version, then continue). You cannot avoid these conflicts by including `state.json` or `docs/events.json` in the push trigger paths — that would cause an infinite workflow loop.
 
 ## Feedback-loop debugging pattern
 
@@ -32,6 +69,8 @@ There is no MCP tool that triggers `workflow_dispatch`, so to verify the full nt
 
 1. Set `state["_request_test_push"] = true` in `state.json` and push along with any code change (code change is needed because `state.json` alone doesn't trigger the Action).
 2. Next Action run pops the marker, calls `notify()`, and records `_telemetry.last_test_push` with `ntfy_http_status` and an `ok` boolean. **Do not** store the ntfy response body anywhere — ntfy echoes the topic name back and `state.json` is in a public repo. See commit 90ac786 / 4f97413 in the history for the one time this was messed up.
+
+To verify Web Push end-to-end you need a live subscription in `docs/subscriptions.json` first, then either wait for a real detection or synthetically inject one by temporarily removing a URL from `state.json` so the next run sees it as "new". The scraper will then send the test push to every subscription via `pywebpush` and log the outcome.
 
 ## Source model
 

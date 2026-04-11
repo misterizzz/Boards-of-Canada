@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#d97843">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BoC">
+  <title>Boards of Canada Watcher</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-512.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site">
+    <div class="mark"></div>
+    <h1>Boards of Canada<span class="sub">/ Watcher</span></h1>
+    <p class="lede">Anything new on Warp and Bleep, as it drops.</p>
+  </header>
+
+  <section class="push">
+    <button id="push-button" type="button" hidden>Enable notifications</button>
+    <p id="push-status" class="push-status"></p>
+    <details id="push-share" hidden>
+      <summary>Subscription ready &mdash; tap to copy</summary>
+      <p>Paste the JSON below into the chat so it lands in <code>docs/subscriptions.json</code>. This is the only manual step.</p>
+      <textarea id="push-json" readonly rows="8"></textarea>
+      <button id="push-copy" type="button">Copy to clipboard</button>
+    </details>
+  </section>
+
+  <main>
+    <h2 class="feed-head">Feed</h2>
+    <p id="feed-meta" class="feed-meta">Loading&hellip;</p>
+    <div id="feed" class="feed"></div>
+  </main>
+
+  <footer>
+    <p>Scraper runs every 5 minutes via GitHub Actions.</p>
+    <p><a href="https://github.com/misterizzz/Boards-of-Canada" target="_blank" rel="noopener">Source</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch((e) =>
+          console.warn("SW registration failed", e)
+        );
+      });
+    }
+  </script>
+</body>
+</html>
