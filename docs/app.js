@@ -131,17 +131,36 @@ async function subscribeForPush() {
     applicationServerKey: urlBase64ToUint8Array(vapidPublic),
   });
 
-  showSubscription(sub);
+  showSubscription(sub, true);
+  pushStatus.textContent =
+    "Subscribed. Copy the JSON below and paste it in the chat — I'll commit it.";
+  pushButton.hidden = true;
 }
 
-function showSubscription(sub) {
+function showSubscription(sub, openPanel = true) {
   const json = JSON.stringify(sub.toJSON(), null, 2);
   pushJson.value = json;
   pushShare.hidden = false;
-  pushShare.open = true;
-  pushStatus.textContent =
-    "Subscribed. Copy the JSON below and paste it in the chat — I'll commit it.";
-  pushButton.textContent = "Re-subscribe";
+  pushShare.open = openPanel;
+}
+
+async function isRegisteredOnServer(subscription) {
+  try {
+    const r = await fetch("subscriptions.json", { cache: "no-store" });
+    if (!r.ok) return false;
+    const list = await r.json();
+    const needle = subscription.endpoint;
+    return Array.isArray(list) && list.some((s) => s && s.endpoint === needle);
+  } catch {
+    return false;
+  }
+}
+
+function markEnabled() {
+  pushStatus.textContent = "Notifications enabled on this device.";
+  pushButton.textContent = "Notifications enabled ✓";
+  pushButton.hidden = true;
+  pushShare.hidden = true;
 }
 
 async function initPush() {
@@ -154,9 +173,15 @@ async function initPush() {
   try {
     const existing = await getExistingSubscription();
     if (existing) {
-      showSubscription(existing);
-      pushStatus.textContent =
-        "Already subscribed on this device. If pushes aren't arriving, re-copy the JSON below and resubmit.";
+      const registered = await isRegisteredOnServer(existing);
+      if (registered) {
+        markEnabled();
+      } else {
+        showSubscription(existing, true);
+        pushButton.hidden = true;
+        pushStatus.textContent =
+          "Subscribed on this device but not yet registered on the server. Copy the JSON and paste it in the chat.";
+      }
     } else {
       pushStatus.textContent = "Not subscribed yet on this device.";
     }
