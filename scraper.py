@@ -603,6 +603,32 @@ def main() -> int:
             }
             print(f"[test-push] failed (redacted): {err}", file=sys.stderr)
 
+    # Also fire a test tickle push over Web Push whenever the test-push
+    # marker is set. This verifies the VAPID pipeline end-to-end without
+    # requiring a synthesized fake release event in events.json.
+    if (args.force_notify or marker_requests_push) and not args.dry_run:
+        vapid_private = os.environ.get("VAPID_PRIVATE_KEY")
+        subs = load_subscriptions()
+        if vapid_private and subs:
+            before = len(subs)
+            subs = send_web_push(subs, vapid_private)
+            save_subscriptions(subs)
+            state["_telemetry"]["last_test_webpush"] = {
+                "sent_at": int(time.time()),
+                "subscriptions_before": before,
+                "subscriptions_after": len(subs),
+            }
+            print(
+                f"[test-webpush] tickled {before} subscription(s), "
+                f"{len(subs)} survived"
+            )
+        elif subs and not vapid_private:
+            print(
+                "[test-webpush] subscriptions present but VAPID_PRIVATE_KEY "
+                "secret is not set — cannot send test push",
+                file=sys.stderr,
+            )
+
     # Event log + push fan-out. Collect enriched events first so we can
     # do the event append, ntfy push, and web push in one pass.
     enriched: list[dict] = []
