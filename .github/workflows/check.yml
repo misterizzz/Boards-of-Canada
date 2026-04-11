@@ -43,32 +43,39 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Bootstrap PWA logo (one-off)
-        # The repo ships with a 68-byte 1x1 placeholder PNG in docs/icons.
-        # On first run we replace it with the Deezer CDN BoC artist photo.
-        # Subsequent runs see the real file (>>68 bytes) and skip.
+        # The repo ships with a ~5KB PIL-drawn placeholder. On the first
+        # successful run we replace it with the Deezer CDN BoC artist photo
+        # (≥ 50KB once converted to PNG). Wrapped in `continue-on-error`
+        # so a transient fetch failure never blocks the scraper.
+        continue-on-error: true
         run: |
-          set -euo pipefail
-          for size in 192 512; do
-            target="docs/icons/icon-${size}.png"
-            bytes=$(wc -c < "$target" 2>/dev/null || echo 0)
-            if [ "$bytes" -lt 1000 ]; then
-              echo "Fetching BoC artist photo for $target"
-              curl -fsSL \
-                -H "User-Agent: Mozilla/5.0 BoC-Watcher" \
-                "https://cdn-images.dzcdn.net/images/artist/e3c41c3df07bec6af0153c8f640b7b62/500x500.jpg" \
-                -o /tmp/boc.jpg
-              # Convert JPG → PNG via Pillow (already pulled in as a
-              # pywebpush transitive dep is unlikely; install explicitly).
-              pip install --quiet Pillow
-              python3 -c "
+          set -u
+          marker="docs/icons/.source"
+          current="$(cat "$marker" 2>/dev/null || echo placeholder)"
+          if [ "$current" = "deezer-500" ]; then
+            echo "Icon already sourced from Deezer, skipping bootstrap."
+            exit 0
+          fi
+          echo "Fetching BoC artist photo…"
+          if ! curl -fsSL \
+              -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
+              -H "Accept: image/avif,image/webp,image/png,*/*" \
+              -H "Referer: https://www.deezer.com/" \
+              "https://cdn-images.dzcdn.net/images/artist/e3c41c3df07bec6af0153c8f640b7b62/500x500.jpg" \
+              -o /tmp/boc.jpg; then
+            echo "curl failed, leaving placeholder in place."
+            exit 0
+          fi
+          pip install --quiet Pillow
+          python3 - <<'PY'
 from PIL import Image
-img = Image.open('/tmp/boc.jpg').convert('RGB')
-img = img.resize(($size, $size), Image.LANCZOS)
-img.save('$target', 'PNG', optimize=True)
-print('wrote $target')
-"
-            fi
-          done
+src = Image.open('/tmp/boc.jpg').convert('RGB')
+for size in (192, 512):
+    img = src.resize((size, size), Image.LANCZOS)
+    img.save(f'docs/icons/icon-{size}.png', 'PNG', optimize=True)
+    print(f'wrote docs/icons/icon-{size}.png')
+PY
+          echo deezer-500 > docs/icons/.source
 
       - name: Check for new releases
         env:
@@ -83,10 +90,11 @@ print('wrote $target')
 
       - name: Commit updated state and PWA data
         run: |
-          if [[ -n "$(git status --porcelain state.json docs/events.json docs/subscriptions.json docs/icons/icon-192.png docs/icons/icon-512.png)" ]]; then
+          paths="state.json docs/events.json docs/subscriptions.json docs/icons/icon-192.png docs/icons/icon-512.png docs/icons/.source"
+          if [[ -n "$(git status --porcelain -- $paths 2>/dev/null)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add state.json docs/events.json docs/subscriptions.json docs/icons/icon-192.png docs/icons/icon-512.png
+            git add $paths 2>/dev/null || true
             git commit -m "chore: update release state and PWA data"
             git push
           else
