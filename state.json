@@ -29,12 +29,6 @@
   },
   "_telemetry": {
     "last_run": 1775885963,
-    "last_test_push": {
-      "ntfy_body_snippet": "{\"id\":\"V8qGaOiY0mGA\",\"time\":1775885963,\"expires\":1775929163,\"event\":\"message\",\"topic\":\"boc-alert-Taqmy4-fedbum-zepmix\",\"",
-      "ntfy_http_status": 200,
-      "ok": true,
-      "sent_at": 1775885963
-    },
     "sources": {
       "Bleep": {
         "fetch": "ok",

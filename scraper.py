@@ -338,20 +338,25 @@ def main() -> int:
                 "BoC watcher test",
                 f"Test notification — scraper pipeline verified at {int(time.time())}",
             )
+            # IMPORTANT: do NOT store the response body — ntfy echoes the
+            # topic name back in its JSON payload, and state.json is in a
+            # public repo. Status code + boolean is enough.
             state["_telemetry"]["last_test_push"] = {
                 "sent_at": int(time.time()),
                 "ntfy_http_status": resp.status_code,
-                "ntfy_body_snippet": resp.text[:120] if resp.text else "",
                 "ok": True,
             }
             print(f"[test-push] ntfy responded {resp.status_code}")
         except requests.RequestException as exc:
+            # Strip any URL from the error message so the topic cannot leak
+            # via an exception trace either.
+            err = str(exc).replace(topic, "<redacted>") if topic else str(exc)
             state["_telemetry"]["last_test_push"] = {
                 "sent_at": int(time.time()),
-                "error": str(exc),
+                "error": err,
                 "ok": False,
             }
-            print(f"[test-push] failed: {exc}", file=sys.stderr)
+            print(f"[test-push] failed (redacted): {err}", file=sys.stderr)
 
     for source, url, title in new_items:
         print(f"NEW [{source.name}] {title} -> {url}")
