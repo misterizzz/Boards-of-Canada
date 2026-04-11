@@ -1,7 +1,6 @@
 {
-  "_request_test_push": true,
   "Bleep": {
-    "last_checked": 1775858440,
+    "last_checked": 1775885963,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
@@ -15,7 +14,7 @@
     }
   },
   "Warp Records": {
-    "last_checked": 1775858439,
+    "last_checked": 1775885960,
     "releases": {
       "https://warp.net/releases/11672-the-campfire-headphase": "The Campfire Headphase , album , 2005",
       "https://warp.net/releases/12790-trans-canada-highway": "Trans Canada Highway , EP , 2006",
@@ -29,7 +28,13 @@
     }
   },
   "_telemetry": {
-    "last_run": 1775858440,
+    "last_run": 1775885963,
+    "last_test_push": {
+      "ntfy_body_snippet": "{\"id\":\"V8qGaOiY0mGA\",\"time\":1775885963,\"expires\":1775929163,\"event\":\"message\",\"topic\":\"boc-alert-Taqmy4-fedbum-zepmix\",\"",
+      "ntfy_http_status": 200,
+      "ok": true,
+      "sent_at": 1775885963
+    },
     "sources": {
       "Bleep": {
         "fetch": "ok",
