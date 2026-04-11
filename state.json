@@ -1,1 +1,187 @@
-{}
+{
+  "Bleep": {
+    "last_checked": 1775887976,
+    "releases": {
+      "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
+      "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
+      "https://bleep.com/release/12985-boards-of-canada-twoism": "Twoism",
+      "https://bleep.com/release/141387-boards-of-canada-peel-session": "Peel Session",
+      "https://bleep.com/release/388652-boards-of-canada-hi-scores": "Hi Scores",
+      "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest": "Tomorrows Harvest",
+      "https://bleep.com/release/4625-boards-of-canada-geogaddi": "Geogaddi",
+      "https://bleep.com/release/502760-boards-of-canada-boards-of-canada-t-shirt-green": "Boards Of Canada T Shirt Green",
+      "https://bleep.com/release/505112-boards-of-canada-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T Shirt Spectra Yellow",
+      "https://bleep.com/release/505113-boards-of-canada-leaf-logo-t-shirt-black": "Leaf Logo T Shirt Black",
+      "https://bleep.com/release/505114-boards-of-canada-leaf-logo-t-shirt-spectra-yellow": "Leaf Logo T Shirt Spectra Yellow",
+      "https://bleep.com/release/505115-boards-of-canada-nuclear-family-logo-t-shirt-black": "Nuclear Family Logo T Shirt Black",
+      "https://bleep.com/release/505116-boards-of-canada-nuclear-family-logo-hoodie-black": "Nuclear Family Logo Hoodie Black",
+      "https://bleep.com/release/505117-boards-of-canada-leaf-logo-sweatshirt-black": "Leaf Logo Sweatshirt Black",
+      "https://bleep.com/release/505118-boards-of-canada-compound-logo-sweatshirt-black": "Compound Logo Sweatshirt Black",
+      "https://bleep.com/release/505119-boards-of-canada-nuclear-family-logo-sweatshirt-natural-raw": "Nuclear Family Logo Sweatshirt Natural Raw",
+      "https://bleep.com/release/505120-boards-of-canada-leaf-logo-sweatshirt-natural-raw": "Leaf Logo Sweatshirt Natural Raw",
+      "https://bleep.com/release/505121-boards-of-canada-compound-logo-t-shirt-black": "Compound Logo T Shirt Black",
+      "https://bleep.com/release/505122-boards-of-canada-boc-logo-t-shirt-black": "Boc Logo T Shirt Black",
+      "https://bleep.com/release/505123-boards-of-canada-music-has-the-right-to-children-t-shirt-white": "Music Has The Right To Children T Shirt White",
+      "https://bleep.com/release/505124-boards-of-canada-music-has-the-right-to-children-t-shirt-black": "Music Has The Right To Children T Shirt Black",
+      "https://bleep.com/release/505125-boards-of-canada-two-boys-t-shirt-black": "Two Boys T Shirt Black",
+      "https://bleep.com/release/505129-boards-of-canada-compound-logo-sweatshirt-natural-raw": "Compound Logo Sweatshirt Natural Raw",
+      "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country": "In A Beautiful Place Out In The Country",
+      "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "Music Has The Right To Children"
+    }
+  },
+  "Warp": {
+    "last_checked": 1775887974,
+    "releases": {
+      "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
+      "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
+      "https://warp.net/products/505113-leaf-logo-t-shirt-black": "Leaf Logo T-Shirt - Black",
+      "https://warp.net/products/505114-leaf-logo-t-shirt-spectra-yellow": "Leaf Logo T-Shirt - Spectra Yellow",
+      "https://warp.net/products/505115-nuclear-family-logo-t-shirt-black": "Nuclear Family Logo T-Shirt - Black",
+      "https://warp.net/products/505116-nuclear-family-logo-hoodie-black": "Nuclear Family Logo Hoodie - Black",
+      "https://warp.net/products/505117-leaf-logo-sweatshirt-black": "Leaf Logo Sweatshirt - Black",
+      "https://warp.net/products/505118-compound-logo-sweatshirt-black": "Compound Logo Sweatshirt - Black",
+      "https://warp.net/products/505119-nuclear-family-logo-sweatshirt-natural-raw": "Nuclear Family Logo Sweatshirt - Natural Raw",
+      "https://warp.net/products/505120-leaf-logo-sweatshirt-natural-raw": "Leaf Logo Sweatshirt - Natural Raw",
+      "https://warp.net/products/505121-compound-logo-t-shirt-black": "Compound Logo T-Shirt - Black",
+      "https://warp.net/products/505122-boc-logo-t-shirt-black": "BOC Logo T-shirt - Black",
+      "https://warp.net/products/505123-music-has-the-right-to-children-t-shirt-white": "Music Has the Right to Children T-shirt - White",
+      "https://warp.net/products/505124-music-has-the-right-to-children-t-shirt-black": "Music Has the Right to Children T-shirt - Black",
+      "https://warp.net/products/505125-two-boys-t-shirt-black": "Two Boys T-Shirt - Black",
+      "https://warp.net/products/505129-compound-logo-sweatshirt-natural-raw": "Compound Logo Sweatshirt - Natural Raw",
+      "https://warp.net/releases/11672-the-campfire-headphase": "The Campfire Headphase , album , 2005",
+      "https://warp.net/releases/12790-trans-canada-highway": "Trans Canada Highway , EP , 2006",
+      "https://warp.net/releases/12985-twoism": "Twoism , album , 2002",
+      "https://warp.net/releases/141387-peel-session": "Peel Session , album , 2019",
+      "https://warp.net/releases/388652-hi-scores": "Hi Scores , EP , 1996",
+      "https://warp.net/releases/43515-tomorrows-harvest": "Tomorrow's Harvest , album , 2013",
+      "https://warp.net/releases/4625-geogaddi": "Geogaddi , album , 2007",
+      "https://warp.net/releases/5729-in-a-beautiful-place-out-in-the-country": "In A Beautiful Place Out In The Country , EP , 2000",
+      "https://warp.net/releases/7819-music-has-the-right-to-children": "Music Has The Right To Children , album , 1998",
+      "https://warp.net/video/10268183-reach-for-the-dead": "Reach For The Dead , 2013",
+      "https://warp.net/video/10268265-dayvan-cowboy": "Dayvan Cowboy , 2006"
+    }
+  },
+  "_telemetry": {
+    "last_run": 1775887976,
+    "sources": {
+      "Bleep": {
+        "fetch": "ok",
+        "final_url": "https://bleep.com/artist/78-boards-of-canada",
+        "html_length": 114579,
+        "http_status": 200,
+        "looks_like_cloudflare_challenge": false,
+        "matched_count": 25,
+        "path_prefix_inventory": {
+          "/": {
+            "count": 67,
+            "example": "https://bleep.com/"
+          },
+          "/artist/40-various-artists/": {
+            "count": 7,
+            "example": "https://bleep.com/artist/40-various-artists"
+          },
+          "/artist/78-boards-of-canada/": {
+            "count": 25,
+            "example": "https://bleep.com/artist/78-boards-of-canada"
+          },
+          "/cart/": {
+            "count": 3,
+            "example": "https://bleep.com/cart"
+          },
+          "/label/6593-warp-records/": {
+            "count": 29,
+            "example": "https://bleep.com/label/6593-warp-records"
+          },
+          "/release/11672-boards-of-canada-the-campfire-headphase/": {
+            "count": 3,
+            "example": "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase"
+          },
+          "/release/12790-boards-of-canada-trans-canada-highway/": {
+            "count": 3,
+            "example": "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway"
+          },
+          "/release/12985-boards-of-canada-twoism/": {
+            "count": 3,
+            "example": "https://bleep.com/release/12985-boards-of-canada-twoism"
+          },
+          "/release/141387-boards-of-canada-peel-session/": {
+            "count": 3,
+            "example": "https://bleep.com/release/141387-boards-of-canada-peel-session"
+          },
+          "/release/43515-boards-of-canada-tomorrows-harvest/": {
+            "count": 3,
+            "example": "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest"
+          },
+          "/release/4625-boards-of-canada-geogaddi/": {
+            "count": 3,
+            "example": "https://bleep.com/release/4625-boards-of-canada-geogaddi"
+          },
+          "/terms/show/": {
+            "count": 4,
+            "example": "https://bleep.com/terms/show/terms-and-conditions"
+          }
+        },
+        "total_anchors_on_page": 308
+      },
+      "Warp": {
+        "fetch": "ok",
+        "final_url": "https://warp.net/artists/boards-of-canada",
+        "html_length": 161438,
+        "http_status": 200,
+        "looks_like_cloudflare_challenge": false,
+        "matched_count": 27,
+        "path_prefix_inventory": {
+          "/": {
+            "count": 1,
+            "example": "https://warp.net/"
+          },
+          "/about/": {
+            "count": 2,
+            "example": "https://warp.net/about"
+          },
+          "/artists/": {
+            "count": 1,
+            "example": "https://warp.net/artists"
+          },
+          "/artists/boards-of-canada/": {
+            "count": 3,
+            "example": "https://warp.net/artists/boards-of-canada"
+          },
+          "/discography/": {
+            "count": 1,
+            "example": "https://warp.net/discography"
+          },
+          "/editorial/": {
+            "count": 1,
+            "example": "https://warp.net/editorial"
+          },
+          "/events/": {
+            "count": 1,
+            "example": "https://warp.net/events"
+          },
+          "/releases/141387-peel-session/": {
+            "count": 1,
+            "example": "https://warp.net/releases/141387-peel-session/tracklist"
+          },
+          "/releases/43515-tomorrows-harvest/": {
+            "count": 1,
+            "example": "https://warp.net/releases/43515-tomorrows-harvest/tracklist"
+          },
+          "/releases/4625-geogaddi/": {
+            "count": 1,
+            "example": "https://warp.net/releases/4625-geogaddi/tracklist"
+          },
+          "/shop/": {
+            "count": 1,
+            "example": "https://warp.net/shop"
+          },
+          "/video/": {
+            "count": 1,
+            "example": "https://warp.net/video"
+          }
+        },
+        "total_anchors_on_page": 68
+      }
+    }
+  }
+}
