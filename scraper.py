@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Bump: Apple Watch mirror verification, 2026-04-11.
 """Watch Warp and Bleep for anything new about Boards of Canada.
 
 On every run we fetch the BoC artist pages on both sites and extract
