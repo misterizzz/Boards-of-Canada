@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '/boc-status'",
+            "statusMessage": "Auto-checking BoC Watcher health"
+          }
+        ]
+      }
+    ]
+  }
+}

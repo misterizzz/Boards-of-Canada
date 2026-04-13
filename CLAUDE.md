@@ -99,6 +99,16 @@ Two distinct cases produce a 0-result extraction, handled differently:
 - **First run for a source** (name not in `state`): write an empty baseline. If you don't do this, a source that correctly returns 0 results today — e.g. Warp Editorial when no BoC article is on page 1 — stays in "first-run" mode forever and silently absorbs the eventual first real match as "baseline". Bug introduced and fixed once; see commit 112cc43.
 - **Subsequent run returning 0 results**: keep the stored state untouched. Assume transient fetch blip or broken selector — don't clobber a working baseline and don't spam notifications on recovery.
 
+## Slash commands and session auto-check
+
+`.claude/commands/` ships three project-local slash commands:
+
+- **`/boc-status`** — reads `state.json` + `docs/events.json` + `docs/subscriptions.json` via MCP and summarises telemetry, flagging red flags (matched_count=0 on a previously-populated source, Cloudflare challenge, stale `last_run`). Pre-approved for `mcp__github__get_file_contents` so it doesn't prompt per invocation.
+- **`/boc-test-push`** — sets `state["_request_test_push"] = true`, bumps the timestamp comment on `scraper.py:2`, commits and pushes. Waits for the Action and reports both `last_test_push.ntfy_http_status` and `last_test_webpush.subscriptions_{before,after}`.
+- **`/boc-add-sub <JSON>`** — validates a pushSubscription JSON, appends (or replaces on matching p256dh) into `docs/subscriptions.json`, commits and pushes. Never logs the endpoint URL back in chat — it's sensitive.
+
+`.claude/settings.json` registers a SessionStart hook (matcher `startup`) that echoes `/boc-status` on every fresh Claude Code session opened in this repo. Effect: each session auto-begins with a health check of the watcher. Comment out the hook if that becomes noise.
+
 ## Running locally
 
 ```bash
