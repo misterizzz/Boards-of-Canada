@@ -209,7 +209,13 @@ class Source:
             if not any(marker in href for marker in self.path_markers):
                 continue
             abs_url = urljoin(base, href).split("?")[0].split("#")[0]
-            path = urlparse(abs_url).path
+            abs_parsed = urlparse(abs_url)
+            # Only keep same-domain links — otherwise a broad path_markers
+            # like ("/",) would sweep in every twitter / youtube / external
+            # anchor on the page.
+            if abs_parsed.netloc != parsed.netloc:
+                continue
+            path = abs_parsed.path
             # Skip the artist page itself and obvious index pages.
             if path.rstrip("/") == artist_path:
                 continue
@@ -317,6 +323,17 @@ SOURCES: list[Source] = [
         url="https://warp.net/editorial",
         path_markers=("/editorial/",),
         required_text="boards of canada",
+    ),
+    Source(
+        # BoC's own website. Structure is unknown at first run; we accept
+        # every same-domain anchor with a non-root path and let the diff
+        # do its job. No required_slug/required_text because the whole
+        # site is already artist-scoped. First-run baseline captures
+        # whatever is currently there; every future anchor added becomes
+        # a notification.
+        name="BoC Official",
+        url="https://boardsofcanada.com/",
+        path_markers=("/",),
     ),
 ]
 
