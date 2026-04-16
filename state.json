@@ -1,6 +1,10 @@
 {
+  "Bandcamp": {
+    "last_checked": 1776350559,
+    "releases": {}
+  },
   "Bleep": {
-    "last_checked": 1776349609,
+    "last_checked": 1776350558,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
@@ -29,14 +33,32 @@
       "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "Music Has The Right To Children"
     }
   },
+  "BoC Hero Image": {
+    "last_checked": 1776350559,
+    "releases": {
+      "https://boardsofcanada.com/assets/bg.jpg#raw-hash=8935d78d9e3b124e": "Raw content changed (hash 8935d78d9e3b124e)"
+    }
+  },
+  "BoC Klaviyo": {
+    "last_checked": 1776350559,
+    "releases": {
+      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=3939de245e93e2a1": "Raw content changed (hash 3939de245e93e2a1)"
+    }
+  },
   "BoC Official": {
-    "last_checked": 1776349610,
+    "last_checked": 1776350558,
     "releases": {
       "https://boardsofcanada.com/#content-hash=941b6da329feee5e": "Page content changed (hash 941b6da329feee5e)"
     }
   },
+  "BoC Sharing Image": {
+    "last_checked": 1776350559,
+    "releases": {
+      "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b009e1c7a23cd1f9": "Raw content changed (hash b009e1c7a23cd1f9)"
+    }
+  },
   "Warp": {
-    "last_checked": 1776349607,
+    "last_checked": 1776350556,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -72,23 +94,35 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1776349610,
+    "last_run": 1776350559,
     "sources": {
+      "Bandcamp": {
+        "fetch": "ok",
+        "final_url": "https://boardsofcanada.bandcamp.com/",
+        "html_length": 3036,
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'self'; img-src 'self' data:; media-src 'self' data:; object-src 'none'; style-src 'self' 'sha256-o4vzfmmUENEg4chMjjRP9EuW9ucGnGIGVdbl8d0SHQQ='; script-src 'self' 'sha256-a9bHdQGvRzDwDVzx8m+Rzw+0FHZad8L0zjtBwkxOIz4=';\" /> <link href=\"/_fs-ch-1T1wmsGaOgGaSxcX/assets/inter-var.woff2\" rel=\"preload\" as=\"font\" type=\"font/woff2\" crossorigin /> <link href=\"/_fs-ch-1T1wmsGaOgGaSxcX/assets/styles.css\" rel=\"stylesheet\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" /> <title>Client Challenge</title> <style> #loading-error { font-size: 16px; font-family: 'Inter', sans-serif; margin-top: 10px; margin-left: 10px; display: none; } </style> </head> <body> <noscript> <div class=\"noscript-container\"> <div class=\"noscript-content\"> <img src=\"/_fs-ch-1T1wmsGaOgGaSxcX/assets/errorIcon.svg\" alt=\"\" role=\"presentation\" class=\"error-icon\" /> <span class=\"noscript-span\" >JavaScript is disabled in your browser.</span > <p>Please enable JavaScript to proceed.</p> </div> </div> </noscript> <div id=\"loading-error\" role=\"alert\" aria-live=\"polite\"> A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser. </div> <script> function loadScript(src) { return new Promise((resolve, reject) => { const script = document.createElement('script'); script.onload = resolve; script.onerror = (event) => { console.error('Script load error event:', event); document.getElementById('loading-error').style.display = 'block'; reject( new Error( `Failed to load script: ${src}, Please contact the service administrator.` ) ); }; script.src = src; document.body.appendChild(script); }); } loadScript('/_fs-ch-1T1wmsGaOgGaSxcX/errors.js') .then(() => { const script = document.createElement('script'); script.src = '/_fs-ch-1T1wmsGaOgGaSxcX/script.js?reload=true'; script.onerror = (event) => { console.error('Script load error event:', event); const errorMsg = new Error( `Failed to load script: ${script.src}. Please contact the service administrator.` ); console.error(errorMsg); handleScriptError(); }; document.body.appendChild(script); }) .catch((error) => { console.error(error);",
+        "http_status": 200,
+        "looks_like_cloudflare_challenge": false,
+        "matched_count": 0,
+        "path_prefix_inventory": {},
+        "script_srcs": [],
+        "total_anchors_on_page": 0
+      },
       "Bleep": {
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
-        "html_length": 114428,
+        "html_length": 112185,
         "html_sample": "<!-- Main Layout --> <!DOCTYPE html> <html class=\"no-js\"> <head> <title> Bleep - Boards of Canada </title> <meta charset=\"utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <meta name=\"author\" content=\"Bleep\"> <meta name=\"description\" content=\"Boards of Canada is a Scottish electronic music duo comprised of brothers Mike Sandison and Marcus Eoin.\">",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 25,
         "path_prefix_inventory": {
           "/": {
-            "count": 67,
+            "count": 66,
             "example": "https://bleep.com/"
           },
           "/artist/40-various-artists/": {
-            "count": 7,
+            "count": 6,
             "example": "https://bleep.com/artist/40-various-artists"
           },
           "/artist/78-boards-of-canada/": {
@@ -132,18 +166,48 @@
             "example": "https://bleep.com/terms/show/terms-and-conditions"
           }
         },
-        "total_anchors_on_page": 308
+        "script_srcs": [],
+        "total_anchors_on_page": 302
+      },
+      "BoC Hero Image": {
+        "byte_length": 622457,
+        "fetch": "ok",
+        "final_url": "https://boardsofcanada.com/assets/bg.jpg",
+        "http_status": 200,
+        "matched_count": 1,
+        "raw_hash_prefix": "8935d78d9e3b124e"
+      },
+      "BoC Klaviyo": {
+        "byte_length": 14695,
+        "fetch": "ok",
+        "final_url": "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
+        "http_status": 200,
+        "matched_count": 1,
+        "raw_hash_prefix": "3939de245e93e2a1"
       },
       "BoC Official": {
         "fetch": "ok",
         "final_url": "https://boardsofcanada.com/",
         "html_length": 6911,
-        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>BOARDS OF CANADA</title> <meta property=\"og:image\" content=\"https://boardsofcanada.com/assets/sharing.jpg\"> <link rel=\"icon\" href=\"assets/favicon.png\" type=\"image/png\"> <link rel=\"stylesheet\" href=\"https://use.typekit.net/wqv0jfu.css\"> <style> * { box-sizing: border-box; } html, body { margin: 0; min-heigh",
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>BOARDS OF CANADA</title> <meta property=\"og:image\" content=\"https://boardsofcanada.com/assets/sharing.jpg\"> <link rel=\"icon\" href=\"assets/favicon.png\" type=\"image/png\"> <link rel=\"stylesheet\" href=\"https://use.typekit.net/wqv0jfu.css\"> <style> * { box-sizing: border-box; } html, body { margin: 0; min-height: 100%; font-family: \"itc-avant-garde-gothic-pro\", sans-serif; font-weight: 500; font-style: normal; color: #ffffff; background-color: #000000; background-image: linear-gradient(90deg, rgba(44, 44, 44, 0.4) 0%, rgba(58, 58, 58, 0.2) 50%, rgba(44, 44, 44, 0.4) 100%), url('assets/bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; } body { min-height: 100vh; min-height: 100svh; overflow: hidden; } .viewport { position: fixed; inset: 0; display: grid; place-items: center; padding: clamp(16px, 4vh, 48px); } .page { width: min(100%, 820px); max-height: calc(100svh - clamp(32px, 8vh, 96px)); padding: clamp(16px, 3svh, 40px) clamp(16px, 5vw, 48px); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 1.5svh, 24px); } @media only screen and (max-width:600px) { .viewport, .page { padding: 0; } } #CybotCookiebotDialogBodyEdgeMoreDetails { display: none !important; } #CybotCookiebotDialogTabContent { margin: 0 !important; } @media screen and (max-width: 600px) { #CybotCookiebotDialogBodyButtonsWrapper { width: 100% !important; } .CybotCookiebotScrollContainer { min-height: 0 !important; } } @media screen and (max-width: 1280px) { #CybotCookiebotDialogBodyButtonsWrapper { width: 100% !important; } .CybotCookiebotDialogBodyButton { width: 100% !important; } } #CybotCookiebotDialogBodyButtonsWrapper { flex-direction: row !important; max-width: 350px !important; margin-right: 2rem !important; } #CybotCookiebotDialogBodyButtons { justify-content: flex-end !important; max-width: 350px !important; } #CybotCookiebotDialogBodyLevelButtonCustomize > div { display: none !important; } .CybotCookiebotDialogBodyBottomWrapper { display: none !important; } #CybotCookiebotDialogHeader { display: none !important; } #CybotCookiebotDialogPoweredByText { display: none !important; } #CybotCookiebotDialogPoweredbyCybot { display: none !important; } .CybotCookiebotD",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 1,
         "path_prefix_inventory": {},
+        "script_srcs": [
+          "https://consent.cookiebot.com/uc.js",
+          "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
+          "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516"
+        ],
         "total_anchors_on_page": 0
+      },
+      "BoC Sharing Image": {
+        "byte_length": 401952,
+        "fetch": "ok",
+        "final_url": "https://boardsofcanada.com/assets/sharing.jpg",
+        "http_status": 200,
+        "matched_count": 1,
+        "raw_hash_prefix": "b009e1c7a23cd1f9"
       },
       "Warp": {
         "fetch": "ok",
@@ -203,6 +267,7 @@
             "example": "https://warp.net/video"
           }
         },
+        "script_srcs": [],
         "total_anchors_on_page": 68
       },
       "Warp Editorial": {
@@ -263,6 +328,7 @@
             "example": "https://warp.net/video"
           }
         },
+        "script_srcs": [],
         "total_anchors_on_page": 34
       }
     }
