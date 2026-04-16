@@ -43,40 +43,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Bootstrap PWA logo (one-off)
-        # The repo ships with a ~5KB PIL-drawn placeholder. On the first
-        # successful run we replace it with the Deezer CDN BoC artist photo
-        # (≥ 50KB once converted to PNG). Wrapped in `continue-on-error`
-        # so a transient fetch failure never blocks the scraper.
-        continue-on-error: true
-        run: |
-          set -u
-          marker="docs/icons/.source"
-          current="$(cat "$marker" 2>/dev/null || echo placeholder)"
-          if [ "$current" = "deezer-500" ]; then
-            echo "Icon already sourced from Deezer, skipping bootstrap."
-            exit 0
-          fi
-          echo "Fetching BoC artist photo..."
-          if ! curl -fsSL \
-              -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
-              -H "Accept: image/avif,image/webp,image/png,*/*" \
-              -H "Referer: https://www.deezer.com/" \
-              "https://cdn-images.dzcdn.net/images/artist/e3c41c3df07bec6af0153c8f640b7b62/500x500.jpg" \
-              -o /tmp/boc.jpg; then
-            echo "curl failed, leaving placeholder in place."
-            exit 0
-          fi
-          pip install --quiet Pillow
-          python3 -c "
-          from PIL import Image
-          src = Image.open('/tmp/boc.jpg').convert('RGB')
-          src.resize((192, 192), Image.LANCZOS).save('docs/icons/icon-192.png', 'PNG', optimize=True)
-          src.resize((512, 512), Image.LANCZOS).save('docs/icons/icon-512.png', 'PNG', optimize=True)
-          print('icons updated from Deezer')
-          " || exit 0
-          echo deezer-500 > docs/icons/.source
-
       - name: Check for new releases
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}

@@ -3,7 +3,7 @@
 // known feed, and (2) Web Push delivery: on `push` we show a notification,
 // on `notificationclick` we open the source URL that came in the payload.
 
-const CACHE = "boc-watcher-v2";
+const CACHE = "boc-watcher-v3";
 const SHELL = [
   "./",
   "index.html",

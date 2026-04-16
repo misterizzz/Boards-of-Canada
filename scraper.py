@@ -476,23 +476,6 @@ SOURCES: list[Source] = [
             "(https://github.com/misterizzz/Boards-of-Canada)"
         ),
     ),
-    Source(
-        # Discogs community database. BoC's artist id on Discogs is 1289.
-        # Returns JSON list of releases sorted by year desc. Rate limited
-        # to 60 req/hour for anonymous clients; we use ~12/hour so we're
-        # well under. Discogs' ToS requires an identifying User-Agent.
-        name="Discogs",
-        url=(
-            "https://api.discogs.com/artists/1289/releases"
-            "?per_page=50&sort=year&sort_order=desc"
-        ),
-        path_markers=("/",),
-        raw_bytes_hash=True,
-        user_agent_override=(
-            "BoC-Watcher/1.0 "
-            "+https://github.com/misterizzz/Boards-of-Canada"
-        ),
-    ),
 ]
 
 
