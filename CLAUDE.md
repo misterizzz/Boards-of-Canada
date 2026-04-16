@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A GitHub-Actions-hosted watcher that pushes iOS notifications whenever anything new appears about Boards of Canada on warp.net or bleep.com — music releases, merch, videos, editorial articles. Two push channels run in parallel:
+A GitHub-Actions-hosted watcher that pushes iOS notifications whenever anything new appears about Boards of Canada on warp.net, bleep.com, or boardsofcanada.com — music releases, merch, videos, editorial articles, site content changes. Two push channels run in parallel:
 
 1. **ntfy.sh** (legacy) — uses the ntfy iOS app
 2. **Native Web Push** to a Progressive Web App installed from GitHub Pages (`docs/`), which also serves as a BoC-styled overview feed of every event ever captured.
@@ -16,7 +16,7 @@ Everything is driven by one Python script (`scraper.py`), one workflow (`.github
 - **Schedule**: `*/5 * * * *` cron in the workflow, plus a `push` trigger scoped to `scraper.py`, `requirements.txt`, and the workflow file itself. Pushing a code change therefore fires the Action within ~20 seconds. `state.json`, `docs/events.json`, `docs/subscriptions.json` and `docs/icons/**` are deliberately NOT in the push paths so the bot's own commits cannot recursively retrigger.
 - **Concurrency**: `group: boc-watcher`, `cancel-in-progress: true`, `timeout-minutes: 5`. Don't flip `cancel-in-progress` to false — a hung run (e.g. a broken `pip install`) will silently queue every subsequent push behind it if you do. The 5-minute job timeout caps the blast radius of bugs.
 - **State**: `state.json` in the repo root (current snapshot per source). The workflow's final step commits it back with a `github-actions[bot]` author whenever it changed.
-- **Default branch**: `claude/ios-album-notifications-akAwd` — that's where cron fires and where bot commits land. `main` exists but has diverged; don't fast-forward it without an explicit user OK (would need a force-push).
+- **Default branch**: `main` — that's where cron fires and where bot commits land. The workflow dual-pushes every bot commit to both `main` AND `claude/ios-album-notifications-akAwd` (which GitHub Pages serves the PWA from). The feature branch push uses `--force-with-lease` after an explicit `git fetch` of that ref (without the fetch, Actions' shallow checkout doesn't know the feature branch tip and refuses the push — this bug cost us hours; see commit fa7f3ad).
 - **Secrets**: `NTFY_TOPIC` (ntfy.sh topic name, optional), `VAPID_PRIVATE_KEY` (base64url-encoded raw 32-byte ECDSA P-256 scalar, used by `_build_vapid_auth_header()` to sign Web Push requests to Apple).
 
 ## Web Push is self-implemented, NOT pywebpush
@@ -37,12 +37,7 @@ The first attempt shipped `pywebpush` as a dependency but its transitive dep `ht
 
 ### Icon bootstrap
 
-`docs/icons/icon-{192,512}.png` ship as PIL-drawn BoC-styled placeholders (~5 KB each). The workflow's "Bootstrap PWA logo" step replaces them with the Deezer CDN artist photo on first run, gated by a sentinel file `docs/icons/.source`:
-
-- `placeholder` (or missing) → fetch the Deezer JPEG, Pillow-resize to 192 and 512, write `.source` = `deezer-500`.
-- `deezer-500` → skip.
-
-The step is wrapped in `continue-on-error: true` so a Deezer 403 or transient failure never blocks the scraper.
+`docs/icons/icon-{192,512}.png` are PIL-drawn hexagon flower patterns (7 flat-top white hexagons on pure black, matching boardsofcanada.com's `#000000` background). Generated locally and committed directly — no runtime bootstrap step in the workflow. `docs/icons/.source` is `hexagons-v1`.
 
 ## Event log (`docs/events.json`) vs state snapshot (`state.json`)
 
@@ -56,13 +51,33 @@ Dead Web Push subscriptions (404/410 from Apple) are pruned by `send_web_push()`
 
 ## Source model
 
-Everything revolves around the `Source` dataclass in `scraper.py`. Each source owns one URL and filters applied to every `<a>` anchor on the fetched HTML:
+Everything revolves around the `Source` dataclass in `scraper.py`. Each source owns one URL and a detection strategy. Three strategies exist:
+
+### 1. Anchor-based extraction (default)
+
+Filters applied to every `<a>` anchor on the fetched HTML:
 
 - `path_markers: tuple[str, ...]` — a URL matches if its path contains ANY of these.
 - `required_slug: str | None` — URL path must additionally contain this string. Used on Bleep to require `"boards-of-canada"` because Bleep's `/release/` URLs list music and merch for many artists.
 - `required_text: str | None` — anchor's visible text must contain this substring (case-insensitive). Used by `Warp Editorial` because editorial URL slugs don't embed artist names, only the article title does.
 - `title_from_slug: bool` — force title derivation from the URL slug instead of `anchor.get_text()`. Needed for Bleep where the useful text is behind an `<img>` and the outer anchor text is a format selector like `"LP Download"` or `"LP CD Download"`.
 - `canonicalize: Callable[[str], str]` — applied after filtering to collapse sub-pages. Only `_warp_canonical()` is used, stripping `/tracklist`, `/reviews`, `/credits` off `warp.net/releases/<slug>/*`.
+
+Same-netloc filter: `extract_releases()` drops any anchor whose absolute URL has a different netloc than the source URL. This prevents broad `path_markers` like `("/",)` from sweeping in external links (twitter, youtube, etc.).
+
+### 2. Text-content hash (`detect_via_content_hash: bool`)
+
+For pages with zero `<a>` tags (JS-rendered SPAs, splash pages). Strips `<script>`, `<style>`, `<meta>`, `<link>`, lowercases, collapses whitespace, SHA256-hashes the visible text. Any hash flip = one push. Used by `BoC Official` (boardsofcanada.com) and `Bandcamp` (which serves a JS anti-bot challenge page from GitHub Actions IPs).
+
+### 3. Raw-bytes hash (`raw_bytes_hash: bool`)
+
+For non-HTML sources: JS bundles, images, JSON APIs. SHA256-hashes `resp.content` directly. Any byte-level change = one push. Used by `BoC Klaviyo` (email-campaign JS), `BoC Hero Image` (bg.jpg), `BoC Sharing Image` (og:image).
+
+### Source-specific headers
+
+`user_agent_override: str | None` — per-source User-Agent for APIs that reject generic browser UAs. Not currently used (MusicBrainz and Discogs were removed) but the mechanism is in place if a future API source needs it.
+
+### URL classification
 
 `classify_url()` runs at notify time and labels each new URL. `MERCH_SLUG_SUBSTRINGS` is the hardcoded list (`t-shirt`, `hoodie`, `sweatshirt`, `tote`, `mug`, etc.) used to distinguish merch from music inside Bleep's `/release/` URL space. Warp keeps merch under `/products/` so doesn't need this; add to the list if a new merch type appears on Bleep.
 
@@ -133,5 +148,9 @@ If a new source shares a URL with an existing one the scraper fetches twice — 
 - **Workflow registration needs the file on the default branch.** When the repo was created, `main` didn't exist and the first push made `claude/ios-album-notifications-akAwd` the default — workflows only run from there. Switching the default via Settings → Branches is a manual user step.
 - **ntfy.sh topics are publicly guessable**, not private channels. Anyone who knows the topic name can publish to it and read its message stream. Never log or commit the topic value.
 - **Bleep artist IDs are not slug-validated.** `https://bleep.com/artist/48-boards-of-canada` 301-redirects to a completely different artist (A Guy Called Gerald). Always cross-check the artist ID against `final_url` in the Bleep telemetry; the correct BoC ID is 78.
+- **Never add `br` (brotli) to Accept-Encoding.** Python's `requests` library on Ubuntu runners has no brotli decoder by default. If you advertise `br`, servers that negotiate brotli return bytes we can't decode — BeautifulSoup parses garbage, hashes flip randomly per run, and every source fires false-positive pushes. Stick to `gzip, deflate` only. See the multi-commit brotli saga in the history for the full horror.
+- **boardsofcanada.com is a JS-rendered SPA** — the initial HTML is a 6.9 KB shell with zero `<a>` tags. The visible content (Klaviyo email form) is injected client-side. Anchor-based extraction finds nothing; use `detect_via_content_hash` instead. The Klaviyo JS bundle (`static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js`) and the hero/sharing images are monitored separately via `raw_bytes_hash` to catch campaign updates.
+- **Bandcamp serves a JS challenge page** ("Client Challenge") to GitHub Actions IPs. No headers or User-Agent tweaking bypasses it. Source is in `detect_via_content_hash` mode as a best-effort signal — at least it detects if the challenge page itself changes.
+- **fetch() returns bytes, not str.** Callers that need HTML text decode with `content.decode("utf-8", errors="replace")`. Hash-based sources use the raw bytes directly.
 - **iOS 18 sometimes classifies PWAs as bookmarks on install.** If the user reports the PWA only lives in App Library (not the home screen) and the long-press menu shows only "Delete bookmark" / "Share bookmark" with no "Add to Home Screen" option, they need to: `Settings → Home Screen & App Library → Newly Downloaded Apps → "Add to Home Screen"`, then purge old entries (Safari bookmarks + website data for `misterizzz.github.io`), reboot, and reinstall via Safari. Even then it sometimes stays in App Library only — the functionality is unaffected (Spotlight opens it, push still delivers), it's purely an Apple quirk.
 - **Every PWA uninstall/reinstall generates a fresh `pushSubscription`** with a new endpoint. Commit the new one in `docs/subscriptions.json`; the stale one gets pruned automatically on its next push attempt when Apple returns 410. Don't try to "edit" an existing subscription in place.
