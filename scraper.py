@@ -461,27 +461,6 @@ SOURCES: list[Source] = [
         path_markers=("/album/", "/track/", "/merch/"),
         detect_via_content_hash=True,
     ),
-    Source(
-        # MusicBrainz release-groups API for the BoC artist MBID
-        # (69b39eab-6577-46a4-a9f5-817839092033). Public JSON API, no
-        # bot protection. Fan-curated so new releases appear within
-        # days, sometimes hours. Raw-byte hash: any change to the JSON
-        # response (new release-group added, a title edit, etc.) flips
-        # the hash and fires a push.
-        name="MusicBrainz",
-        url=(
-            "https://musicbrainz.org/ws/2/release-group"
-            "?artist=69b39eab-6577-46a4-a9f5-817839092033"
-            "&type=album|ep|single"
-            "&fmt=json&limit=100"
-        ),
-        path_markers=("/",),
-        raw_bytes_hash=True,
-        user_agent_override=(
-            "BoC-Watcher/1.0 "
-            "(https://github.com/misterizzz/Boards-of-Canada)"
-        ),
-    ),
 ]
 
 

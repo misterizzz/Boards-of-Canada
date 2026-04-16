@@ -5,7 +5,7 @@ allowed-tools: mcp__github__get_file_contents
 
 Check the health of the Boards of Canada watcher. Read these files from
 GitHub via `mcp__github__get_file_contents`, all on
-`refs/heads/claude/ios-album-notifications-akAwd` in `misterizzz/boards-of-canada`:
+`refs/heads/main` in `misterizzz/boards-of-canada`:
 
 1. `state.json` — parse the `_telemetry` block
 2. `docs/events.json` — count the array length
