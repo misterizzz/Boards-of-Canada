@@ -96,7 +96,14 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add $paths 2>/dev/null || true
             git commit -m "chore: update release state and PWA data"
-            git push
+            # Push to both main (where cron actually fires from) and the
+            # feature branch (which GitHub Pages serves the PWA from).
+            # Force-with-lease on the feature branch so a divergent manual
+            # commit there wins — if feature has unrelated commits we
+            # keep them and skip the sync that run.
+            git push origin HEAD:refs/heads/main
+            git push origin HEAD:refs/heads/claude/ios-album-notifications-akAwd --force-with-lease || \
+              echo "feature branch push rejected, probably diverged manually; will retry next run"
           else
             echo "No changes to commit."
           fi
