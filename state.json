@@ -1,6 +1,12 @@
 {
+  "Bandcamp": {
+    "last_checked": 1776376272,
+    "releases": {
+      "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
+    }
+  },
   "Bleep": {
-    "last_checked": 1776350837,
+    "last_checked": 1776376271,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
@@ -29,8 +35,32 @@
       "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "Music Has The Right To Children"
     }
   },
+  "BoC Hero Image": {
+    "last_checked": 1776376271,
+    "releases": {
+      "https://boardsofcanada.com/assets/bg.jpg#raw-hash=8935d78d9e3b124e": "Raw content changed (hash 8935d78d9e3b124e)"
+    }
+  },
+  "BoC Klaviyo": {
+    "last_checked": 1776376271,
+    "releases": {
+      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=d56a4c27c6104f80": "Raw content changed (hash d56a4c27c6104f80)"
+    }
+  },
+  "BoC Official": {
+    "last_checked": 1776376271,
+    "releases": {
+      "https://boardsofcanada.com/#content-hash=941b6da329feee5e": "Page content changed (hash 941b6da329feee5e)"
+    }
+  },
+  "BoC Sharing Image": {
+    "last_checked": 1776376272,
+    "releases": {
+      "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b009e1c7a23cd1f9": "Raw content changed (hash b009e1c7a23cd1f9)"
+    }
+  },
   "Warp": {
-    "last_checked": 1776350556,
+    "last_checked": 1776376269,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -66,7 +96,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1776350840,
+    "last_run": 1776376272,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -150,23 +180,27 @@
         "raw_hash_prefix": "8935d78d9e3b124e"
       },
       "BoC Klaviyo": {
-        "byte_length": 2060,
+        "byte_length": 14695,
         "fetch": "ok",
         "final_url": "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
         "http_status": 200,
         "matched_count": 1,
-        "raw_hash_prefix": "bc106aff6cd20c18"
+        "raw_hash_prefix": "d56a4c27c6104f80"
       },
       "BoC Official": {
         "fetch": "ok",
         "final_url": "https://boardsofcanada.com/",
-        "html_length": 2277,
-        "html_sample": "\u001b\ufffd\u001a\u0000\ufffd\u007f\u007f\ufffd\ufffd\u07df\ufffd;\ufffd\u0005x \u0018,*\ufffd\ufffd\ufffdeY=\ufffd9\ufffd\\06$\ufffd$\ufffd\ufffd\ufffd\ufffd\u07cf\u0649\ufffd@H\ufffdL\ufffd\ufffdg\ufffd\u023d\ufffd\ufffd\"\ufffd3\ufffdH\ufffdJ +U\ufffd\ufffd.5\ufffdJ[,[\ufffd\u06c6\ufffd\ufffdM\ufffdF \ufffd\ufffd\u0002==\ufffd\ufffd\ufffdW\ufffd\ufffd\u01b7j\ufffd\ufffd\ufffdK\ufffd\ufffd\u0001\u000e\ufffd\u0004X\ufffd\ufffdo\ufffd\ufffd\u05a1/\ufffd\ufffdUu \ufffd[,\ufffd\ufffd\ufffd\b5r\u0012uG\ufffdy\u0010\ufffdy\ufffd\u000f\ufffd]\ufffd\u0015\ufffdi\ufffd\ufffd}'/\ufffd\u00ab' \u007fy\ufffd\u0015>\ufffd\ufffd\ufffd\ufffd?<~\ufffdx\ufffd2\ufffd\u0010\ufffdN\ufffd\ufffd~\u0007W \ufffdk\u00edp\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd{r\ufffd\u043b\ufffd\ufffdp+us\u000f\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0005\ufffd\ufffd$\ufffd2\ufffd\ufffd\ufffd\u001bM\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\\=\u0019\ufffd\ufffd \u000ep\ufffd\ufffd\ufffdm\u0010= I\u0453\ufffd\u000e\u0013\u007f\ufffd\ufffdV\ufffdD\ufffd \ufffd\ufffd\u07f1m\ufffd'\ufffds\ufffdj\ufffd8x\ufffd\ufffd\ufffd\u0000\u0000\ufffd?8\ufffd\ufffd#\u0000\ufffd\ufffd!v\ufffdN\ua980\ufffd\ufffd\u0013\u000f\ufffdQ\ufffd\u0003\ufffdm|\ufffd\ufffd U \ufffd\ufffd\ufffd\ufffd_R\u0000\ufffd\u0017\ufffdJ \u000fKR\ufffd \ufffd!C\ufffdY@\ufffd\ufffdb\ufffd\ufffd\ufffd\ufffd \ufffd\u0002\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u001aB!~`\u0000\ufffd{\ufffdS\u01cc\ufffd0\ufffdR XHO\ufffd\"\ufffd1\ufffd\ufffdC\u0012\ufffdqF\ufffd \ufffd\u0673V#\ufffd\ufffd\ufffd\ufffd\u0010\u0000\ufffd\ufffd\ufffdm\ufffdX.$j \u0398\ufffd\ufffd\ufffdm\ufffd<\ufffd2 \u007f7gI\u0016\u0001{\ufffd\ufffdd\ufffdSxn\u0152Q\u0004\ufffd\ufffd\ufffdR\ufffd F\u0014iuoU\u0018\u0018S\ufffd\u068eF \"R[8y\ufffd\u0005,M\ufffd\u0148\ufffd\ufffd\u001b1\ufffdh\ufffdV3\ufffd=Z[\u0011\ufffd9(\ufffdzB\ufffd~g\ufffd\ufffd\ufffd+m\ue77c,\ufffd\u0002\ufffdF#\u00041\ufffd'+\ufffd\u0002$\ufffd\ufffd\ud9c0\udca9\ufffdR;\ufffdv\ufffd7\ufffdP \ufffd\ufffd [u\ufffdW\u0018o\ufffd\ufffd\ufffdX=\ufffd\ufffdGA\ufffdx\u06c5\ufffd;P\ufffdv\u001b Y\ufffd \"\ufffdZA\ufffd\ufffd\u0006M\ufffd\u0152\u001b\u0015\ufffdJ \ufffd\ufffd=\ufffd\ufffd\ufffd\ufffdQ\ufffd\u0000-?\ufffd^UqU\ufffd\u0002H\ufffd\u0018[\ufffd\ufffd( \ufffd\ufffdM\ufffdC\ufffdDm\ufffd\u0012/\ufffd\ufffdR\ufffd \"jC\ufffdw\ufffd\ufffd \ufffd\ufffd\ufffdc\ufffdd\ufffd\\%\ufffd\ufffdZ\ufffdaS\ufffd\ufffd\u0010w\ufffd1\ufffd\ufffdF\ufffd>\ufffd\ufffd\ufffd!<\ufffd\ufffdIv}\ufffd\ufffd iI\ufffd \ufffd\ufffd\u001a\ufffd2\ufffdd\ufffd\u01d0Q\ufffd\ufffdqs\u0003\u001a\ufffd\ufffd\ufffd^\ufffdu\u0017\ufffd-?\u0004\ufffd\ufffdb\ufffd\u0018w\ufffd,\u00cd\ufffdC\ufffd-\ufffdA\u007f\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdJ\\\u001b\ufffdLre\ufffd'F \ufffd\ufffd\u0006\ufffd\u001b\ufffd\ufffd\ufffds\ufffd\ufffdV\ufffd\ufffd\ufffdh\ufffd\ufffd\u00f2\u000fLA\u001bv\ufffd7\ufffd \ufffd\u0000\ufffd* \ufffd\u0002'D\ufffd\ufffd{\u0007\ufffd\ufffd\u0003\ufffd\ufffd\ufffd\u0011\ufffd'\ufffd\ufffdF\ufffd\ufffd\ufffdw \u06a3\ufffd\ufffd.\ufffd2\ufffd\ufffd\u0016H\u000f\ufffdr\u0002\ufffd\ufffd\ufffdZY\ufffd\ufffdS\ufffd=\ufffd\u001a6r{?\ufffd9\ufffd\ufffd\ufffd\ufffd(\u007f'\ufffd\ufffd \ufffd0YY\ufffd/\ufffdl\ufffd^\ufffd\ufffdD\ufffd\ufffdr\u033aC\ufffd&\ufffd\ufffd:\ufffd\ufffdY~d\ufffd\ufffdj\u0006\ufffdP\u00b4\ufffd3\ufffd\ufffd \ufffd\u0000Z I\ufffd\ufffd \ufffdP\ufffd\ufffd\ufffd>\ufffd7\ufffd\ufffdC\ufffd\u0002!wZ7\ufffd:u\ufffd\ufffd\ufffd\u07b4\ufffdcQ$\ufffdK\ufffdZ\u000f\ufffd\ufffd\ufffd\u0663E\ufffd\ufffd\ufffd \u000f j\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd&y\ufffd \u0213\ufffd\ufffd\ufffd9\ufffd\ufffdh\u001bU\u0019\ufffd/\ufffd*%\u0006>\ufffdc\u0003\ufffd\u0464#7@\ufffd\u0016\ufffd\ufffd4\ufffd`K\ufffd\ufffd s\ufffdQ\ufffdy\u0002E\u0014\ufffdUz\ufffdz7\u0006\ufffd\ufffdb\u0015\ufffdE\ufffdx\ufffd\ufffd c<\ufffd\ufffd\ufffd# m|X\ufffd\ufffd: \ufffd:\ufffd\ufffd\u000e\ufffd\u0011\u0011 f\ufffd\ufffd\ufffd\ufffd<^ks}\u0004(\ufffdAE\u02ad\ufffd\b\ufffd? \ufffd\ufffd\ufffd\u0019\ufffdsY.d\ufffd \ufffdd\ufffd\ufffd@\ufffd\ufffd(.Y\ufffd\ufffd\ufffdW\ufffd\ufffdu?uml[@\ufffduh+\ufffd\ufffd \ufffd\b\ufffdkl\ufffd\ufffdp6\u0006m\ufffd\ufffdhC#z\ufffd b\\\u0019 \ufffd \ufffdi\ufffdb\ufffd\ufffd\u0019\ufffd\ufffd\ufffd\b\ufffd\ufffd'5\u0017\u0018K \ufffd\u01b6\ufffd\ufffd\u05a6\ufffd\ufffd\ufffd\u0001\ufffd\ufffd\ufffdRy\ufffd\u0005\ufffdUo\u00d1\ufffd\\a\ufffd\u000fh\ufffd\ufffd\u0002_k\ufffdt\ufffd\ufffd!\ufffd\ufffd\ufffd\u0015n>\u0018\ufffd,\ufffd\ufffd\ufffd\ufffd]/\u01f8\ufffd [\ufffd7a NIrc\ufffd\ufffd'\ufffdd<\ufffd\ufffd\ufffd\ufffd\ufffd \ufffd\ufffd\ufffd8\u000f\ufffd\ufffd\u0018\ufffd\ufffdU\ufffd\u0019TfD\u2f2d\ufffd+\u0005\ufffd*\bohv \u0000,\ufffd\ufffd\ufffd\ufffd\ufffd[\ufffd\ufffd\u0016\ufffd(\ufffd\ufffd\u0013\ufffd2 \ufffd\ufffd2\u06a1\ufffdI\ufffd\u0017,\ufffdR\ufffdW\ufffd\ufffd\ufffdD\ufffdT\ufffd\ufffd\u0014%\ufffd\ufffd\u0015\ufffdi\\c\ufffd\ufffd\ufffd< \ufffd\ufffd\ufffd4\ufffd\ufffd\ufffdt\ufffd)cyV\ufffd\u00042*\ufffd= \ufffdp6\ufffd\"r\ufffd\u0018\ufffd\ufffdv\ufffd \ufffd\ufffdyiL\ufffd\u0010\ufffd\ufffd\u0006\ufffd\u035ejaO\ufffd!\ufffd'\ufffd\ufffd\ufffdTPG\u0015\ufffd\ufffdi\ufffdT\ufffdr\ufffdT\ufffd\u007f\ufffd\ufffd\ufffd\ufffd~\ufffdVI\u05fbMx \u001a\ufffd&\ufffd\ufffd\ufffd\u0018\u0014\ufffd\\Xc\ufffd;\u053e\ufffd\ufffdZm]p\ufffd\ufffd;n\ufffd.\ufffdfW\u0016-\u064a\u000e\ufffd\ufffd\u023b\ufffd\ufffd.\ufffdB\ufffd\ufffd^\u0019\b\ufffd\ufffd;~D\u001b\\\u0007\ufffdT\u0019\\\ufffd\"\b\ufffd\ufffdd\ufffd)\ufffd)\ufffd\ufffdq\ufffdM\ufffd\ufffd\ufffdA\ufffd1\ufffd\ufffd\ufffd\ufffdI\ufffdz\ufffd\ufffdM\ufffd\ufffd\ufffd\ufffdS\ufffd\ufffd\\KQ\u0006\u0017\ufffdB\ufffdy\ufffd\ufffd\ufffd^ \ufffd\ufffd:\ufffd\u000f\ufffdQx\ufffd\ufffd\u0007Pa\ufffd\ufffdE\ufffdiN\ufffdN\ufffd\ufffd\u0010\u001a\ufffd\ufffd\ufffd>~\ufffd\ufffd}\ufffd\ufffd\ufffd\ufffd/\ufffd\ufffd#\\\u000f\ufffd{\ufffd\ufffd.\ufffdG \ufffd9\ufffdW \u02c9\ufffdQ\ufffd-\u0734@Tt\ufffd,\u001ar\ufffd\ufffdo\u001a\u0013\ufffd0\ufffdm\ufffdj\u0275\u0014%\ufffdId\ufffd\ufffd\u0018\\\ufffdYrbYr_\u000e\ufffd6k\ufffdq\ufffd\u0011\ufffd\u0019\u0010\u001b\ufffd\u0001\ufffd4\ufffdn\ufffd)\ufffd\ufffdD\ufffd<]f)\ufffd\u0016\ufffdh\ufffd\ufffd\ufffd\ufffdv\ufffdArL\ufffd[\ufffdw\ufffdhb\ufffde\ufffd\ufffd[)g\ufffd\u0010\ufffd\ufffd\ufffd\ufffd.\u0000\ufffda\u02e5\ufffd\ufffd,\u688c\u0004\ufffd\ufffdYJ\ufffd\ufffd\ufffd\"\u0003WV&\u0006> %\ufffdU\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdv\ufffd\ufffdp\ufffd_\ufffd\u001b\ufffd\ufffd\u00196\ufffd\ufffd\ufffd]W\ufffd\ufffd\ufffd>\ufffd\ufffd\ufffd|\ufffd\u0007n\u001a \u007f\ufffdYd\ufffd\u0019\u0015\ufffd\ufffd\u00154\ufffd\u001a\u000e_\ufffd\ufffd\ufffd\ufffd \ufffd[Rv\u0003\ufffd\ufffdb\ufffd\ufffdh\ufffd\ufffd,V\ufffd \ufffd\ufffd\\\ufffdIt\ufffdux\u03f2% \ufffd\u0469\ufffd\ufffd\ufffd\ufffd\u020ek\ufffd\ufffdE\ufffd o\ufffd\ufffd\ufffd\ufffd\u000fRj\ufffd\ufffd'k\u000e\ufffd\ufffdt\ufffd\ufffd\u0006}\u0011Tr4\ufffdW\u0016\ufffd\ufffdt\ufffd\u06d0\ufffd,\ufffd51W\ufffd\ufffd\u0016\ufffd<\ufffd\b#\ufffd\ufffd\ufffd;\ufffd]\ufffd\ufffd\ufffd\ufffd\u0019\ufffdA\ufffd\u0019CJt\ufffd\ufffd\ufffd\uac91\ufffdq)\ufffd\ufffd\ufffd\ufffd [\u02cf\ufffd\ufffd\ufffdd\ufffd\ufffdB\ufffd\ufffd\u0017\u0017\ufffdY\ufffdW\u0007e.\ufffd\ufffd(\ufffd\ufffdK\u0012 \ufffd'e\ufffd \ufffd\u001a\ufffd\ufffd\u0000\ufffd\ufffd8]]\ufffd\ufffd3]\u0018\u0015;#\u00050\ufffd\ufffdoj\ufffd\ufffd0\ufffdzh\ufffd\ufffd\u0000z\ufffd\ufffd\\%\ufffd\ufffd\u0015\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd`2:\ufffdG\ufffd|(#\ufffdC\u0019\ufffdWQt\ufffd.\ufffd\ufffd\ufffd\ufffd\ufffd \ufffd\ufffde\u0001\ufffdK\u0005\u0010E\ufffd\ufffd\ufffd\ufffd\\\ufffdb\ufffd ]\ufffd\ufffd\ufffd\ufffdO}>\ufffd\ufffdh\u000e]\ufffd\ufffd\ufffdm\u0004\ufffdh{9\ufffd wP)\u04cbZq\ufffdR;\ufffdl\ufffd\ufffd\ufffd\u001ayet\ufffdJ\ufffdl\ufffdp\ufffdW\ufffd\\\ufffd\ufffdjZ\ufffd:\u02f3l6\ufffdj]\ufffd)\ufffd&\ufffd,\u0013<\ufffdN\ufffd\ufffd\ufffd2 e\ufffdtB@j\ufffd\ufffd\ufffd\ufffdX\u0012\ufffd\ufffd\ufffdt\u0014\ufffd\u03feNm\ufffd\ufffd>n\ufffd\u0353\u0017{\ufffd\ufffd[\ufffd\ufffd\ufffd\u0273\ufffd\ufffd\ufffd{\ufffd \ufffd\ufffd\ufffd\ufffd\ufffd g\ufffdf\ufffd\ufffdW\ufffd\ufffd\ufffd\u0012\ufffd\ufffd\ufffd\ufffdo\ufffd\ufffd~Q\ufffd\u0015\uffbf\ufffd\ufffd\ufffd\ufffd/~\ufffd{v\ufffd\ufffd\ufffd\ufffdo\ufffd\ufffd\ufffd\ufffdsS\ufffd rR S]Z\u0006'\ufffd\u014f\u007f )\u0208\ufffd\ufffd$M\u0013F(\ufffd\ufffd\u00165)\ufffd`\ufffdr\ufffd\ufffdI\ufffd\ufffdi\ufffd\ufffd\ufffdY6a\ufffdx6\u001b\ufffdF#>CF(\ufffd\ufffdH)qhwh\ufffdz\ufffdJ\u0750\ufffdD4o\ufffd\u0014'R\ufffdOy\ufffd\ufffd\ufffd\ufffd\ufffd\u0791\ufffd\ufffd )\ufffd\ufffd\ufffdARx\ufffd#%U\ufffd\ufffd\ufffd?YI o{\ufffd\ufffd\ufffd\ufffde\ufffd\ufffdGJ\ufffd\ufffd\ufffd\ufffd\ufffd\u0524}\ufffd\ufffd \ufffdxb\ufffd,\ufffd\ufffdL\ufffdcW#\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdoH\ufffd{\ufffd\ufffd\ufffd\u0000*k\ufffd\ufffd\ufffdGjI.}\ufffd!\u0005q\ufffd",
+        "html_length": 6911,
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>BOARDS OF CANADA</title> <meta property=\"og:image\" content=\"https://boardsofcanada.com/assets/sharing.jpg\"> <link rel=\"icon\" href=\"assets/favicon.png\" type=\"image/png\"> <link rel=\"stylesheet\" href=\"https://use.typekit.net/wqv0jfu.css\"> <style> * { box-sizing: border-box; } html, body { margin: 0; min-height: 100%; font-family: \"itc-avant-garde-gothic-pro\", sans-serif; font-weight: 500; font-style: normal; color: #ffffff; background-color: #000000; background-image: linear-gradient(90deg, rgba(44, 44, 44, 0.4) 0%, rgba(58, 58, 58, 0.2) 50%, rgba(44, 44, 44, 0.4) 100%), url('assets/bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; } body { min-height: 100vh; min-height: 100svh; overflow: hidden; } .viewport { position: fixed; inset: 0; display: grid; place-items: center; padding: clamp(16px, 4vh, 48px); } .page { width: min(100%, 820px); max-height: calc(100svh - clamp(32px, 8vh, 96px)); padding: clamp(16px, 3svh, 40px) clamp(16px, 5vw, 48px); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 1.5svh, 24px); } @media only screen and (max-width:600px) { .viewport, .page { padding: 0; } } #CybotCookiebotDialogBodyEdgeMoreDetails { display: none !important; } #CybotCookiebotDialogTabContent { margin: 0 !important; } @media screen and (max-width: 600px) { #CybotCookiebotDialogBodyButtonsWrapper { width: 100% !important; } .CybotCookiebotScrollContainer { min-height: 0 !important; } } @media screen and (max-width: 1280px) { #CybotCookiebotDialogBodyButtonsWrapper { width: 100% !important; } .CybotCookiebotDialogBodyButton { width: 100% !important; } } #CybotCookiebotDialogBodyButtonsWrapper { flex-direction: row !important; max-width: 350px !important; margin-right: 2rem !important; } #CybotCookiebotDialogBodyButtons { justify-content: flex-end !important; max-width: 350px !important; } #CybotCookiebotDialogBodyLevelButtonCustomize > div { display: none !important; } .CybotCookiebotDialogBodyBottomWrapper { display: none !important; } #CybotCookiebotDialogHeader { display: none !important; } #CybotCookiebotDialogPoweredByText { display: none !important; } #CybotCookiebotDialogPoweredbyCybot { display: none !important; } .CybotCookiebotD",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 1,
         "path_prefix_inventory": {},
-        "script_srcs": [],
+        "script_srcs": [
+          "https://consent.cookiebot.com/uc.js",
+          "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
+          "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516"
+        ],
         "total_anchors_on_page": 0
       },
       "BoC Sharing Image": {
@@ -177,45 +211,127 @@
         "matched_count": 1,
         "raw_hash_prefix": "b009e1c7a23cd1f9"
       },
-      "Discogs": {
-        "byte_length": 14703,
-        "fetch": "ok",
-        "final_url": "https://api.discogs.com/artists/1289/releases?per_page=50&sort=year&sort_order=desc",
-        "http_status": 200,
-        "matched_count": 1,
-        "raw_hash_prefix": "d804db7e5a7af53b"
-      },
-      "MusicBrainz": {
-        "byte_length": 17175,
-        "fetch": "ok",
-        "final_url": "https://musicbrainz.org/ws/2/release-group?artist=69b39eab-6577-46a4-a9f5-817839092033&type=album%7Cep%7Csingle&fmt=json&limit=100",
-        "http_status": 200,
-        "matched_count": 1,
-        "raw_hash_prefix": "2c938a9d3df3ae0b"
-      },
       "Warp": {
         "fetch": "ok",
         "final_url": "https://warp.net/artists/boards-of-canada",
-        "html_length": 16330,
-        "html_sample": "[\ufffdv\u0012Ee\ufffd\ufffd\ufffdB\ufffd>\ufffd#b>\u0000\u001a) \ufffd\ufffd\u0003\u0007\ufffd?L\ufffdv\\\ufffd\ufffd\ufffd\ufffd\ufffd\u06e7\ufffd\ufffd\ufffd\ufffd=\ufffdy .\ufffd\ufffd\ufffdV\ufffd,\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdK\ufffd\ufffd$\u0225\u0017$h\u0000\ufffdC\ufffdfR]m\ufffd.u\ufffd.m\ufffd\ufffd\ufffd\ufffd\ufffd i\ufffd\ufffd\ufffd\ufffd_\ufffd2p\ufffd\u000e<\ufffd\ufffd\ufffd\ufffd|w\u0001 LX\ufffd\u0000\ufffd.\ufffd \ufffd\u0013\u0014\ufffd\ufffd|\ufffd |y 4[\ufffd \ufffd\ufffd\u0003&]\ufffd\ufffdq\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdi=)]N\ufffde)\u0015Ul;\ufffdv\ufffd\u0000\ufffd\ufffd\ufffd\ufffd\u0001(\ufffd.@)\ufffd\u0004\ufffd\ufffd\ufffd\ufffd_} 33\u0001\u00122BF\u063f\ufffdWU\u0010\ufffd, a/\ufffdWU!\ufffd\ufffd\ufffd\u0019\ufffd w\ufffd\u000f\ufffd\ufffd\ufffd{\u03fd\ufffdTU\ufffdg\ufffd\ufffdSO\u0010\u0014\ufffdpQ\u0006\u0000\ufffd<\ufffdUU\ufffd\u0014\ufffd\ufffd\ufffd\ufffds\ufffd4%\ufffd \u0006\u00107\ufffd& \u0019~\ufffd\ufffd @3\ufffd $\ufffdRj\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd;\ufffd\ufffdEriM\ufffd\ufffd\ufffda\u001a\ufffdU\ufffda\u0018wQ\ufffd!0\ufffdi4\u0000\ufffd\ufffdX\ufffd2\ufffd\u0174\ufffd\ufffd\u0014\u0011I\ufffd^\ufffd\ufffd\u0018\ufffd\ufffd\ufffd\u075f\ufffdJ\ufffd%\u0012M\u001bc\ufffd\u0018#+\u0002\ufffdK { +\ufffd\ufffd\ufffdT\ufffd\u0010\ufffd2\ufffd\ufffd>\ufffd|\u000f\ufffd\ufffd\ufffd\u0640\ufffd\ufffdl\ufffd\ufffd\ufffd\u001a\ufffd\ufffdt\ufffd\ufffd\ufffd\ufffdI\\\ufffd\u00100M\ufffd\ufffd\ufffdC\ufffdu\ufffd\ufffd\ufffd\ufffdV \ufffdJ\ufffd\u0011\ufffd!d\ufffdf\ufffd\ufffdg\ufffd\u0004[\ufffd;\ufffd i\ufffd\b\ufffd\ufffd\ufffd\ufffd:\ufffd\ufffd\ufffd\ufffd\u0005\ufffdC\ufffd\ufffd\u0350:\ufffd:\u0013m Ow\u0014w\ufffd\ufffd\u07a6\u0011\ufffdO\u01f5M 8\ufffd\u0006iH\\\ufffd\ufffd\ufffd c\u049f\ufffd.\u0016L\ufffd\u0007p~z\ufffda\u0003\ufffdu 8\u0006\ubf29!0q\u0001\ufffd\u07b4\u0016\ufffd\ufffd\ufffd\ufffdPE\ufffd\u0016p\ufffd\u001a\ufffd>\ufffd>m\u050b",
+        "html_length": 162641,
+        "html_sample": "<!DOCTYPE html><html lang=\"en\" class=\"antialiased\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width\"/><link rel=\"preload\" as=\"image\" imagesrcset=\"/_next/image?url=%2Fimages%2Fwarp-animated-logo.gif&amp;w=64&amp;q=75 1x, /_next/image?url=%2Fimages%2Fwarp-animated-logo.gif&amp;w=128&amp;q=75 2x\"/><title>Boards of Canada - Artists - WARP</title><meta name=\"description\" content=\"Boards of Canada is a Scottish electronic music duo comprised of brothers Mike Sandison and",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
-        "matched_count": 0,
-        "path_prefix_inventory": {},
+        "matched_count": 27,
+        "path_prefix_inventory": {
+          "/": {
+            "count": 1,
+            "example": "https://warp.net/"
+          },
+          "/about/": {
+            "count": 2,
+            "example": "https://warp.net/about"
+          },
+          "/artists/": {
+            "count": 1,
+            "example": "https://warp.net/artists"
+          },
+          "/artists/boards-of-canada/": {
+            "count": 3,
+            "example": "https://warp.net/artists/boards-of-canada"
+          },
+          "/discography/": {
+            "count": 1,
+            "example": "https://warp.net/discography"
+          },
+          "/editorial/": {
+            "count": 1,
+            "example": "https://warp.net/editorial"
+          },
+          "/events/": {
+            "count": 1,
+            "example": "https://warp.net/events"
+          },
+          "/releases/141387-peel-session/": {
+            "count": 1,
+            "example": "https://warp.net/releases/141387-peel-session/tracklist"
+          },
+          "/releases/43515-tomorrows-harvest/": {
+            "count": 1,
+            "example": "https://warp.net/releases/43515-tomorrows-harvest/tracklist"
+          },
+          "/releases/4625-geogaddi/": {
+            "count": 1,
+            "example": "https://warp.net/releases/4625-geogaddi/tracklist"
+          },
+          "/shop/": {
+            "count": 1,
+            "example": "https://warp.net/shop"
+          },
+          "/video/": {
+            "count": 1,
+            "example": "https://warp.net/video"
+          }
+        },
         "script_srcs": [],
-        "total_anchors_on_page": 0
+        "total_anchors_on_page": 70
       },
       "Warp Editorial": {
         "fetch": "ok",
         "final_url": "https://warp.net/editorial",
-        "html_length": 15324,
-        "html_sample": "[^\ufffd1\u0012a\ufffdj/ \ufffd(\ufffd\ufffdU\ufffd&\ufffd\u0000\ufffd#u\ufffd\u03df\u007f\u007f\u0015\u0018\ufffd\u001bb \ufffd\ufffd\ufffd\ufffd~\ufffd\u007f\ufffdK\ufffd\ufffd\ufffdj\ufffd\u3e8d\u0016A\ufffd_\ufffd5\ufffd\ufffd\ufffd+\u067e\ufffd|m_\ufffd\ufffdu\b \ufffdp\ufffd\u0000 \ufffd\ufffdn\ufffds\ufffdd[\u001b\ufffd?\b7\ufffd |\ufffd&\u0658}?\ufffdNW\ufffdT\ufffdnKja\ufffd\ufffd.\u007f\ufffd\ufffd\u0003h\u000e\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0017\ufffd \ufffd\u071d`\ufffd\ufffdm\ufffdv2\ufffd\u0005\u00149`\b\u001a\ufffd\ufffd&E#\ufffd\ufffdM\ufffd\ufffd Rv!szo\ufffd\u0003\ufffd$\ufffdU\ufffdA\ufffd\ufffd\ufffde;hY\u000e$[\ufffd\ufffd[c\u0007\ufffd\ufffdTu\ufffd\ufffd\ufffdp;\ufffd\ufffd4 \ufffd .\u0000\ufffdF\u000efX>\ufffd B\ufffd\ufffd\ufffd\ufffd\ufffd=\ufffd \ufffd\ufffdk\ufffd\u00100\u000f\ufffdR|\ufffd\ufffd\ufffd\ufffd_jQ\ufffdm\u0005\ufffd\ufffdO\ufffd\ufffd:\ufffd\ufffd\ufffd]Q\ufffd\ufffd\ufffdB\u0014\ufffds\b%\u0007p`gW`\ufffd\ufffd0D\ufffd5\ufffd2P\ufffd\ufffd\u065c\ufffd\ufffd\ufffd\ufffdU\ufffdv\ufffd\u0018D\u0018\ufffd\ufffdX\ufffd1f\ufffd\ufffdi\ufffd\u0012\"!\ufffd \u001b\ufffd\uc154\ufffd\ufffd*\ufffd\ufffd\"\ufffd\ufffd\ufffd\ufffd\u0018j\ufffdc \ufffd*\ufffd@\ufffdoc\ufffdOB\ufffd\ufffd\ufffd3`\ufffd\u0001!\ufffd\ufffd \ufffd\ufffdcE\ufffd\ufffd\ufffd]\ufffd\ufffd@\ufffd\bM\u0018'\ufffd\ufffd\ufffd\ufffd\u0018'3y\ufffd\ufffd&!\ufffdSm\ufffdQ\ufffd\ufffd\u0018H%\ufffd\u0003\u016dx6Q\\1\ufffdl\ufffdS\ufffd$K\ufffdY\ufffd$\ufffd\ufffd&\ufffd\u0010\ufffd\ufffdS \ufffd!\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0019mw\ufffd\ufffdl\ufffd\u0653q\ufffd\u0012\ufffd\ufffdI\ufffd\u0003%\ufffd\ufffde\ufffd\ufffdIN\ufffdZ:\ufffd\ufffd\ufffdJ~_\ufffd\ufffd\ufffd\ufffd=\ufffd4\ufffd\ufffd\ufffd\ufffd \ufffd\u033a\ufffd\ufffdQ$\u014c\u001b\ufffdz\ufffd\ufffd\ufffd\ufffd\ufffdM)>\ufffdK\ufffd7U\u0001\ufffd\ufffd\ufffd\ufffd\ufffd<\ufffd\u007f}8I\ufffdCrr~\u0016u4t~\ufffd",
+        "html_length": 127714,
+        "html_sample": "<!DOCTYPE html><html lang=\"en\" class=\"antialiased\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width\"/><link rel=\"preload\" as=\"image\" imagesrcset=\"/_next/image?url=%2Fimages%2Fwarp-animated-logo.gif&amp;w=64&amp;q=75 1x, /_next/image?url=%2Fimages%2Fwarp-animated-logo.gif&amp;w=128&amp;q=75 2x\"/><title>Editorial - WARP</title><meta name=\"description\" content=\"Warp&#x27;s artists create groundbreaking music, videos and cinema. Aphex Twin, Boards of Canada, Flying Lotu",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 0,
-        "path_prefix_inventory": {},
+        "path_prefix_inventory": {
+          "/": {
+            "count": 1,
+            "example": "https://warp.net/"
+          },
+          "/about/": {
+            "count": 2,
+            "example": "https://warp.net/about"
+          },
+          "/artists/": {
+            "count": 1,
+            "example": "https://warp.net/artists"
+          },
+          "/discography/": {
+            "count": 1,
+            "example": "https://warp.net/discography"
+          },
+          "/editorial/": {
+            "count": 1,
+            "example": "https://warp.net/editorial"
+          },
+          "/editorial/fire-toolz-interview/": {
+            "count": 1,
+            "example": "https://warp.net/editorial/fire-toolz-interview"
+          },
+          "/editorial/go-back-and-get-it-an-interview-with-kelela/": {
+            "count": 1,
+            "example": "https://warp.net/editorial/go-back-and-get-it-an-interview-with-kelela"
+          },
+          "/editorial/kwes-on-kinds/": {
+            "count": 1,
+            "example": "https://warp.net/editorial/kwes-on-kinds"
+          },
+          "/editorial/memory-of-music/": {
+            "count": 1,
+            "example": "https://warp.net/editorial/memory-of-music"
+          },
+          "/events/": {
+            "count": 1,
+            "example": "https://warp.net/events"
+          },
+          "/shop/": {
+            "count": 1,
+            "example": "https://warp.net/shop"
+          },
+          "/video/": {
+            "count": 1,
+            "example": "https://warp.net/video"
+          }
+        },
         "script_srcs": [],
-        "total_anchors_on_page": 0
+        "total_anchors_on_page": 34
       }
     }
   }
