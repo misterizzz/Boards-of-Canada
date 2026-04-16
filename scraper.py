@@ -293,6 +293,18 @@ class Source:
             for pref, count in top
         }
 
+        # For tiny pages (SPAs / splash pages) include a larger sample
+        # and the list of script src's so a diagnosing agent can find
+        # the JS entry point and maybe an embedded JSON API call.
+        if len(html) < 15000:
+            script_srcs = [
+                s.get("src", "") for s in soup.find_all("script", src=True)
+            ]
+            html_sample = " ".join(html[:3000].split())
+        else:
+            script_srcs = []
+            html_sample = " ".join(html[:500].split())
+
         return {
             "total_anchors_on_page": len(anchors),
             "html_length": len(html),
@@ -301,10 +313,8 @@ class Source:
                 or "just a moment" in html.lower()[:2000]
             ),
             "path_prefix_inventory": prefix_inventory,
-            # Small sample of the raw HTML so we can diagnose what the
-            # page actually looks like (esp. for zero-anchor sites).
-            # Stripped whitespace-normalised to stay compact.
-            "html_sample": " ".join(html[:500].split()),
+            "html_sample": html_sample,
+            "script_srcs": script_srcs,
         }
 
 
