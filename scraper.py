@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 import os
 import re
@@ -169,6 +170,13 @@ class Source:
     # text. Needed for Bleep where the text is either empty (image-only
     # anchor) or a format selector label like "LP Download".
     title_from_slug: bool = False
+    # If True, skip anchor extraction and instead return a single
+    # synthetic "release" keyed on a hash of the page's HTML content.
+    # Used for sites like boardsofcanada.com that are JS-rendered or
+    # static splash pages with no <a> tags to diff. When the hash
+    # changes, the diff fires a single push pointing back at the
+    # source URL so the user can see what changed.
+    detect_via_content_hash: bool = False
     # Applied to every matching URL before diffing / storing, so different
     # sub-pages of the same release collapse together.
     canonicalize: Callable[[str], str] = _identity
@@ -198,6 +206,18 @@ class Source:
 
     def extract_releases(self, html: str) -> dict[str, str]:
         """Return {absolute_url: title} for anchors matching any path marker."""
+        if self.detect_via_content_hash:
+            # Normalize: strip all whitespace, lowercase, drop <script> and
+            # <style> blocks whose content often changes between requests
+            # without anything user-visible changing.
+            soup = BeautifulSoup(html, "html.parser")
+            for bad in soup(["script", "style", "meta", "link"]):
+                bad.decompose()
+            normalized = re.sub(r"\s+", "", soup.get_text(" ", strip=True).lower())
+            digest = hashlib.sha256(normalized.encode("utf-8", "ignore")).hexdigest()[:16]
+            fake_url = f"{self.url}#content-hash={digest}"
+            return {fake_url: f"Page content changed (hash {digest})"}
+
         soup = BeautifulSoup(html, "html.parser")
         parsed = urlparse(self.url)
         base = f"{parsed.scheme}://{parsed.netloc}"
@@ -281,6 +301,10 @@ class Source:
                 or "just a moment" in html.lower()[:2000]
             ),
             "path_prefix_inventory": prefix_inventory,
+            # Small sample of the raw HTML so we can diagnose what the
+            # page actually looks like (esp. for zero-anchor sites).
+            # Stripped whitespace-normalised to stay compact.
+            "html_sample": " ".join(html[:500].split()),
         }
 
 
@@ -325,15 +349,16 @@ SOURCES: list[Source] = [
         required_text="boards of canada",
     ),
     Source(
-        # BoC's own website. Structure is unknown at first run; we accept
-        # every same-domain anchor with a non-root path and let the diff
-        # do its job. No required_slug/required_text because the whole
-        # site is already artist-scoped. First-run baseline captures
-        # whatever is currently there; every future anchor added becomes
-        # a notification.
+        # BoC's own website is a static splash / JS-rendered SPA — the
+        # initial HTML has zero <a> tags so anchor-based diffing is a
+        # no-op. Switch to content-hash mode: normalize and SHA256 the
+        # visible text, treat any hash change as a "new release". When
+        # the hash flips, the push title says "Page content changed"
+        # with click-through to the site so the user can see what moved.
         name="BoC Official",
         url="https://boardsofcanada.com/",
         path_markers=("/",),
+        detect_via_content_hash=True,
     ),
 ]
 
