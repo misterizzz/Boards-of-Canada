@@ -125,9 +125,12 @@ CATEGORY_PATH_PREFIXES: tuple[tuple[str, str], ...] = (
     ("/editorial/", "news"),
     ("/video/", "video"),
     ("/videos/", "video"),
+    ("/merch/", "merch"),
     ("/products/", "merch"),
     ("/tour/", "tour"),
     ("/releases/", "music"),
+    ("/album/", "music"),
+    ("/track/", "music"),
 )
 
 
@@ -173,16 +176,24 @@ class Source:
     # If True, skip anchor extraction and instead return a single
     # synthetic "release" keyed on a hash of the page's HTML content.
     # Used for sites like boardsofcanada.com that are JS-rendered or
-    # static splash pages with no <a> tags to diff. When the hash
-    # changes, the diff fires a single push pointing back at the
-    # source URL so the user can see what changed.
+    # static splash pages with no <a> tags to diff. Normalizes HTML:
+    # strip script/style/meta/link, lowercase, collapse whitespace.
     detect_via_content_hash: bool = False
+    # If True, hash the raw response bytes directly. Used for non-HTML
+    # sources: JS bundles (Klaviyo campaign config), images (splash page
+    # hero, social-sharing image). Any byte-level change fires a push.
+    raw_bytes_hash: bool = False
     # Applied to every matching URL before diffing / storing, so different
     # sub-pages of the same release collapse together.
     canonicalize: Callable[[str], str] = _identity
 
-    def fetch(self) -> tuple[str, int, str]:
-        """Return (html, http_status, final_url) after retry/backoff."""
+    def fetch(self) -> tuple[bytes, int, str]:
+        """Return (content_bytes, http_status, final_url) after retry/backoff.
+
+        Returns bytes so hash-based sources can fingerprint binary content
+        (images, compiled JS) without lossy text decoding. HTML callers
+        decode the bytes themselves before feeding BeautifulSoup.
+        """
         headers = {
             "User-Agent": USER_AGENT,
             "Accept": (
@@ -196,7 +207,7 @@ class Source:
             try:
                 resp = requests.get(self.url, headers=headers, timeout=30)
                 resp.raise_for_status()
-                return resp.text, resp.status_code, resp.url
+                return resp.content, resp.status_code, resp.url
             except requests.RequestException as exc:
                 last_error = exc
                 if attempt < 3:
@@ -204,8 +215,16 @@ class Source:
         assert last_error is not None
         raise last_error
 
-    def extract_releases(self, html: str) -> dict[str, str]:
+    def extract_releases(self, content: bytes) -> dict[str, str]:
         """Return {absolute_url: title} for anchors matching any path marker."""
+        if self.raw_bytes_hash:
+            # Direct byte-level fingerprint. Used for non-HTML sources
+            # (images, JS bundles) where any change = a new release.
+            digest = hashlib.sha256(content).hexdigest()[:16]
+            fake_url = f"{self.url}#raw-hash={digest}"
+            return {fake_url: f"Raw content changed (hash {digest})"}
+
+        html = content.decode("utf-8", errors="replace")
         if self.detect_via_content_hash:
             # Normalize: strip all whitespace, lowercase, drop <script> and
             # <style> blocks whose content often changes between requests
@@ -260,13 +279,19 @@ class Source:
                 releases[abs_url] = title
         return releases
 
-    def telemetry(self, html: str) -> dict:
+    def telemetry(self, content: bytes) -> dict:
         """Per-run telemetry written back to state.json.
 
         Also dumps a compact inventory of anchor path prefixes on the page
         so we can see — without access to Action logs — what URL spaces
         exist and decide whether our path_markers cover them.
         """
+        if self.raw_bytes_hash:
+            return {
+                "byte_length": len(content),
+                "raw_hash_prefix": hashlib.sha256(content).hexdigest()[:16],
+            }
+        html = content.decode("utf-8", errors="replace")
         soup = BeautifulSoup(html, "html.parser")
         anchors = [a.get("href", "") for a in soup.find_all("a", href=True)]
         base_netloc = urlparse(self.url).netloc
@@ -369,6 +394,42 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.com/",
         path_markers=("/",),
         detect_via_content_hash=True,
+    ),
+    Source(
+        # Klaviyo JS bundle injected by boardsofcanada.com. Contains the
+        # email-capture form config + any campaign-specific copy. When
+        # BoC updates their signup flow (new announcement, different
+        # CTA, pre-order unlock), this file flips. Raw byte hash.
+        name="BoC Klaviyo",
+        url="https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
+        path_markers=("/",),
+        raw_bytes_hash=True,
+    ),
+    Source(
+        # The hero background image on boardsofcanada.com. Would change
+        # on any visual redesign / new campaign artwork.
+        name="BoC Hero Image",
+        url="https://boardsofcanada.com/assets/bg.jpg",
+        path_markers=("/",),
+        raw_bytes_hash=True,
+    ),
+    Source(
+        # Social-sharing preview image (og:image). Often swapped when a
+        # new release or announcement lands, even before the page text
+        # changes. Cheap extra signal.
+        name="BoC Sharing Image",
+        url="https://boardsofcanada.com/assets/sharing.jpg",
+        path_markers=("/",),
+        raw_bytes_hash=True,
+    ),
+    Source(
+        # BoC's official Bandcamp page — direct from the band. New
+        # releases and pre-orders often land here first. Standard
+        # anchor-based extraction; Bandcamp puts each release at
+        # /album/<slug> and /track/<slug>.
+        name="Bandcamp",
+        url="https://boardsofcanada.bandcamp.com/",
+        path_markers=("/album/", "/track/", "/merch/"),
     ),
 ]
 
