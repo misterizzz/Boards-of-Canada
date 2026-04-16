@@ -1,6 +1,6 @@
 {
   "Bleep": {
-    "last_checked": 1776100426,
+    "last_checked": 1776348544,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
@@ -30,7 +30,7 @@
     }
   },
   "Warp": {
-    "last_checked": 1776100423,
+    "last_checked": 1776348543,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -66,22 +66,12 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1776100426,
-    "last_test_push": {
-      "ntfy_http_status": 200,
-      "ok": true,
-      "sent_at": 1776100426
-    },
-    "last_test_webpush": {
-      "sent_at": 1776100426,
-      "subscriptions_after": 1,
-      "subscriptions_before": 1
-    },
+    "last_run": 1776348545,
     "sources": {
       "Bleep": {
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
-        "html_length": 114579,
+        "html_length": 114116,
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 25,
@@ -199,7 +189,7 @@
       "Warp Editorial": {
         "fetch": "ok",
         "final_url": "https://warp.net/editorial",
-        "html_length": 124134,
+        "html_length": 127714,
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 0,
@@ -224,6 +214,10 @@
             "count": 1,
             "example": "https://warp.net/editorial"
           },
+          "/editorial/fire-toolz-interview/": {
+            "count": 1,
+            "example": "https://warp.net/editorial/fire-toolz-interview"
+          },
           "/editorial/go-back-and-get-it-an-interview-with-kelela/": {
             "count": 1,
             "example": "https://warp.net/editorial/go-back-and-get-it-an-interview-with-kelela"
@@ -235,10 +229,6 @@
           "/editorial/memory-of-music/": {
             "count": 1,
             "example": "https://warp.net/editorial/memory-of-music"
-          },
-          "/editorial/ollie-judge-on-cowards/": {
-            "count": 1,
-            "example": "https://warp.net/editorial/ollie-judge-on-cowards"
           },
           "/events/": {
             "count": 1,
@@ -253,7 +243,7 @@
             "example": "https://warp.net/video"
           }
         },
-        "total_anchors_on_page": 33
+        "total_anchors_on_page": 34
       }
     }
   }
