@@ -183,6 +183,11 @@ class Source:
     # sources: JS bundles (Klaviyo campaign config), images (splash page
     # hero, social-sharing image). Any byte-level change fires a push.
     raw_bytes_hash: bool = False
+    # Per-source User-Agent override. Needed by APIs that require an
+    # app-identifying UA (MusicBrainz, Discogs) — they rate-limit or
+    # block generic browser UAs more aggressively. Leaving it None uses
+    # the default Chrome-like fingerprint.
+    user_agent_override: str | None = None
     # Applied to every matching URL before diffing / storing, so different
     # sub-pages of the same release collapse together.
     canonicalize: Callable[[str], str] = _identity
@@ -194,13 +199,28 @@ class Source:
         (images, compiled JS) without lossy text decoding. HTML callers
         decode the bytes themselves before feeding BeautifulSoup.
         """
+        # Match the full header fingerprint of a real Chrome navigation
+        # request so bot-protection layers (Bandcamp, Cloudflare, etc.)
+        # don't serve us a JS challenge page.
         headers = {
-            "User-Agent": USER_AGENT,
+            "User-Agent": self.user_agent_override or USER_AGENT,
             "Accept": (
                 "text/html,application/xhtml+xml,application/xml;q=0.9,"
-                "image/avif,image/webp,*/*;q=0.8"
+                "image/avif,image/webp,image/apng,*/*;q=0.8,"
+                "application/signed-exchange;v=b3;q=0.7"
             ),
-            "Accept-Language": "en-GB,en;q=0.9",
+            "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "Sec-Ch-Ua": '"Chromium";v="124", "Not-A.Brand";v="99"',
+            "Sec-Ch-Ua-Mobile": "?0",
+            "Sec-Ch-Ua-Platform": '"macOS"',
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-User": "?1",
+            "Upgrade-Insecure-Requests": "1",
         }
         last_error: Exception | None = None
         for attempt in range(4):
@@ -424,12 +444,54 @@ SOURCES: list[Source] = [
     ),
     Source(
         # BoC's official Bandcamp page — direct from the band. New
-        # releases and pre-orders often land here first. Standard
-        # anchor-based extraction; Bandcamp puts each release at
-        # /album/<slug> and /track/<slug>.
+        # releases and pre-orders often land here first. Bandcamp
+        # serves GitHub Actions IPs a JavaScript anti-bot challenge
+        # page instead of the real content, so we fall back to content
+        # hashing: if the challenge page ever changes (or we somehow
+        # break through), the hash flips and fires a push. Belt and
+        # braces — not ideal but better than silence.
         name="Bandcamp",
         url="https://boardsofcanada.bandcamp.com/",
         path_markers=("/album/", "/track/", "/merch/"),
+        detect_via_content_hash=True,
+    ),
+    Source(
+        # MusicBrainz release-groups API for the BoC artist MBID
+        # (69b39eab-6577-46a4-a9f5-817839092033). Public JSON API, no
+        # bot protection. Fan-curated so new releases appear within
+        # days, sometimes hours. Raw-byte hash: any change to the JSON
+        # response (new release-group added, a title edit, etc.) flips
+        # the hash and fires a push.
+        name="MusicBrainz",
+        url=(
+            "https://musicbrainz.org/ws/2/release-group"
+            "?artist=69b39eab-6577-46a4-a9f5-817839092033"
+            "&type=album|ep|single"
+            "&fmt=json&limit=100"
+        ),
+        path_markers=("/",),
+        raw_bytes_hash=True,
+        user_agent_override=(
+            "BoC-Watcher/1.0 "
+            "(https://github.com/misterizzz/Boards-of-Canada)"
+        ),
+    ),
+    Source(
+        # Discogs community database. BoC's artist id on Discogs is 1289.
+        # Returns JSON list of releases sorted by year desc. Rate limited
+        # to 60 req/hour for anonymous clients; we use ~12/hour so we're
+        # well under. Discogs' ToS requires an identifying User-Agent.
+        name="Discogs",
+        url=(
+            "https://api.discogs.com/artists/1289/releases"
+            "?per_page=50&sort=year&sort_order=desc"
+        ),
+        path_markers=("/",),
+        raw_bytes_hash=True,
+        user_agent_override=(
+            "BoC-Watcher/1.0 "
+            "+https://github.com/misterizzz/Boards-of-Canada"
+        ),
     ),
 ]
 
