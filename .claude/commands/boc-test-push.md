@@ -1,5 +1,6 @@
 ---
 description: Fire a test push through both ntfy and Web Push to verify the pipeline
+allowed-tools: Bash, Read, Edit, mcp__github__get_file_contents
 ---
 
 Trigger an end-to-end test of both push channels.

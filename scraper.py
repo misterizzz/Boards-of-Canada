@@ -464,14 +464,26 @@ SOURCES: list[Source] = [
 ]
 
 
+def _atomic_write_text(path: Path, text: str) -> None:
+    # Workflow uses concurrency: cancel-in-progress, so a run can be killed
+    # mid-write. Write to a sibling tmp and os.replace so readers always see
+    # a complete file.
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(text)
+    os.replace(tmp, path)
+
+
 def load_state() -> dict:
     if STATE_FILE.exists():
-        return json.loads(STATE_FILE.read_text())
+        try:
+            return json.loads(STATE_FILE.read_text())
+        except json.JSONDecodeError:
+            return {}
     return {}
 
 
 def save_state(state: dict) -> None:
-    STATE_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
+    _atomic_write_text(STATE_FILE, json.dumps(state, indent=2, sort_keys=True) + "\n")
 
 
 def load_events() -> list:
@@ -485,7 +497,7 @@ def load_events() -> list:
 
 def save_events(events: list) -> None:
     EVENTS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    EVENTS_FILE.write_text(json.dumps(events, indent=2) + "\n")
+    _atomic_write_text(EVENTS_FILE, json.dumps(events, indent=2) + "\n")
 
 
 def load_subscriptions() -> list:
@@ -499,7 +511,7 @@ def load_subscriptions() -> list:
 
 def save_subscriptions(subs: list) -> None:
     SUBSCRIPTIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    SUBSCRIPTIONS_FILE.write_text(json.dumps(subs, indent=2) + "\n")
+    _atomic_write_text(SUBSCRIPTIONS_FILE, json.dumps(subs, indent=2) + "\n")
 
 
 def _b64url_encode(data: bytes) -> str:
@@ -523,6 +535,11 @@ def _build_vapid_auth_header(
 
     padded = vapid_private_key_b64url + "=" * ((4 - len(vapid_private_key_b64url) % 4) % 4)
     raw_private = _base64.urlsafe_b64decode(padded)
+    if len(raw_private) != 32:
+        raise ValueError(
+            f"VAPID_PRIVATE_KEY must decode to 32 bytes (got {len(raw_private)}); "
+            "it should be the raw P-256 scalar, base64url-encoded."
+        )
     private_value = int.from_bytes(raw_private, "big")
     priv = ec.derive_private_key(private_value, ec.SECP256R1())
     pub_bytes = priv.public_key().public_bytes(
@@ -808,7 +825,8 @@ def main() -> int:
                         click_url=ev["url"],
                     )
                 except requests.RequestException as exc:
-                    print(f"[ntfy] push failed: {exc}", file=sys.stderr)
+                    err = str(exc).replace(topic, "<redacted>") if topic else str(exc)
+                    print(f"[ntfy] push failed: {err}", file=sys.stderr)
 
         # 3. Web Push fan-out to every subscription in docs/subscriptions.json.
         # One tickle push per run — the SW will fetch events.json itself

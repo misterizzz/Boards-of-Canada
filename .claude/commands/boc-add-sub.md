@@ -1,6 +1,7 @@
 ---
 description: Append a new Web Push subscription from the PWA to docs/subscriptions.json
 argument-hint: '<subscription JSON>'
+allowed-tools: Bash, Read, Edit, Write
 ---
 
 The user has just copied a Web Push subscription JSON from the BoC PWA and

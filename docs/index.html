@@ -32,9 +32,9 @@
   </section>
 
   <main>
-    <h2 class="feed-head">Feed</h2>
-    <p id="feed-meta" class="feed-meta">Loading&hellip;</p>
-    <div id="feed" class="feed"></div>
+    <h2 class="feed-head" id="feed-head">Feed</h2>
+    <p id="feed-meta" class="feed-meta" aria-live="polite">Loading&hellip;</p>
+    <div id="feed" class="feed" role="feed" aria-labelledby="feed-head" aria-busy="true"></div>
   </main>
 
   <footer>

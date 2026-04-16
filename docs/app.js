@@ -48,6 +48,7 @@ function escapeHtml(s) {
 function render(events) {
   const feed = document.getElementById("feed");
   const meta = document.getElementById("feed-meta");
+  feed.setAttribute("aria-busy", "false");
   if (!events.length) {
     feed.innerHTML = "";
     meta.textContent =
@@ -55,10 +56,11 @@ function render(events) {
     return;
   }
   meta.textContent = `${events.length} event${events.length === 1 ? "" : "s"} tracked.`;
+  const total = events.length;
   feed.innerHTML = events
     .map(
-      (e) => `
-    <article class="event cat-${escapeHtml(e.category || "update")}">
+      (e, i) => `
+    <article class="event cat-${escapeHtml(e.category || "update")}" role="article" aria-posinset="${i + 1}" aria-setsize="${total}">
       <header>
         <span class="badge">${escapeHtml(e.category || "update")}</span>
         <time datetime="${new Date(e.ts * 1000).toISOString()}">${relativeTime(e.ts)}</time>
@@ -121,8 +123,16 @@ async function subscribeForPush() {
   }
 
   pushStatus.textContent = "Fetching VAPID key…";
-  const vapidResp = await fetch(VAPID_URL, { cache: "no-store" });
-  const { key: vapidPublic } = await vapidResp.json();
+  let vapidPublic;
+  try {
+    const vapidResp = await fetch(VAPID_URL, { cache: "no-store" });
+    if (!vapidResp.ok) throw new Error(`HTTP ${vapidResp.status}`);
+    ({ key: vapidPublic } = await vapidResp.json());
+  } catch (e) {
+    pushStatus.textContent = `Could not load VAPID key (${e.message}). Tap again to retry.`;
+    pushButton.hidden = false;
+    return;
+  }
 
   pushStatus.textContent = "Registering with Apple Push…";
   const reg = await navigator.serviceWorker.ready;
@@ -197,8 +207,11 @@ async function initPush() {
   pushCopy.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(pushJson.value);
-      pushCopy.textContent = "Copied!";
-      setTimeout(() => (pushCopy.textContent = "Copy to clipboard"), 1800);
+      pushJson.value = "";
+      pushCopy.textContent = "Copied — paste it in chat";
+      pushCopy.disabled = true;
+      pushStatus.textContent =
+        "Subscription JSON copied to clipboard and cleared from this page. Paste it in the chat to register.";
     } catch {
       pushJson.select();
       document.execCommand("copy");
