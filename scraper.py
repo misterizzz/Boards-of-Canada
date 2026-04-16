@@ -210,7 +210,13 @@ class Source:
                 "application/signed-exchange;v=b3;q=0.7"
             ),
             "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
-            "Accept-Encoding": "gzip, deflate, br",
+            # No "br" — the Python requests library on the Actions runner
+            # does not have brotli support by default, so if we advertise
+            # it the server sends brotli-compressed bytes that we can't
+            # decode, and the scraper starts returning garbage to
+            # BeautifulSoup / the hash pipeline. gzip+deflate are
+            # handled natively by requests/urllib3.
+            "Accept-Encoding": "gzip, deflate",
             "Cache-Control": "no-cache",
             "Pragma": "no-cache",
             "Sec-Ch-Ua": '"Chromium";v="124", "Not-A.Brand";v="99"',

@@ -1,10 +1,4 @@
 {
-  "Bandcamp": {
-    "last_checked": 1776350837,
-    "releases": {
-      "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
-    }
-  },
   "Bleep": {
     "last_checked": 1776350837,
     "releases": {
@@ -33,42 +27,6 @@
       "https://bleep.com/release/505129-boards-of-canada-compound-logo-sweatshirt-natural-raw": "Compound Logo Sweatshirt Natural Raw",
       "https://bleep.com/release/5729-boards-of-canada-in-a-beautiful-place-out-in-the-country": "In A Beautiful Place Out In The Country",
       "https://bleep.com/release/7819-boards-of-canada-music-has-the-right-to-children": "Music Has The Right To Children"
-    }
-  },
-  "BoC Hero Image": {
-    "last_checked": 1776350837,
-    "releases": {
-      "https://boardsofcanada.com/assets/bg.jpg#raw-hash=8935d78d9e3b124e": "Raw content changed (hash 8935d78d9e3b124e)"
-    }
-  },
-  "BoC Klaviyo": {
-    "last_checked": 1776350837,
-    "releases": {
-      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=bc106aff6cd20c18": "Raw content changed (hash bc106aff6cd20c18)"
-    }
-  },
-  "BoC Official": {
-    "last_checked": 1776350837,
-    "releases": {
-      "https://boardsofcanada.com/#content-hash=4eb914ebc1db8c7f": "Page content changed (hash 4eb914ebc1db8c7f)"
-    }
-  },
-  "BoC Sharing Image": {
-    "last_checked": 1776350837,
-    "releases": {
-      "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b009e1c7a23cd1f9": "Raw content changed (hash b009e1c7a23cd1f9)"
-    }
-  },
-  "Discogs": {
-    "last_checked": 1776350840,
-    "releases": {
-      "https://api.discogs.com/artists/1289/releases?per_page=50&sort=year&sort_order=desc#raw-hash=d804db7e5a7af53b": "Raw content changed (hash d804db7e5a7af53b)"
-    }
-  },
-  "MusicBrainz": {
-    "last_checked": 1776350838,
-    "releases": {
-      "https://musicbrainz.org/ws/2/release-group?artist=69b39eab-6577-46a4-a9f5-817839092033&type=album|ep|single&fmt=json&limit=100#raw-hash=2c938a9d3df3ae0b": "Raw content changed (hash 2c938a9d3df3ae0b)"
     }
   },
   "Warp": {
