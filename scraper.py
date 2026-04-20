@@ -193,6 +193,11 @@ class Source:
     # based sources so notifications read "boardsofcanada.com" instead
     # of "BoC Klaviyo" (the internal name).
     display_name: str | None = None
+    # Human-facing noun describing *what kind of thing* this source is,
+    # used in event titles for hash-based sources when no diffed text
+    # is available. E.g. "background image" on the hero, "email popup
+    # config" on the Klaviyo bundle. Falls back to generic "content".
+    display_kind: str | None = None
     # Human-facing URL the user should land on when tapping an event.
     # Falls back to `url`. Set on hash-based sources so tapping doesn't
     # open a raw .js bundle or image — instead lands on the parent site
@@ -431,6 +436,7 @@ SOURCES: list[Source] = [
         path_markers=("/",),
         detect_via_content_hash=True,
         display_name="boardsofcanada.com",
+        display_kind="page text",
         landing_url="https://boardsofcanada.com/",
     ),
     Source(
@@ -442,7 +448,8 @@ SOURCES: list[Source] = [
         url="https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
         path_markers=("/",),
         raw_bytes_hash=True,
-        display_name="boardsofcanada.com email campaign",
+        display_name="boardsofcanada.com",
+        display_kind="email popup/newsletter config",
         landing_url="https://boardsofcanada.com/",
     ),
     Source(
@@ -452,7 +459,8 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.com/assets/bg.jpg",
         path_markers=("/",),
         raw_bytes_hash=True,
-        display_name="boardsofcanada.com hero image",
+        display_name="boardsofcanada.com",
+        display_kind="background image",
         landing_url="https://boardsofcanada.com/",
     ),
     Source(
@@ -463,7 +471,8 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.com/assets/sharing.jpg",
         path_markers=("/",),
         raw_bytes_hash=True,
-        display_name="boardsofcanada.com social image",
+        display_name="boardsofcanada.com",
+        display_kind="social-share preview image",
         landing_url="https://boardsofcanada.com/",
     ),
     Source(
@@ -478,7 +487,8 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.bandcamp.com/",
         path_markers=("/album/", "/track/", "/merch/"),
         detect_via_content_hash=True,
-        display_name="BoC on Bandcamp",
+        display_name="boardsofcanada.bandcamp.com",
+        display_kind="page content",
         landing_url="https://boardsofcanada.bandcamp.com/",
     ),
 ]
@@ -546,14 +556,19 @@ def _humanize_event(
     # Translate the internal (url, title) produced by extract_releases()
     # into user-facing strings for events.json / push notifications.
     # Anchor-based sources already have good values — leave them alone.
-    # Hash-based sources get landing_url + a friendly label, optionally
-    # enriched with a byte-size delta or a phrase pulled from the text
-    # diff.
+    # Hash-based sources get landing_url + a friendly title:
+    #   - for raw_bytes_hash: "<kind> changed (+N%)" — the kind names
+    #     what the thing is so a layperson knows whether this matters
+    #     (e.g. "background image" vs "email popup config").
+    #   - for detect_via_content_hash: if text-diff found a new phrase,
+    #     the phrase itself is the title (quoted) — that's the most
+    #     informative thing we can possibly say. Fall back to
+    #     "<kind> changed" only when no diff phrase was extractable.
     if not (source.raw_bytes_hash or source.detect_via_content_hash):
         return raw_url, raw_title
 
-    display = source.display_name or source.name
     landing = source.landing_url or source.url
+    kind = source.display_kind or "content"
 
     if source.raw_bytes_hash:
         old_len = prev_state.get("byte_length")
@@ -563,7 +578,7 @@ def _humanize_event(
             pct = round((new_len - old_len) * 100 / old_len)
             if pct:
                 suffix = f" ({pct:+d}%)"
-        return landing, f"{display} updated{suffix}"
+        return landing, f"{kind} changed{suffix}"
 
     # detect_via_content_hash
     phrase = _first_added_phrase(
@@ -571,8 +586,8 @@ def _humanize_event(
         new_state.get("content_snapshot", ""),
     )
     if phrase:
-        return landing, f"{display} updated — “{phrase}”"
-    return landing, f"{display} updated"
+        return landing, f"“{phrase}”"
+    return landing, f"{kind} changed"
 
 
 def load_state() -> dict:
