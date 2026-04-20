@@ -63,10 +63,10 @@ function render(events) {
     <article class="event cat-${escapeHtml(e.category || "update")}" role="article" aria-posinset="${i + 1}" aria-setsize="${total}">
       <header>
         <span class="badge">${escapeHtml(e.category || "update")}</span>
+        <span class="badge badge-source">${escapeHtml(e.source)}</span>
         <time datetime="${new Date(e.ts * 1000).toISOString()}">${relativeTime(e.ts)}</time>
       </header>
       <h2><a href="${escapeHtml(e.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(e.title)}</a></h2>
-      <footer>${escapeHtml(e.source)}</footer>
     </article>
   `
     )

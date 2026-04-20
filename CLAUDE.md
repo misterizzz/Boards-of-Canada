@@ -49,6 +49,8 @@ The first attempt shipped `pywebpush` as a dependency but its transitive dep `ht
 
 Dead Web Push subscriptions (404/410 from Apple) are pruned by `send_web_push()` and written back to `docs/subscriptions.json` on the same commit.
 
+**Event presentation vs diff-key:** for hash-based sources (the five BoC-* + Bandcamp) the `releases` dict in `state.json` is still keyed on the hash-suffixed URL (`…#raw-hash=…` / `#content-hash=…`) so diffs remain stable, but the event record written to `docs/events.json` uses `source.display_name` and `source.landing_url` so the user sees "boardsofcanada.com updated" with a tap-through to the actual site, not raw JS / images. State also carries `byte_length` (for `raw_bytes_hash`) and a 4 KB `content_snapshot` (for `detect_via_content_hash`) which the next run uses to compute "`updated (+12%)`" or to pull a short phrase out of the text diff via `_first_added_phrase()`.
+
 ## Source model
 
 Everything revolves around the `Source` dataclass in `scraper.py`. Each source owns one URL and a detection strategy. Three strategies exist:

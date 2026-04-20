@@ -225,10 +225,15 @@ article.event.cat-update::before  { background: var(--coffee); }
 
 article.event header {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.4rem 0.5rem;
   margin-bottom: 0.4rem;
+}
+
+article.event header time {
+  margin-left: auto;
 }
 
 .badge {
@@ -243,12 +248,26 @@ article.event header {
   box-shadow: 0 1px 0 var(--orange-deep);
 }
 
-.cat-music  .badge { background: var(--orange);      box-shadow: 0 1px 0 var(--orange-deep); }
-.cat-merch  .badge { background: var(--moss);        box-shadow: 0 1px 0 var(--moss-deep); }
-.cat-news   .badge { background: var(--coffee-soft); box-shadow: 0 1px 0 var(--coffee); }
-.cat-video  .badge { background: var(--aubergine);   box-shadow: 0 1px 0 #4a2d48; }
-.cat-tour   .badge { background: var(--orange-deep); box-shadow: 0 1px 0 #7a3a15; }
-.cat-update .badge { background: var(--coffee);      box-shadow: 0 1px 0 #000; }
+/* Source chip — named so it visually distinguishes the source
+   website from the category badge. Uses moss so it sits apart from
+   the per-category coloring. The per-category rules below use
+   :not(.badge-source) so this chip keeps its moss regardless of
+   the article's category. */
+.badge-source {
+  background: var(--moss);
+  color: var(--cream);
+  box-shadow: 0 1px 0 var(--moss-deep);
+  text-transform: none;
+  font-variant: normal;
+  letter-spacing: 0.02em;
+}
+
+.cat-music  .badge:not(.badge-source) { background: var(--orange);      box-shadow: 0 1px 0 var(--orange-deep); }
+.cat-merch  .badge:not(.badge-source) { background: var(--moss);        box-shadow: 0 1px 0 var(--moss-deep); }
+.cat-news   .badge:not(.badge-source) { background: var(--coffee-soft); box-shadow: 0 1px 0 var(--coffee); }
+.cat-video  .badge:not(.badge-source) { background: var(--aubergine);   box-shadow: 0 1px 0 #4a2d48; }
+.cat-tour   .badge:not(.badge-source) { background: var(--orange-deep); box-shadow: 0 1px 0 #7a3a15; }
+.cat-update .badge:not(.badge-source) { background: var(--coffee);      box-shadow: 0 1px 0 #000; }
 
 article.event time {
   font-size: 0.72rem;

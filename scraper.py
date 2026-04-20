@@ -188,6 +188,16 @@ class Source:
     # block generic browser UAs more aggressively. Leaving it None uses
     # the default Chrome-like fingerprint.
     user_agent_override: str | None = None
+    # Human-facing label for this source in events.json, the PWA feed,
+    # and push notification titles. Falls back to `name`. Set on hash-
+    # based sources so notifications read "boardsofcanada.com" instead
+    # of "BoC Klaviyo" (the internal name).
+    display_name: str | None = None
+    # Human-facing URL the user should land on when tapping an event.
+    # Falls back to `url`. Set on hash-based sources so tapping doesn't
+    # open a raw .js bundle or image — instead lands on the parent site
+    # the user actually cares about.
+    landing_url: str | None = None
     # Applied to every matching URL before diffing / storing, so different
     # sub-pages of the same release collapse together.
     canonicalize: Callable[[str], str] = _identity
@@ -420,6 +430,8 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.com/",
         path_markers=("/",),
         detect_via_content_hash=True,
+        display_name="boardsofcanada.com",
+        landing_url="https://boardsofcanada.com/",
     ),
     Source(
         # Klaviyo JS bundle injected by boardsofcanada.com. Contains the
@@ -430,6 +442,8 @@ SOURCES: list[Source] = [
         url="https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
         path_markers=("/",),
         raw_bytes_hash=True,
+        display_name="boardsofcanada.com email campaign",
+        landing_url="https://boardsofcanada.com/",
     ),
     Source(
         # The hero background image on boardsofcanada.com. Would change
@@ -438,6 +452,8 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.com/assets/bg.jpg",
         path_markers=("/",),
         raw_bytes_hash=True,
+        display_name="boardsofcanada.com hero image",
+        landing_url="https://boardsofcanada.com/",
     ),
     Source(
         # Social-sharing preview image (og:image). Often swapped when a
@@ -447,6 +463,8 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.com/assets/sharing.jpg",
         path_markers=("/",),
         raw_bytes_hash=True,
+        display_name="boardsofcanada.com social image",
+        landing_url="https://boardsofcanada.com/",
     ),
     Source(
         # BoC's official Bandcamp page — direct from the band. New
@@ -460,6 +478,8 @@ SOURCES: list[Source] = [
         url="https://boardsofcanada.bandcamp.com/",
         path_markers=("/album/", "/track/", "/merch/"),
         detect_via_content_hash=True,
+        display_name="BoC on Bandcamp",
+        landing_url="https://boardsofcanada.bandcamp.com/",
     ),
 ]
 
@@ -471,6 +491,88 @@ def _atomic_write_text(path: Path, text: str) -> None:
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(text)
     os.replace(tmp, path)
+
+
+def _content_fingerprint(source: "Source", content: bytes) -> dict:
+    # Extra per-source state captured alongside the hash so we can
+    # humanize the next change (byte-size delta for raw bytes, text
+    # snapshot for content-hash pages).
+    if source.raw_bytes_hash:
+        return {"byte_length": len(content)}
+    if source.detect_via_content_hash:
+        html = content.decode("utf-8", errors="replace")
+        soup = BeautifulSoup(html, "html.parser")
+        for bad in soup(["script", "style", "meta", "link"]):
+            bad.decompose()
+        text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+        # Cap at 4KB — boardsofcanada.com's splash and Bandcamp's
+        # challenge page are both well under 2KB of visible text, so
+        # this bounds state.json growth while still capturing the full
+        # visible content for diffing.
+        return {"content_snapshot": text[:4000]}
+    return {}
+
+
+def _first_added_phrase(old_text: str, new_text: str) -> str | None:
+    # Return the first phrase that appears in new_text but not in
+    # old_text, trimmed to a reasonable length for a notification
+    # body. Used to give hash-based events a short "what changed"
+    # caption. Returns None if nothing useful is found.
+    if not old_text or not new_text or old_text == new_text:
+        return None
+    # Segment on sentence-ish boundaries. The normalized text has had
+    # all whitespace collapsed to single spaces, so we split on
+    # punctuation to get candidate phrases.
+    old_segments = set(
+        s.strip() for s in re.split(r"[.!?|•·—–]+", old_text) if s.strip()
+    )
+    for segment in re.split(r"[.!?|•·—–]+", new_text):
+        phrase = segment.strip()
+        if 20 <= len(phrase) <= 80 and phrase not in old_segments:
+            # Trim quote chars if the whole phrase is wrapped.
+            if phrase[0] in "\"'“”‘’" and phrase[-1] in "\"'“”‘’":
+                phrase = phrase[1:-1].strip()
+            return phrase
+    return None
+
+
+def _humanize_event(
+    source: "Source",
+    raw_url: str,
+    raw_title: str,
+    prev_state: dict,
+    new_state: dict,
+) -> tuple[str, str]:
+    # Translate the internal (url, title) produced by extract_releases()
+    # into user-facing strings for events.json / push notifications.
+    # Anchor-based sources already have good values — leave them alone.
+    # Hash-based sources get landing_url + a friendly label, optionally
+    # enriched with a byte-size delta or a phrase pulled from the text
+    # diff.
+    if not (source.raw_bytes_hash or source.detect_via_content_hash):
+        return raw_url, raw_title
+
+    display = source.display_name or source.name
+    landing = source.landing_url or source.url
+
+    if source.raw_bytes_hash:
+        old_len = prev_state.get("byte_length")
+        new_len = new_state.get("byte_length")
+        suffix = ""
+        if isinstance(old_len, int) and old_len > 0 and isinstance(new_len, int):
+            pct = round((new_len - old_len) * 100 / old_len)
+            if pct:
+                suffix = f" ({pct:+d}%)"
+        return landing, f"{display} updated{suffix}"
+
+    # detect_via_content_hash
+    phrase = _first_added_phrase(
+        prev_state.get("content_snapshot", ""),
+        new_state.get("content_snapshot", ""),
+    )
+    if phrase:
+        return landing, f"{display} updated — “{phrase}”"
+    return landing, f"{display} updated"
 
 
 def load_state() -> dict:
@@ -681,7 +783,8 @@ def main() -> int:
 
     for source in SOURCES:
         is_first_run = source.name not in state
-        previous = set(state.get(source.name, {}).get("releases", {}).keys())
+        prev_source_state = state.get(source.name, {})
+        previous = set(prev_source_state.get("releases", {}).keys())
         tele: dict = {"fetch": "unknown"}
 
         try:
@@ -718,17 +821,23 @@ def main() -> int:
             )
             continue
 
+        new_source_state = {
+            "releases": releases,
+            "last_checked": int(time.time()),
+            **_content_fingerprint(source, html),
+        }
+
         added = set(releases.keys()) - previous
         if is_first_run:
             print(f"[{source.name}] baseline captured ({len(releases)} items)")
         elif added:
             for url in sorted(added):
-                new_items.append((source, url, releases[url]))
+                event_url, event_title = _humanize_event(
+                    source, url, releases[url], prev_source_state, new_source_state
+                )
+                new_items.append((source, url, event_url, event_title))
 
-        state[source.name] = {
-            "releases": releases,
-            "last_checked": int(time.time()),
-        }
+        state[source.name] = new_source_state
 
     state["_telemetry"] = {
         "last_run": int(time.time()),
@@ -793,18 +902,21 @@ def main() -> int:
     # Event log + push fan-out. Collect enriched events first so we can
     # do the event append, ntfy push, and web push in one pass.
     enriched: list[dict] = []
-    for source, url, title in new_items:
-        category = classify_url(url)
+    for source, diff_url, event_url, event_title in new_items:
+        # Classify from the diff_url (still carries /products /release
+        # etc. path prefixes) rather than the humanized event_url,
+        # which for hash-sources is just the landing page root.
+        category = classify_url(diff_url)
         enriched.append(
             {
                 "ts": int(time.time()),
-                "source": source.name,
+                "source": source.display_name or source.name,
                 "category": category,
-                "title": title,
-                "url": url,
+                "title": event_title,
+                "url": event_url,
             }
         )
-        print(f"NEW [{source.name}/{category}] {title} -> {url}")
+        print(f"NEW [{source.name}/{category}] {event_title} -> {event_url}")
 
     if enriched and not args.dry_run:
         # 1. Append to docs/events.json, newest-first, FIFO cap.
