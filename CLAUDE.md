@@ -49,7 +49,13 @@ The first attempt shipped `pywebpush` as a dependency but its transitive dep `ht
 
 Dead Web Push subscriptions (404/410 from Apple) are pruned by `send_web_push()` and written back to `docs/subscriptions.json` on the same commit.
 
-**Event presentation vs diff-key:** for hash-based sources (the five BoC-* + Bandcamp) the `releases` dict in `state.json` is still keyed on the hash-suffixed URL (`…#raw-hash=…` / `#content-hash=…`) so diffs remain stable, but the event record written to `docs/events.json` uses `source.display_name` and `source.landing_url` so the user sees "boardsofcanada.com updated" with a tap-through to the actual site, not raw JS / images. State also carries `byte_length` (for `raw_bytes_hash`) and a 4 KB `content_snapshot` (for `detect_via_content_hash`) which the next run uses to compute "`updated (+12%)`" or to pull a short phrase out of the text diff via `_first_added_phrase()`.
+**Event presentation vs diff-key:** for hash-based sources (the five BoC-* + Bandcamp) the `releases` dict in `state.json` is still keyed on the hash-suffixed URL (`…#raw-hash=…` / `#content-hash=…`) so diffs remain stable, but the event record written to `docs/events.json` uses `source.display_name` (the site, e.g. `boardsofcanada.com`) and `source.landing_url` (the parent site, not the raw JS/image URL). The event title itself is assembled by `_humanize_event()` in one of three shapes:
+
+- `raw_bytes_hash` sources: `"<display_kind> changed (+N%)"` — e.g. `"email popup/newsletter config changed (+1%)"`, `"background image changed (+5%)"`. The `display_kind` names *what the thing is* in plain language so a layperson doesn't need to know what "Klaviyo" means. Percentage comes from `byte_length` stored on the previous run; missing on first encounter, in which case the title omits it.
+- `detect_via_content_hash` sources when `_first_added_phrase()` finds a phrase ≥20 chars absent from the previous 4 KB `content_snapshot`: the phrase *itself* becomes the title, in curly quotes. The source chip on the card provides the "where", the title provides the "what". This promotes the single most informative signal we can extract to headline position.
+- `detect_via_content_hash` sources when no diff phrase is extractable: fall back to `"<display_kind> changed"` (e.g. `"page text changed"`).
+
+Anchor-based sources (Warp, Bleep, Warp Editorial) are untouched — their extractor already produces meaningful titles and URLs, so `_humanize_event()` short-circuits and returns the original `(url, title)`.
 
 ## Source model
 
