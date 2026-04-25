@@ -1,13 +1,13 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1777074667,
+    "last_checked": 1777080413,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
   },
   "Bleep": {
-    "last_checked": 1777074666,
+    "last_checked": 1777080412,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
@@ -48,34 +48,34 @@
   },
   "BoC Hero Image": {
     "byte_length": 664248,
-    "last_checked": 1777074667,
+    "last_checked": 1777080413,
     "releases": {
       "https://boardsofcanada.com/assets/bg.jpg#raw-hash=cd1a7574e3db8579": "Raw content changed (hash cd1a7574e3db8579)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 15010,
-    "last_checked": 1777074667,
+    "last_checked": 1777080413,
     "releases": {
       "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=f81341cf792fdadf": "Raw content changed (hash f81341cf792fdadf)"
     }
   },
   "BoC Official": {
     "content_snapshot": "BOARDS OF CANADA 29 MAY Pre-order Local Stockists Pre-save Register For First Access",
-    "last_checked": 1777074667,
+    "last_checked": 1777080412,
     "releases": {
       "https://boardsofcanada.com/#content-hash=2989ae6fa4c9ad27": "Page content changed (hash 2989ae6fa4c9ad27)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 561091,
-    "last_checked": 1777074667,
+    "last_checked": 1777080413,
     "releases": {
       "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b387a03c3eee06ae": "Raw content changed (hash b387a03c3eee06ae)"
     }
   },
   "Warp": {
-    "last_checked": 1777074664,
+    "last_checked": 1777080410,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -121,7 +121,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1777074667,
+    "last_run": 1777080413,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -138,18 +138,18 @@
       "Bleep": {
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
-        "html_length": 131346,
+        "html_length": 133277,
         "html_sample": "<!-- Main Layout --> <!DOCTYPE html> <html class=\"no-js\"> <head> <title> Bleep - Boards of Canada </title> <meta charset=\"utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <meta name=\"author\" content=\"Bleep\"> <meta name=\"description\" content=\"Boards of Canada is a Scottish electronic music duo comprised of brothers Mike Sandison and Marcus Eoin.\">",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 35,
         "path_prefix_inventory": {
           "/": {
-            "count": 76,
+            "count": 77,
             "example": "https://bleep.com/"
           },
           "/artist/40-various-artists/": {
-            "count": 6,
+            "count": 7,
             "example": "https://bleep.com/artist/40-various-artists"
           },
           "/artist/78-boards-of-canada/": {
@@ -194,7 +194,7 @@
           }
         },
         "script_srcs": [],
-        "total_anchors_on_page": 362
+        "total_anchors_on_page": 368
       },
       "BoC Hero Image": {
         "byte_length": 664248,
