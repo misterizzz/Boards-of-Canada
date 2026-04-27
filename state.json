@@ -1,13 +1,13 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1777280788,
+    "last_checked": 1777288603,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
   },
   "Bleep": {
-    "last_checked": 1777280788,
+    "last_checked": 1777288602,
     "releases": {
       "https://bleep.com/release/11672-boards-of-canada-the-campfire-headphase": "The Campfire Headphase",
       "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway": "Trans Canada Highway",
@@ -48,34 +48,34 @@
   },
   "BoC Hero Image": {
     "byte_length": 664248,
-    "last_checked": 1777280788,
+    "last_checked": 1777288602,
     "releases": {
       "https://boardsofcanada.com/assets/bg.jpg#raw-hash=cd1a7574e3db8579": "Raw content changed (hash cd1a7574e3db8579)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 15010,
-    "last_checked": 1777280788,
+    "last_checked": 1777288602,
     "releases": {
       "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=f81341cf792fdadf": "Raw content changed (hash f81341cf792fdadf)"
     }
   },
   "BoC Official": {
     "content_snapshot": "BOARDS OF CANADA 29 MAY Pre-order Local Stockists Pre-save Register For First Access",
-    "last_checked": 1777280788,
+    "last_checked": 1777288602,
     "releases": {
       "https://boardsofcanada.com/#content-hash=2989ae6fa4c9ad27": "Page content changed (hash 2989ae6fa4c9ad27)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 561091,
-    "last_checked": 1777280788,
+    "last_checked": 1777288602,
     "releases": {
       "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b387a03c3eee06ae": "Raw content changed (hash b387a03c3eee06ae)"
     }
   },
   "Warp": {
-    "last_checked": 1777280786,
+    "last_checked": 1777288600,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -121,7 +121,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1777280788,
+    "last_run": 1777288603,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -215,7 +215,7 @@
       "BoC Official": {
         "fetch": "ok",
         "final_url": "https://boardsofcanada.com/",
-        "html_length": 12712,
+        "html_length": 12710,
         "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /> <title>BOARDS OF CANADA</title> <meta name=\"title\" content=\"BOARDS OF CANADA\"> <meta name=\"description\" content=\"INFERNO. 29 MAY.\"> <link rel=\"canonical\" href=\"https://boardsofcanada.com/\"> <meta property=\"og:type\" content=\"website\"> <meta property=\"og:url\" content=\"https://boardsofcanada.com/\"> <meta property=\"og:title\" content=\"BOARDS OF CANADA\"> <meta property=\"og:description\" content=\"INFERNO. 29 MAY.\"> <meta property=\"og:image\" content=\"https://boardsofcanada.com/assets/sharing.jpg\"> <meta property=\"twitter:card\" content=\"summary_large_image\"> <meta property=\"twitter:url\" content=\"https://boardsofcanada.com/\"> <meta property=\"twitter:title\" content=\"BOARDS OF CANADA\"> <meta property=\"twitter:description\" content=\"INFERNO. 29 MAY.\"> <meta property=\"twitter:image\" content=\"https://boardsofcanada.com/assets/sharing.jpg\"> <link rel=\"icon\" href=\"https://boardsofcanada.com/assets/favicon.png\" type=\"image/png\"> <link rel=\"stylesheet\" href=\"https://use.typekit.net/wqv0jfu.css\"> <link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/reset.css\"> <style> :root { --bg-color: #000000; --text: #ffffff; --font-size: 1.05rem; --line: rgba(255, 255, 255, 0.18); --soft-blur: 0.5px; --initial-blur: 4px; --ease: ease; --entry-duration: 3s; --link-vertical-padding: clamp(8px, 1.4svh, 16px); --hover-duration: 1400ms; } * { box-sizing: border-box; } html, body { margin: 0; min-height: 100%; font-family: \"itc-avant-garde-gothic-pro\", sans-serif; font-weight: 300; font-size: var(--font-size); font-style: normal; text-transform: uppercase; color: var(--text); background-color: var(--bg-color); background-image: url('assets/bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; } body { min-height: 100vh; min-height: 100svh; overflow: hidden; } .viewport { position: fixed; inset: 0; display: grid; place-items: center; overflow: hidden; } .page { width: min(100%, 820px); max-height: 100svh; padding: clamp(16px, 3svh, 40px) clamp(16px, 5vw, 48px); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 1.5svh, 24px); opacity: 0; filter: blur(var(--initial-blur)); animation: pageFadeIn var(--entry-duration) var(--ease) forwards; } .artwork { display: block; width: min(180px, 24svh, 30vw); max-width: 100%; height: auto; margin: 0 auto 8px; } .title { margin: 0; display: block; width: min(100%, clamp(220px, 46vw, 500px));",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
