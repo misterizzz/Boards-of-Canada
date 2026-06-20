@@ -1,7 +1,7 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1781966196,
+    "last_checked": 1781971534,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
@@ -49,34 +49,34 @@
   },
   "BoC Hero Image": {
     "byte_length": 1089334,
-    "last_checked": 1781966196,
+    "last_checked": 1781971533,
     "releases": {
       "https://boardsofcanada.com/assets/bg.jpg#raw-hash=ee26ab08cdb05854": "Raw content changed (hash ee26ab08cdb05854)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 15181,
-    "last_checked": 1781966196,
+    "last_checked": 1781971533,
     "releases": {
       "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=0a245f48825c4904": "Raw content changed (hash 0a245f48825c4904)"
     }
   },
   "BoC Official": {
     "content_snapshot": "BOARDS OF CANADA OUT NOW Listen Buy on Bleep Local Stockists Register for Updates",
-    "last_checked": 1781966196,
+    "last_checked": 1781971533,
     "releases": {
       "https://boardsofcanada.com/#content-hash=a582ace2473a0cad": "Page content changed (hash a582ace2473a0cad)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 561091,
-    "last_checked": 1781966196,
+    "last_checked": 1781971534,
     "releases": {
       "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b387a03c3eee06ae": "Raw content changed (hash b387a03c3eee06ae)"
     }
   },
   "Warp": {
-    "last_checked": 1781966195,
+    "last_checked": 1781971532,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -123,7 +123,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1781966196,
+    "last_run": 1781971534,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -141,7 +141,7 @@
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
         "html_length": 2023,
-        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AFwr/sQhFONmrQWIKIG6VRBAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMba2Jc6ripQIbRlV1AgEQgDtfqVkUzlhMaEljoo/OZWT1kLXRPBTEyY/XiiajdaVx7+BPjzLt8NlEO3NaWLh8QnYgxp23Ti+RpcFDkQ==\", \"iv\":\"CgAFAR4k3wAAB7jO\", \"context\":\"yYJFcNsisy7ZMDqgA5nh0AS9Z07AVNppgu/YsrpibKWvCCLBrM7VMe+XzlikB9x4AqwkRTjS9OQENRaOhxKa2NBowSdsw2J04iI5r/gik4hMPei2Q9y12qNqwcQvULt2I3sWHwMrat5GkyiJPqLVY4YOM+CAM78CTRJCeYyP+6xUcJB1wJAQf+jZhZ9UvmhgVZ5j1PNPO8b+7XIcHK99erVLVp98jEJUyvy0C3Yf0xtVuziBe4zbh7B/IoAAkeHVxXRgUluon5h2jrX7GICcdZGi29I+T+loD08l4P6TJi/4XlHx0gQM68h5hzFkx+g+n5FlWBO39Nx0qYG6o9+113WIyYiy7WSudCz6RzWOs0gAr2L24kH0mUbuOhC72rpZh7OpQZ5unl0t/qnCtX6kJpw=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AExqTkF/TiDPM8NeBm4LoYXAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMqA9ZrpDN8YYaewOnAgEQgDuM/bIubn5Rm4Ssz4NCwIGcr5KujsKHrM6rUGiLCqJ/4cmSWAL8Ydbw0O1sZ8mKS4dnDvB717n/+OKS0w==\", \"iv\":\"CgAFRR4jngAAAVIZ\", \"context\":\"O1BPC5jK8eabeEVteL8Gi5rTM0U4fB5rwk66jbIoLCoQqAt/mt01eJncPdzVrcNYk82J7lq4BnLHnWnbO6PI5vTPcHppevCxYGGd9IGHnR4ZQ5ABvBa+G98iYlhZo+DwaxXnh3BCKHbhDpul7YRqHWNioGXkZ0qBjPRtamuoRGF7r7ot5Gyus1LT3rKNsEuEmMGSHe/sguRwdUlwp+M6oyqq/ARdFW0wV+UIus7Je0afpabtqpDJiBGSkNQP5W+esN103J7YwGOnioCKfLK/uWHPn/qnFgnX+oQYLo+ctuZJdej6KP9CnB6yG0fze+IKREK5rZcvJktQQQVBdQr9EUTSV3CF/GtiyqLQxQSkVw3/fvFvYKBGFKo7uCmtykJywJ+Dgaqsc4chDXoEtVLodBE=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
         "http_status": 202,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 0,
