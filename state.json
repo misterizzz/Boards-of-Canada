@@ -1,7 +1,7 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1782232557,
+    "last_checked": 1782239332,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
@@ -49,34 +49,34 @@
   },
   "BoC Hero Image": {
     "byte_length": 1089334,
-    "last_checked": 1782232557,
+    "last_checked": 1782239332,
     "releases": {
       "https://boardsofcanada.com/assets/bg.jpg#raw-hash=ee26ab08cdb05854": "Raw content changed (hash ee26ab08cdb05854)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 15013,
-    "last_checked": 1782232557,
+    "last_checked": 1782239331,
     "releases": {
       "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=3f472f6efd10bc36": "Raw content changed (hash 3f472f6efd10bc36)"
     }
   },
   "BoC Official": {
     "content_snapshot": "BOARDS OF CANADA OUT NOW Listen Buy on Bleep Local Stockists Register for Updates",
-    "last_checked": 1782232557,
+    "last_checked": 1782239331,
     "releases": {
       "https://boardsofcanada.com/#content-hash=a582ace2473a0cad": "Page content changed (hash a582ace2473a0cad)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 561091,
-    "last_checked": 1782232557,
+    "last_checked": 1782239332,
     "releases": {
       "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b387a03c3eee06ae": "Raw content changed (hash b387a03c3eee06ae)"
     }
   },
   "Warp": {
-    "last_checked": 1782232554,
+    "last_checked": 1782239330,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -123,7 +123,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1782232557,
+    "last_run": 1782239332,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -140,63 +140,16 @@
       "Bleep": {
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
-        "html_length": 135071,
-        "html_sample": "<!-- Main Layout --> <!DOCTYPE html> <html class=\"no-js\"> <head> <title> Bleep - Boards of Canada </title> <meta charset=\"utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <meta name=\"author\" content=\"Bleep\"> <meta name=\"description\" content=\"Boards of Canada is a Scottish electronic music duo comprised of brothers Mike Sandison and Marcus Eoin.\">",
-        "http_status": 200,
+        "html_length": 2023,
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AG/MEbTmRR9IzEckcbNlCJzAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMvh/8PTYP2hBVv9+TAgEQgDtTSn1Nm0wlp/f9PWLCiFCHgDbN9ItIQBx8sFhq12+CcsiP85HahwF8Tiq0T0gjB1VNbXVmrw0FGGxTSg==\", \"iv\":\"CgAENh5iNwAAAF+J\", \"context\":\"P5zsJfdMpiriLjkUg3X5NORk0lxuhWHpHexWDHQX5hhBtiCZ7Lc2fk0iYng0jgVv37fX9GZURykFjjQ3E7URjqDrAbVjL0sZQ+/wJBf8gp7lBxl4jcy1ao1OqzYWWdTuD4rWbP3Q8NJeLmJrJ8Ze/B4qAe6VeQ6FhXQ8m1QI0Gy7eMJfNmKttSuDqARzkXAALUcU0om32JdhsvfXNH8DBINug25ruMbEWMw5VGYCPdCRiFfd8/5QN2vF2ug66n3H2Dt2//O6X0FTbIMt5g47pa83ptYuv+zQ7I1Kbj4A/cs0XKh7gwilXGXmBczmqDPtNSsnFE/RAsn7a/1UiLisW3Q3Kn2QV/yCMVPSrjgXyzPPDZqjgrd8cHi0E7HmuDLqhPqTFaSb2XCav4ebNitmP6I=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
+        "http_status": 202,
         "looks_like_cloudflare_challenge": false,
-        "matched_count": 36,
-        "path_prefix_inventory": {
-          "/": {
-            "count": 78,
-            "example": "https://bleep.com/"
-          },
-          "/artist/40-various-artists/": {
-            "count": 7,
-            "example": "https://bleep.com/artist/40-various-artists"
-          },
-          "/artist/78-boards-of-canada/": {
-            "count": 36,
-            "example": "https://bleep.com/artist/78-boards-of-canada"
-          },
-          "/cart/": {
-            "count": 3,
-            "example": "https://bleep.com/cart"
-          },
-          "/label/6593-warp-records/": {
-            "count": 41,
-            "example": "https://bleep.com/label/6593-warp-records"
-          },
-          "/release/12790-boards-of-canada-trans-canada-highway/": {
-            "count": 3,
-            "example": "https://bleep.com/release/12790-boards-of-canada-trans-canada-highway"
-          },
-          "/release/141387-boards-of-canada-peel-session/": {
-            "count": 3,
-            "example": "https://bleep.com/release/141387-boards-of-canada-peel-session"
-          },
-          "/release/43515-boards-of-canada-tomorrows-harvest/": {
-            "count": 3,
-            "example": "https://bleep.com/release/43515-boards-of-canada-tomorrows-harvest"
-          },
-          "/release/590960-boards-of-canada-inferno/": {
-            "count": 3,
-            "example": "https://bleep.com/release/590960-boards-of-canada-inferno"
-          },
-          "/release/590977-boards-of-canada-inferno-continuous-mix/": {
-            "count": 3,
-            "example": "https://bleep.com/release/590977-boards-of-canada-inferno-continuous-mix"
-          },
-          "/release/594272-boards-of-canada-inferno/": {
-            "count": 3,
-            "example": "https://bleep.com/release/594272-boards-of-canada-inferno"
-          },
-          "/terms/show/": {
-            "count": 4,
-            "example": "https://bleep.com/terms/show/terms-and-conditions"
-          }
-        },
-        "script_srcs": [],
-        "total_anchors_on_page": 374
+        "matched_count": 0,
+        "path_prefix_inventory": {},
+        "script_srcs": [
+          "https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js"
+        ],
+        "total_anchors_on_page": 0
       },
       "BoC Hero Image": {
         "byte_length": 1089334,
