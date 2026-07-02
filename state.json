@@ -1,7 +1,7 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1782951392,
+    "last_checked": 1782966846,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
@@ -49,34 +49,34 @@
   },
   "BoC Hero Image": {
     "byte_length": 1089334,
-    "last_checked": 1782951392,
+    "last_checked": 1782966846,
     "releases": {
       "https://boardsofcanada.com/assets/bg.jpg#raw-hash=ee26ab08cdb05854": "Raw content changed (hash ee26ab08cdb05854)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 15322,
-    "last_checked": 1782951392,
+    "last_checked": 1782966846,
     "releases": {
       "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=5a80bed5af3a1ba6": "Raw content changed (hash 5a80bed5af3a1ba6)"
     }
   },
   "BoC Official": {
     "content_snapshot": "BOARDS OF CANADA OUT NOW Listen Buy on Bleep Local Stockists Register for Updates",
-    "last_checked": 1782951391,
+    "last_checked": 1782966846,
     "releases": {
       "https://boardsofcanada.com/#content-hash=a582ace2473a0cad": "Page content changed (hash a582ace2473a0cad)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 561091,
-    "last_checked": 1782951392,
+    "last_checked": 1782966846,
     "releases": {
       "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b387a03c3eee06ae": "Raw content changed (hash b387a03c3eee06ae)"
     }
   },
   "Warp": {
-    "last_checked": 1782951390,
+    "last_checked": 1782966845,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -123,7 +123,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1782951392,
+    "last_run": 1782966846,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -141,7 +141,7 @@
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
         "html_length": 2023,
-        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AFDzQBQFaHyUqUDWYqBnueDAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMjEK8I3rBKKTPM1meAgEQgDugwGOA9M6owWUGXHMTu9SfOl7j4bHvmo9WAh3if9bvEsHbVEQxZ8L6HA2mn9u5pd6SMmKOHaOVDQ8ldQ==\", \"iv\":\"CgAFOB+F0AAAAAqq\", \"context\":\"j1e+JKwOrGbZYtPUN5ztwmxjdbhDJemti6AfMFdPCuaTNhsyEliHTFIizvswDBScaud9vG3vts4lVgjKb1O0Va4xJZJeuM9Doqh7x+QqsG+6HNFOKxYO37yOMIKfEJi/fZigmXybzIt5P99vAb4QnS/9T8avrLUG2mvvjIl6KCssy3VQNjHGiT1ylXOlSP3kjIrMN+1CtQUUelZTSMm+KgEirln/Vl/tQAefpVQDZwGy3IcAp4fiAsZ3F5EGR6jyuuCQ3XJwPXWmOLdhYLo2U7OXDG1iLS6NJ0vAF/u9a/1l944EqcGH6AmdrlovqueCkeMFJOHHzHZkH1gz7tT3Nkrq/cLHCtujbIzXEFIncOUkbxR7X+W69T2Ql+raMDm0lYNDaqbCej/7McJzpnwR4j0=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AFDzQBQFaHyUqUDWYqBnueDAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMjEK8I3rBKKTPM1meAgEQgDugwGOA9M6owWUGXHMTu9SfOl7j4bHvmo9WAh3if9bvEsHbVEQxZ8L6HA2mn9u5pd6SMmKOHaOVDQ8ldQ==\", \"iv\":\"CgAG/h70wQAAAER6\", \"context\":\"DSBbLxSu1SRdXcWFr1Fpk5uJZiDVNzzZD4KF/DneEymgP4O6OTLzX8LKDz8b64wKR+DUZNVbFwaIPz43qM9dgHnsxlz00wgrkuySsCTmjxJCE8ku3w2laavZHGfq+WQmhcNDW7wCGT/1qE2By3TXpkL28MQ3KYc/jgVQZtlPWy6vQsmWxMSO3zmBXmgrV0+kYLA9WyIpzKXCQEXBSyCajytKQcanMnizbXvHqGnNhAyVVDK8AMyC5bzdilrp7ruUX9oE0zZH02IbxWV343yRG8iDUX4ZZLW7GqWIgrPgzytojPx0DM/t9G4cfJuA/CoKZtujmHVtzNliC+3IHV0T3QeRu19rqU13aPy4Ie0oJcKhHm/qKoREm0t1+QzcCWdbD1lojSqC+ZO7gEzdI36Epx8=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
         "http_status": 202,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 0,
@@ -198,7 +198,7 @@
       "Warp": {
         "fetch": "ok",
         "final_url": "https://warp.net/artists/boards-of-canada",
-        "html_length": 201496,
+        "html_length": 201637,
         "html_sample": "<!DOCTYPE html><html lang=\"en\" class=\"antialiased\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width\"/><link rel=\"preload\" as=\"image\" imagesrcset=\"/_next/image?url=%2Fimages%2Fwarp-animated-logo.gif&amp;w=64&amp;q=75 1x, /_next/image?url=%2Fimages%2Fwarp-animated-logo.gif&amp;w=128&amp;q=75 2x\"/><title>Boards of Canada - Artists - WARP</title><meta name=\"description\" content=\"Boards of Canada is a Scottish electronic music duo comprised of brothers Mike Sandison and",
         "http_status": 200,
         "looks_like_cloudflare_challenge": false,
