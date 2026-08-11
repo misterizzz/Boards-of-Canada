@@ -1,7 +1,7 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1786475904,
+    "last_checked": 1786478845,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
@@ -49,34 +49,34 @@
   },
   "BoC Hero Image": {
     "byte_length": 1089334,
-    "last_checked": 1786475903,
+    "last_checked": 1786478845,
     "releases": {
       "https://boardsofcanada.com/assets/bg.jpg#raw-hash=ee26ab08cdb05854": "Raw content changed (hash ee26ab08cdb05854)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 15215,
-    "last_checked": 1786475903,
+    "last_checked": 1786478845,
     "releases": {
-      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=a8723a7c78574542": "Raw content changed (hash a8723a7c78574542)"
+      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=8e313489cc13073e": "Raw content changed (hash 8e313489cc13073e)"
     }
   },
   "BoC Official": {
     "content_snapshot": "BOARDS OF CANADA OUT NOW Listen Buy on Bleep Local Stockists Register for Updates",
-    "last_checked": 1786475903,
+    "last_checked": 1786478845,
     "releases": {
       "https://boardsofcanada.com/#content-hash=a582ace2473a0cad": "Page content changed (hash a582ace2473a0cad)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 561091,
-    "last_checked": 1786475903,
+    "last_checked": 1786478845,
     "releases": {
       "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b387a03c3eee06ae": "Raw content changed (hash b387a03c3eee06ae)"
     }
   },
   "Warp": {
-    "last_checked": 1786475902,
+    "last_checked": 1786478844,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -123,7 +123,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1786475904,
+    "last_run": 1786478845,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -141,7 +141,7 @@
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
         "html_length": 2023,
-        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AFAOapOFUDMkX83TGetqA4ZAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMt95u9HqCdokPWe3cAgEQgDtoYEsudHmYKCeJkuecJYxaKsZU5GfQMWQRRy+vCSlrXyfqG4Xir/ETPUZ+xP0LUM0GclS1zn8LpnWHSQ==\", \"iv\":\"CgAEWR9KuQAAAGC7\", \"context\":\"bht+zEYKUsNOQtvAxC7DvqNONiZg7hwUOEHP3qYoubdsc5I9iXmOfhRN5Fi23MuCjXVIeaXY8a94dBo7T7IpLKyPPH3tNynspihlKlOLHUzgyiCV5MKUzRLqnB4caj0MSRy0/FVWpnhICkhDXiJSocus6xCwpyyMzZ5rHXE1srNeLo4eKl5CdDR/relGkRwLSJagtME2TJqeIaT9NAOxo6WcQuAg2BBac7rTX0lyozXg0iFF7MvZUvLFtZ8576PXWhmVCmyCtvjmo31u8MbqVKQ5aA4LxUYyEDDqCnhbLBxrQKx9Ny2BwbkVSHJ/MW9+4WfVy+4TQ3ii4WO1WEs0GIIZ4WpB8BMN4+ofsjunbBz2bZraTXzaW/gqiOvsO5JGpDBlpFRLeXJQ/ZvFJedtMZ0=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AFAOapOFUDMkX83TGetqA4ZAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMt95u9HqCdokPWe3cAgEQgDtoYEsudHmYKCeJkuecJYxaKsZU5GfQMWQRRy+vCSlrXyfqG4Xir/ETPUZ+xP0LUM0GclS1zn8LpnWHSQ==\", \"iv\":\"CgAHIB9IzQAAACNj\", \"context\":\"Ra++Ynr4Ew79rQd1QKCkVHFoXwfF6Ui80xjBub2p9Odz9YmfExd3HPyeCEmJuIkAhl30524gnTMDqigA+vOKn3PHTO8rTaDqQPCa6rjrrX9BML18484FCWU0cUJ0tjU8ir4CG3tq3MZHXVvd5MTm8z6eIdf62GpXHcEriMo2FtOabnyTOgCWOBQzuJtTQWwwWysN0fb0negbFeKV/scxI8z7kiMCmXCk67I5VYEFmw8o7z9VD/Py0v804V7JHvcEAuNLTcKExqxvgCsIXCB40uVzQAspA4712Dq3mvVPsO5KY1upp/ua+OxWAwubu6q9XGjogVaW/zckWkJEelIyUNQrwZxujSc05nRTmXQ4J8EMVJLoeR5Zf2nP+JazBLM7vexMDLKTifuTwgEvpyOAD4s=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
         "http_status": 202,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 0,
@@ -165,7 +165,7 @@
         "final_url": "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
         "http_status": 200,
         "matched_count": 1,
-        "raw_hash_prefix": "a8723a7c78574542"
+        "raw_hash_prefix": "8e313489cc13073e"
       },
       "BoC Official": {
         "fetch": "ok",
