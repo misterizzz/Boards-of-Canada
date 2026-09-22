@@ -1,7 +1,7 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1790096579,
+    "last_checked": 1790107750,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
@@ -49,28 +49,28 @@
   },
   "BoC Hero Image": {
     "byte_length": 1089334,
-    "last_checked": 1790096579,
+    "last_checked": 1790107749,
     "releases": {
       "https://boardsofcanada.com/assets/bg.jpg#raw-hash=ee26ab08cdb05854": "Raw content changed (hash ee26ab08cdb05854)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 22920,
-    "last_checked": 1790096579,
+    "last_checked": 1790107749,
     "releases": {
-      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=eef0198575bd6926": "Raw content changed (hash eef0198575bd6926)"
+      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=0ac5fd3d596d4769": "Raw content changed (hash 0ac5fd3d596d4769)"
     }
   },
   "BoC Official": {
     "content_snapshot": "BOARDS OF CANADA OUT NOW Listen Buy on Bleep Local Stockists Register for Updates",
-    "last_checked": 1790096579,
+    "last_checked": 1790107749,
     "releases": {
       "https://boardsofcanada.com/#content-hash=a582ace2473a0cad": "Page content changed (hash a582ace2473a0cad)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 561091,
-    "last_checked": 1790096579,
+    "last_checked": 1790107749,
     "releases": {
       "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=b387a03c3eee06ae": "Raw content changed (hash b387a03c3eee06ae)"
     }
@@ -123,7 +123,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1790096579,
+    "last_run": 1790107750,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -141,7 +141,7 @@
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
         "html_length": 2023,
-        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AEWy8K/9MmZRjKcRIsM4pn0AAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMGbS/fPjJ5ldFvO7/AgEQgDtkPS7Q25bZnxSDU0VcDN/Z3MVDYU6S3HOoOZobzSMcWJrZxaCMnK0OklSHtLiQ1VtyBHslHSmhIqNBfg==\", \"iv\":\"CgAHZR58SAAAC+6v\", \"context\":\"vnuMdx7Jt6MWqgxx+kUOmS98WzUwYkfszIeOs2IY+ORLOl8oD3z/pOp2npyOeX3FKrhXNAfDVfaaqnhT5Fv7juxS6V79UeIf468oStTxKLQ0y2P8wePrdXfmMTFbCLriF5mK17/ER4gAIJ8jrv+zeDRULewBBTjSsoZljyystC/eTXu8PgpZlxP2eYf9afRlx9h6ccTKT1Xiz1oOUATn9voEeyPahbEQKzxEp5qxacf/nYXUKgHJ7o9gZETC86eLvXIHyEZb7+F6lE7l+EYw0vRhxlJMvr7stwW0QLiWkyMmJ+jlKX6+ux6GC8r815AQlVRVccZEpN1Jfgs1Du+skOQsYWUMKdVinLyNeVAzhIhA8OtNR02XqHCQNkukjsVLyGK8AwHGkb4HtIkgqJ35zAU=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AEWy8K/9MmZRjKcRIsM4pn0AAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMGbS/fPjJ5ldFvO7/AgEQgDtkPS7Q25bZnxSDU0VcDN/Z3MVDYU6S3HOoOZobzSMcWJrZxaCMnK0OklSHtLiQ1VtyBHslHSmhIqNBfg==\", \"iv\":\"CgAERR5hhgAAAjKE\", \"context\":\"eT2MsVXoe8YoM82N+yq0LWbzxeKLHgLnzdFtnqRH3MAC6l3NjvRa1bo66+YHTcrySK18R5SxQ28spy1cqX7Pc2HLp6efy8ob5xsyiY5YFZGZnywkxstEJ1+pbE8UNT13oSaQdwi8FlXYXNG/ugal7DRrGtl9Qp262aaoOLRBRwDMbRERvWCnGNsFz1sy0P3Eo/VtuJ5eJmecolPuvc03/Kc8WfI5AAvNmtSoeZ20+S/dG2abQrJmdvztp12/fmAeuv9w9zKqiDw5voYdbkcj56+gbLyxHF0qRBfcoxGh1vZpRD42hQBJn9s8PuLDzsAdzLec38Ni6laPhgx4CohqfBegeqA4KTOj7oim5v5cHSivVl1sByT8kleJ+ejX1+HqXphT7oGlyWajcGk2eUgJpUc=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
         "http_status": 202,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 0,
@@ -165,7 +165,7 @@
         "final_url": "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
         "http_status": 200,
         "matched_count": 1,
-        "raw_hash_prefix": "eef0198575bd6926"
+        "raw_hash_prefix": "0ac5fd3d596d4769"
       },
       "BoC Official": {
         "fetch": "ok",
