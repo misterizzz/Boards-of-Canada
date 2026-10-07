@@ -1,5 +1,26 @@
 [
   {
+    "ts": 1791334357,
+    "source": "boardsofcanada.com",
+    "category": "update",
+    "title": "social-share preview image changed",
+    "url": "https://boardsofcanada.com/"
+  },
+  {
+    "ts": 1791334357,
+    "source": "boardsofcanada.com",
+    "category": "update",
+    "title": "background image changed",
+    "url": "https://boardsofcanada.com/"
+  },
+  {
+    "ts": 1791334357,
+    "source": "boardsofcanada.com",
+    "category": "update",
+    "title": "email popup/newsletter config changed",
+    "url": "https://boardsofcanada.com/"
+  },
+  {
     "ts": 1791321740,
     "source": "boardsofcanada.com",
     "category": "update",
@@ -3477,26 +3498,5 @@
     "category": "merch",
     "title": "Boards Of Canada Logo Cap Black",
     "url": "https://bleep.com/release/590963-boards-of-canada-boards-of-canada-logo-cap-black"
-  },
-  {
-    "ts": 1776866859,
-    "source": "Bleep",
-    "category": "merch",
-    "title": "Boards Of Canada Big Hex Logo T Shirt Spectra Yellow",
-    "url": "https://bleep.com/release/590962-boards-of-canada-boards-of-canada-big-hex-logo-t-shirt-spectra-yellow"
-  },
-  {
-    "ts": 1776866859,
-    "source": "Bleep",
-    "category": "merch",
-    "title": "Boards Of Canada Nuclear Family Logo T Shirt Black",
-    "url": "https://bleep.com/release/590961-boards-of-canada-boards-of-canada-nuclear-family-logo-t-shirt-black"
-  },
-  {
-    "ts": 1776866859,
-    "source": "Bleep",
-    "category": "music",
-    "title": "Inferno",
-    "url": "https://bleep.com/release/590960-boards-of-canada-inferno"
   }
 ]
