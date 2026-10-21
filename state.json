@@ -1,7 +1,7 @@
 {
   "Bandcamp": {
     "content_snapshot": "Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn\u2019t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser.",
-    "last_checked": 1792605475,
+    "last_checked": 1792618318,
     "releases": {
       "https://boardsofcanada.bandcamp.com/#content-hash=0a8a7e7903e183cc": "Page content changed (hash 0a8a7e7903e183cc)"
     }
@@ -49,34 +49,34 @@
   },
   "BoC Hero Image": {
     "byte_length": 2023,
-    "last_checked": 1792605474,
+    "last_checked": 1792618318,
     "releases": {
-      "https://boardsofcanada.com/assets/bg.jpg#raw-hash=d50c869ca7a5f5ee": "Raw content changed (hash d50c869ca7a5f5ee)"
+      "https://boardsofcanada.com/assets/bg.jpg#raw-hash=1573af79af2964a6": "Raw content changed (hash 1573af79af2964a6)"
     }
   },
   "BoC Klaviyo": {
     "byte_length": 13167,
-    "last_checked": 1792605474,
+    "last_checked": 1792618317,
     "releases": {
-      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=c2b4ca61021564a5": "Raw content changed (hash c2b4ca61021564a5)"
+      "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg#raw-hash=7f736a07142f5f36": "Raw content changed (hash 7f736a07142f5f36)"
     }
   },
   "BoC Official": {
     "content_snapshot": "JavaScript is disabled In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page.",
-    "last_checked": 1792605473,
+    "last_checked": 1792618317,
     "releases": {
       "https://boardsofcanada.com/#content-hash=4dcca380f1355688": "Page content changed (hash 4dcca380f1355688)"
     }
   },
   "BoC Sharing Image": {
     "byte_length": 2023,
-    "last_checked": 1792605474,
+    "last_checked": 1792618318,
     "releases": {
-      "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=853b8d3b73ffd264": "Raw content changed (hash 853b8d3b73ffd264)"
+      "https://boardsofcanada.com/assets/sharing.jpg#raw-hash=988dbb5166ff477d": "Raw content changed (hash 988dbb5166ff477d)"
     }
   },
   "Warp": {
-    "last_checked": 1792605472,
+    "last_checked": 1792618316,
     "releases": {
       "https://warp.net/products/502760-boards-of-canada-t-shirt-green": "Boards Of Canada T-Shirt - Green",
       "https://warp.net/products/505112-nuclear-family-logo-t-shirt-spectra-yellow": "Nuclear Family Logo T-Shirt - Spectra Yellow",
@@ -128,7 +128,7 @@
     "releases": {}
   },
   "_telemetry": {
-    "last_run": 1792605475,
+    "last_run": 1792618318,
     "sources": {
       "Bandcamp": {
         "fetch": "ok",
@@ -146,7 +146,7 @@
         "fetch": "ok",
         "final_url": "https://bleep.com/artist/78-boards-of-canada",
         "html_length": 2023,
-        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AEs3wWr5B0iuFAKY3DV9zDtAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMws+cRDamoP7nhiBfAgEQgDsFg/OxNBDdR9JPUFOGLAk3o5gl77YdOePPo1jgqgb9ja+NZgve9uZmLgwqABTbYXw4fxVfeULtUWKGKQ==\", \"iv\":\"CgAFch66uAAAAjQR\", \"context\":\"PXSbcNoYI2DaIaruvyN0FrDsnxBGTBh+yO+AubTszoyT8WOVEmbrQdkEKAMk6Se03k4a3PXam3y1YdfA+Xu9o+wixSTbvvHrIWHsUZKsFNwfjWtb/RgGY7jajS2f2/YaQp0QntosHJuYIHrGIkv123V2IuaSKGBH6BFM6iWe4y/GqmlNQ8mmdx+gloar5vFBrYrBSyLNh7DDpCLBzKazdMfDjIDaZ+qIPYaiwBFPvpoRjzVHTaSEBCa7jc+jG7kxV01BAhecZCwHSaFTxUFOk4u1rVv/7KkYoOiJWX150ErmnBTdagI2YEUVW+p1XxWzNsYeDKp85KCtbfCVV7pf5gh9slx6psECRbAsQYL7SgYagdEQEIw0181xTmE6tkT8bMHbSis8T1Lyb2+C0V6mABY=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AEs3wWr5B0iuFAKY3DV9zDtAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMws+cRDamoP7nhiBfAgEQgDsFg/OxNBDdR9JPUFOGLAk3o5gl77YdOePPo1jgqgb9ja+NZgve9uZmLgwqABTbYXw4fxVfeULtUWKGKQ==\", \"iv\":\"CgAHDx6+gwAAAku3\", \"context\":\"N/7hGqEe5+fwd2TJkrDsswcK4+im8vBfXucuyTYH8NWACJE1BLTadnrDgHqpogTvkWxX5W5wgkA7oadc8BOa7qCo6PA1h8Cn1YUvRB7Odv+XLmCxT7eVr3Vn1L7NO35irc7DWHJJtYaiiIq1SkbZPCSd3aGjWM6Zx2+wvjkmPb3p8d9UcvLJX6ILwsYLYZShtLFBod5n18bTT0cHvS2ClV1X0+xdVRVxwUAFOjmN9QkklDxt5/2dj3+KKCyxzadDhWrhLg64b+tdNCONjszegjI022RYW4YTpHbjGEVC+fsbTFBcZl41oEBymEmDh5HJ0iC36HwHlXopvcpj5mauFEk5Dn37WeGH5aHbsV5YxKnmE6YPZhDHK3fNKKBuhUzjqyVMl54Tgho2VqvHHFSPZNA=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
         "http_status": 202,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 0,
@@ -162,7 +162,7 @@
         "final_url": "https://bleep.com/boards-of-canada-hi-scores",
         "http_status": 202,
         "matched_count": 1,
-        "raw_hash_prefix": "d50c869ca7a5f5ee"
+        "raw_hash_prefix": "1573af79af2964a6"
       },
       "BoC Klaviyo": {
         "byte_length": 13167,
@@ -170,13 +170,13 @@
         "final_url": "https://static.klaviyo.com/onsite/js/Rwheqg/klaviyo.js?company_id=Rwheqg",
         "http_status": 200,
         "matched_count": 1,
-        "raw_hash_prefix": "c2b4ca61021564a5"
+        "raw_hash_prefix": "7f736a07142f5f36"
       },
       "BoC Official": {
         "fetch": "ok",
         "final_url": "https://bleep.com/boards-of-canada-hi-scores",
         "html_length": 2023,
-        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AEs3wWr5B0iuFAKY3DV9zDtAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMws+cRDamoP7nhiBfAgEQgDsFg/OxNBDdR9JPUFOGLAk3o5gl77YdOePPo1jgqgb9ja+NZgve9uZmLgwqABTbYXw4fxVfeULtUWKGKQ==\", \"iv\":\"CgAHDx6+gwAAAft8\", \"context\":\"ratUuhNOl0xsFV/Ngq99p3WYZeGGxHWGrLZv9WPbNWczkJ0dWV8DDcSquQ8kV6h7iOvWRaUo1TSGojUs39XmlU6knT1AiFNgiC6eItG0swgMMc43eVk3PXnIGP8l+dvzSK0b2k1ptQcz8IwWMQghAdjKBhSL+RgdaCS8cxD8S242xG6QhRDzO75GboLD2ABI1wrr9AS4hqL+Uy9Wfhf4pQvTveeVohtP+3HE+gHtvrDrWNv9FW3fuRw4GVBkrEV6CjCXyZ64flNeS9xLOeQEDA7prIJ7jhhPOd7t7/6gTRTmkqlMlBrZVZ7babxJv9IyJbj/nyM4DaQSiTkpmfTVKMkyNsJa47uZ3ty4ooesA6juLI+HiZSJv1KWQfW8CeEpwzLrixjvc6uwKpGXFDQuMwc=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
+        "html_sample": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title></title> <style> body { font-family: \"Arial\"; } </style> <script type=\"text/javascript\"> window.awsWafCookieDomainList = []; window.gokuProps = { \"key\":\"AQIDAHjcYu/GjX+QlghicBgQ/7bFaQZ+m5FKCMDnO+vTbNg96AEs3wWr5B0iuFAKY3DV9zDtAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMws+cRDamoP7nhiBfAgEQgDsFg/OxNBDdR9JPUFOGLAk3o5gl77YdOePPo1jgqgb9ja+NZgve9uZmLgwqABTbYXw4fxVfeULtUWKGKQ==\", \"iv\":\"CgAG0h69CQAAAZVe\", \"context\":\"Ny8CJYIotsQ75xwL4sq5baWOuxQKSeVbEegLFDm5nWnxy66Axc2Ivf9IcmYP/4r/CyDgjl31oIPfLeiHACaNy/bfstwFH1YRLMeBusrFI3K7gKqfjPZjI28uTzWw3RVs092LwAYHOwxOUZuXaZHFr0vWx5MV1YaDochBryvjER8Ko6qzQDVAg6ZqplofHMrKnb4OFSj3Hi+boadqv7yKAHjM6I+JHww3cNbGw8la5AWoI2ZbAQBS9ww4Mr/VpN5KdgJdnclsd9oZqFWf+WxXmVEfCEPiQalX8w0VyhnkUwojmchbjTRKije0e0UIhM3i3OURKzidRzquG9LGqZbd+HEY5rD0ta9XD7fhgYR3enkBmAOec5rKqca678j/9aXKOOzydJJeDRVDils2OP/73gQ=\" }; </script> <script src=\"https://be94dcbc5ac4.2e11b9a5.eu-west-1.token.awswaf.com/be94dcbc5ac4/72771a2d495e/4240c51e66bc/challenge.js\"></script> </head> <body> <div id=\"challenge-container\"></div> <script type=\"text/javascript\"> AwsWafIntegration.saveReferrer(); AwsWafIntegration.checkForceRefresh().then((forceRefresh) => { if (forceRefresh) { AwsWafIntegration.forceRefreshToken().then(() => { window.location.reload(true); }); } else { AwsWafIntegration.getToken().then(() => { window.location.reload(true); }); } }); </script> <noscript> <h1>JavaScript is disabled</h1> In order to continue, we need to verify that you're not a robot. This requires JavaScript. Enable JavaScript and then reload the page. </noscript> </body> </html>",
         "http_status": 202,
         "looks_like_cloudflare_challenge": false,
         "matched_count": 1,
@@ -192,7 +192,7 @@
         "final_url": "https://bleep.com/boards-of-canada-hi-scores",
         "http_status": 202,
         "matched_count": 1,
-        "raw_hash_prefix": "853b8d3b73ffd264"
+        "raw_hash_prefix": "988dbb5166ff477d"
       },
       "Warp": {
         "fetch": "ok",
