@@ -1,5 +1,19 @@
 [
   {
+    "ts": 1792627763,
+    "source": "boardsofcanada.com",
+    "category": "update",
+    "title": "social-share preview image changed",
+    "url": "https://boardsofcanada.com/"
+  },
+  {
+    "ts": 1792627763,
+    "source": "boardsofcanada.com",
+    "category": "update",
+    "title": "background image changed",
+    "url": "https://boardsofcanada.com/"
+  },
+  {
     "ts": 1792618318,
     "source": "boardsofcanada.com",
     "category": "update",
@@ -3480,20 +3494,6 @@
   },
   {
     "ts": 1786546008,
-    "source": "boardsofcanada.com",
-    "category": "update",
-    "title": "email popup/newsletter config changed",
-    "url": "https://boardsofcanada.com/"
-  },
-  {
-    "ts": 1786485499,
-    "source": "boardsofcanada.com",
-    "category": "update",
-    "title": "email popup/newsletter config changed (-25%)",
-    "url": "https://boardsofcanada.com/"
-  },
-  {
-    "ts": 1786478845,
     "source": "boardsofcanada.com",
     "category": "update",
     "title": "email popup/newsletter config changed",
